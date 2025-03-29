@@ -43,6 +43,11 @@
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == url_for('payment') %}active{% endif %}" href="{{ url_for('payment') }}">Payment</a>
                     </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link btn btn-outline-primary btn-sm {% if request.path == url_for('admin_login') %}active{% endif %}" href="{{ url_for('admin_login') }}">
+                            <i class="fas fa-lock"></i> Admin
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -108,6 +113,7 @@
                     <a href="{{ url_for('registration') }}" class="footer-link">Registration</a>
                     <a href="{{ url_for('accommodation') }}" class="footer-link">Accommodation</a>
                     <a href="{{ url_for('payment') }}" class="footer-link">Payment</a>
+                    <a href="{{ url_for('admin_login') }}" class="footer-link"><i class="fas fa-lock"></i> Admin Dashboard</a>
                 </div>
                 <div class="col-md-4">
                     <h5>Connect With Us</h5>

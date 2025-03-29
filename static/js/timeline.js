@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 const conferenceStartDate = new Date('2025-07-20');
 const conferenceEndDate = new Date('2025-07-25');
 
+// For testing/preview purposes - uncomment to simulate the conference is active
+// const mockToday = new Date('2025-07-22'); // Simulates day 3 of the conference
+// const originalNow = Date.now;
+// Date.now = function() { return mockToday.getTime(); };
+
 /**
  * Initialize the interactive timeline
  */
@@ -23,6 +28,7 @@ function initializeTimeline() {
     setTimeout(() => {
         items.forEach((item, index) => {
             setTimeout(() => {
+                item.classList.remove('timeline-hidden');
                 item.classList.add('timeline-visible');
             }, index * 200);
         });

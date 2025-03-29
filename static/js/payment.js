@@ -3,6 +3,21 @@ document.addEventListener("DOMContentLoaded", function() {
     setupPaypalButton();
 });
 
+// Show feedback to user (this duplicates the function in validation.js for modularity)
+function showFeedback(element, message, isValid) {
+    // Find or create feedback element
+    let feedback = element.nextElementSibling;
+    if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+        feedback = document.createElement('div');
+        feedback.className = isValid ? 'valid-feedback' : 'invalid-feedback';
+        element.parentNode.insertBefore(feedback, element.nextSibling);
+    }
+    
+    feedback.textContent = message;
+    element.classList.toggle('is-valid', isValid);
+    element.classList.toggle('is-invalid', !isValid);
+}
+
 // Setup payment option selection
 function setupPaymentOptions() {
     const paymentOptions = document.querySelectorAll('.payment-option');
@@ -98,65 +113,165 @@ function setupPaypalButton() {
 
 // Credit card validation functions
 function validateCreditCard() {
-    const cardNumber = document.getElementById('cardNumber');
-    const cardName = document.getElementById('cardName');
-    const cardExpiry = document.getElementById('cardExpiry');
-    const cardCVC = document.getElementById('cardCVC');
     let isValid = true;
     
-    // Card number validation
-    if (cardNumber) {
-        const cardNumberValue = cardNumber.value.replace(/\s/g, '');
-        if (cardNumberValue.length < 13 || cardNumberValue.length > 19 || !luhnCheck(cardNumberValue)) {
-            showFeedback(cardNumber, 'Please enter a valid card number', false);
-            isValid = false;
-        } else {
-            showFeedback(cardNumber, 'Valid card number', true);
-        }
+    isValid = validateCardNumber(document.getElementById('cardNumber')) && isValid;
+    isValid = validateCardName(document.getElementById('cardName')) && isValid;
+    isValid = validateCardExpiry(document.getElementById('cardExpiry')) && isValid;
+    isValid = validateCardCVC(document.getElementById('cardCVC')) && isValid;
+    
+    return isValid;
+}
+
+// Validate card number with real-time feedback
+function validateCardNumber(field) {
+    if (!field) return false;
+    
+    const value = field.value.replace(/\s/g, '');
+    let isValid = true;
+    let message = '';
+    let cardType = '';
+    
+    // Determine card type based on first digits
+    if (/^4/.test(value)) {
+        cardType = 'Visa';
+    } else if (/^5[1-5]/.test(value)) {
+        cardType = 'MasterCard';
+    } else if (/^3[47]/.test(value)) {
+        cardType = 'American Express';
+    } else if (/^6(?:011|5)/.test(value)) {
+        cardType = 'Discover';
     }
     
-    // Card name validation
-    if (cardName && cardName.value.trim() === '') {
-        showFeedback(cardName, 'Please enter the name on card', false);
+    if (value === '') {
         isValid = false;
-    } else if (cardName) {
-        showFeedback(cardName, 'Valid name', true);
+        message = 'Please enter your card number';
+    } else if (value.length < 13 || value.length > 19) {
+        isValid = false;
+        message = 'Card number should be between 13 and 19 digits';
+    } else if (!luhnCheck(value)) {
+        isValid = false;
+        message = 'Invalid card number';
     }
     
-    // Card expiry validation
-    if (cardExpiry) {
-        const expiryPattern = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
-        if (!expiryPattern.test(cardExpiry.value)) {
-            showFeedback(cardExpiry, 'Please enter a valid expiry date (MM/YY)', false);
-            isValid = false;
-        } else {
-            const parts = cardExpiry.value.split('/');
-            const month = parseInt(parts[0], 10);
-            const year = parseInt('20' + parts[1], 10);
-            const now = new Date();
-            const currentYear = now.getFullYear();
-            const currentMonth = now.getMonth() + 1;
-            
-            if (year < currentYear || (year === currentYear && month < currentMonth)) {
-                showFeedback(cardExpiry, 'Card has expired', false);
-                isValid = false;
+    // Show card type for better user experience
+    if (isValid && cardType) {
+        message = `Valid ${cardType} card`;
+    } else if (isValid) {
+        message = 'Valid card number';
+    }
+    
+    // Update card icons if needed
+    const cardIcons = field.parentNode.querySelector('.input-group-text');
+    if (cardIcons && cardType) {
+        // Highlight the detected card type
+        Array.from(cardIcons.children).forEach(icon => {
+            if ((cardType === 'Visa' && icon.classList.contains('fa-cc-visa')) ||
+                (cardType === 'MasterCard' && icon.classList.contains('fa-cc-mastercard')) ||
+                (cardType === 'American Express' && icon.classList.contains('fa-cc-amex'))) {
+                icon.classList.add('text-primary');
             } else {
-                showFeedback(cardExpiry, 'Valid expiry date', true);
+                icon.classList.remove('text-primary');
             }
-        }
+        });
     }
     
-    // CVC validation
-    if (cardCVC) {
-        const cvcPattern = /^[0-9]{3,4}$/;
-        if (!cvcPattern.test(cardCVC.value)) {
-            showFeedback(cardCVC, 'Please enter a valid CVC code (3-4 digits)', false);
+    field.setCustomValidity(isValid ? '' : message);
+    showFeedback(field, message, isValid);
+    return isValid;
+}
+
+// Validate card name with real-time feedback
+function validateCardName(field) {
+    if (!field) return false;
+    
+    const value = field.value.trim();
+    let isValid = true;
+    let message = '';
+    
+    if (value === '') {
+        isValid = false;
+        message = 'Please enter the name on your card';
+    } else if (value.length < 3) {
+        isValid = false;
+        message = 'Name is too short';
+    } else if (!/^[a-zA-Z\s]+$/.test(value)) {
+        isValid = false;
+        message = 'Name should contain only letters and spaces';
+    }
+    
+    field.setCustomValidity(isValid ? '' : message);
+    showFeedback(field, isValid ? 'Valid name' : message, isValid);
+    return isValid;
+}
+
+// Validate card expiry with real-time feedback
+function validateCardExpiry(field) {
+    if (!field) return false;
+    
+    const value = field.value.trim();
+    const expiryPattern = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
+    let isValid = true;
+    let message = '';
+    
+    if (value === '') {
+        isValid = false;
+        message = 'Please enter the expiry date';
+    } else if (!expiryPattern.test(value)) {
+        isValid = false;
+        message = 'Format should be MM/YY';
+    } else {
+        // Check if card is expired
+        const parts = value.split('/');
+        const month = parseInt(parts[0], 10);
+        const year = parseInt('20' + parts[1], 10);
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth() + 1;
+        
+        if (year < currentYear || (year === currentYear && month < currentMonth)) {
             isValid = false;
-        } else {
-            showFeedback(cardCVC, 'Valid CVC', true);
+            message = 'Card has expired';
+        } else if (year > currentYear + 10) {
+            isValid = false;
+            message = 'Expiry date too far in the future';
         }
     }
     
+    field.setCustomValidity(isValid ? '' : message);
+    showFeedback(field, isValid ? 'Valid expiry date' : message, isValid);
+    return isValid;
+}
+
+// Validate card CVC with real-time feedback
+function validateCardCVC(field) {
+    if (!field) return false;
+    
+    const value = field.value.trim();
+    const cvcPattern = /^[0-9]{3,4}$/;
+    let isValid = true;
+    let message = '';
+    
+    // Check for AMEX cards which use 4-digit CVC
+    const cardNumberField = document.getElementById('cardNumber');
+    const isAmex = cardNumberField && /^3[47]/.test(cardNumberField.value.replace(/\s/g, ''));
+    
+    if (value === '') {
+        isValid = false;
+        message = 'Please enter the CVC';
+    } else if (!cvcPattern.test(value)) {
+        isValid = false;
+        message = 'CVC should be 3-4 digits';
+    } else if (isAmex && value.length !== 4) {
+        isValid = false;
+        message = 'American Express cards require a 4-digit CVC';
+    } else if (!isAmex && value.length !== 3) {
+        isValid = false;
+        message = 'CVC should be 3 digits';
+    }
+    
+    field.setCustomValidity(isValid ? '' : message);
+    showFeedback(field, isValid ? 'Valid CVC' : message, isValid);
     return isValid;
 }
 
@@ -209,22 +324,94 @@ function luhnCheck(cardNumber) {
 // Add event listeners for credit card form
 document.addEventListener("DOMContentLoaded", function() {
     const cardNumber = document.getElementById('cardNumber');
+    const cardName = document.getElementById('cardName');
     const cardExpiry = document.getElementById('cardExpiry');
-    const creditCardForm = document.getElementById('credit-card-form');
+    const cardCVC = document.getElementById('cardCVC');
+    const creditCardForm = document.querySelector('#credit-card-form form');
     
+    // Format card number as user types
     if (cardNumber) {
         cardNumber.addEventListener('input', formatCardNumber);
+        
+        // Real-time validation with slight delay
+        let typingTimer;
+        cardNumber.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(function() {
+                validateCardNumber(cardNumber);
+            }, 500);
+        });
+        
+        // Also validate on blur
+        cardNumber.addEventListener('blur', function() {
+            validateCardNumber(cardNumber);
+        });
     }
     
+    // Real-time validation for card name
+    if (cardName) {
+        let typingTimer;
+        cardName.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(function() {
+                validateCardName(cardName);
+            }, 500);
+        });
+        
+        cardName.addEventListener('blur', function() {
+            validateCardName(cardName);
+        });
+    }
+    
+    // Format expiry date as user types
     if (cardExpiry) {
         cardExpiry.addEventListener('input', formatExpiryDate);
+        
+        // Real-time validation
+        let typingTimer;
+        cardExpiry.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(function() {
+                validateCardExpiry(cardExpiry);
+            }, 500);
+        });
+        
+        cardExpiry.addEventListener('blur', function() {
+            validateCardExpiry(cardExpiry);
+        });
     }
     
+    // Real-time validation for CVC
+    if (cardCVC) {
+        let typingTimer;
+        cardCVC.addEventListener('input', function() {
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(function() {
+                validateCardCVC(cardCVC);
+            }, 500);
+        });
+        
+        cardCVC.addEventListener('blur', function() {
+            validateCardCVC(cardCVC);
+        });
+    }
+    
+    // Form submission validation
     if (creditCardForm) {
         creditCardForm.addEventListener('submit', function(event) {
             if (!validateCreditCard()) {
                 event.preventDefault();
+                event.stopPropagation();
             }
         });
     }
+    
+    // Add "is-invalid" and "is-valid" classes to show validation state
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            // Clear validation status while typing
+            input.classList.remove('is-invalid', 'is-valid');
+        });
+    });
 });

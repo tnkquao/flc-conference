@@ -1,0 +1,139 @@
+/* Admin Dashboard Styles */
+
+/* Content Wrapper */
+.content-wrapper {
+    margin-bottom: 2rem;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0.75rem 1rem;
+}
+
+/* Dashboard Stat Cards */
+.card-body .display-4 {
+    font-size: 2.5rem;
+}
+
+/* Table Styling */
+.table th {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Button Groups */
+.btn-group .btn {
+    padding: 0.25rem 0.5rem;
+}
+
+/* Custom Badges */
+.badge {
+    padding: 0.5em 0.75em;
+    font-weight: 500;
+}
+
+/* Navbar Customization */
+.navbar-brand {
+    font-weight: 600;
+}
+
+.nav-tabs .nav-link {
+    padding: 0.5rem 1rem;
+    color: #6c757d;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Pagination */
+.pagination {
+    margin-bottom: 0;
+}
+
+/* Footer */
+.footer {
+    font-size: 0.875rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+    .table-responsive {
+        border: none;
+    }
+    
+    .card-footer {
+        padding: 1rem;
+    }
+}
+
+/* Progress Bar */
+.progress {
+    height: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Modal Customization */
+.modal-header {
+    background-color: #f8f9fa;
+}
+
+/* Form Elements */
+textarea.form-control {
+    min-height: 100px;
+}
+
+/* Page Header */
+h1 {
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Print-specific styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #dee2e6 !important;
+    }
+    
+    body {
+        padding: 1rem !important;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

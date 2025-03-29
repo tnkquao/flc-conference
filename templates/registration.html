@@ -113,6 +113,11 @@
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary btn-lg">Proceed to Accommodation</button>
                     </div>
+                    
+                    <!-- Link to accommodation page for users who want to skip directly to accommodation -->
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('accommodation') }}" class="text-muted">Already registered? Go directly to accommodation</a>
+                    </div>
                 </form>
             </div>
         </div>

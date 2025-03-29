@@ -16,7 +16,22 @@
                 
                 <h2 class="mb-4">Registration Complete!</h2>
                 <p class="lead mb-4">Thank you for registering for the First Love Church Conference.</p>
-                <p>We're excited to see you at the event. A confirmation email has been sent to your registered email address with all the details.</p>
+                
+                {% if registration %}
+                    {% if registration.qr_code %}
+                    <div class="mb-4">
+                        <img src="{{ url_for('static', filename=registration.qr_code) }}" alt="Registration QR Code" style="max-width: 200px;">
+                        <p class="mt-2">Your unique QR code ticket</p>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="alert alert-success mb-4">
+                        <p class="mb-1"><strong>Registration ID:</strong> {{ registration.registration_id }}</p>
+                        <p class="mb-0">Please save this ID for your reference. A confirmation email has also been sent to your registered email address with all the details.</p>
+                    </div>
+                {% else %}
+                    <p>We're excited to see you at the event. A confirmation email has been sent to your registered email address with all the details.</p>
+                {% endif %}
                 
                 <div class="card bg-light my-4">
                     <div class="card-body">

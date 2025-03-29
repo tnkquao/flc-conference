@@ -1,0 +1,208 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="mb-0"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h1>
+    <span class="text-muted">{{ now.strftime('%B %d, %Y') }}</span>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card bg-primary text-white shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title mb-0">Total Registrations</h6>
+                        <h2 class="mt-3 mb-0">{{ total_registrations }}</h2>
+                    </div>
+                    <div class="display-4 opacity-50">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between bg-primary border-top-0">
+                <a href="{{ url_for('admin_registrations') }}" class="text-white text-decoration-none small">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-success text-white shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title mb-0">Paid Registrations</h6>
+                        <h2 class="mt-3 mb-0">{{ paid_registrations }}</h2>
+                    </div>
+                    <div class="display-4 opacity-50">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between bg-success border-top-0">
+                <a href="{{ url_for('admin_registrations') }}?status=paid" class="text-white text-decoration-none small">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-info text-white shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title mb-0">Accommodation Requests</h6>
+                        <h2 class="mt-3 mb-0">{{ total_accommodation }}</h2>
+                    </div>
+                    <div class="display-4 opacity-50">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between bg-info border-top-0">
+                <a href="{{ url_for('admin_registrations') }}?accommodation=true" class="text-white text-decoration-none small">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="card bg-warning text-dark shadow-sm h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title mb-0">Total Revenue</h6>
+                        <h2 class="mt-3 mb-0">${{ "%.2f"|format(total_revenue) }}</h2>
+                    </div>
+                    <div class="display-4 opacity-50">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex align-items-center justify-content-between bg-warning border-top-0">
+                <span class="text-dark text-decoration-none small">All Payments</span>
+                <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Recent Registrations</h5>
+                <a href="{{ url_for('admin_registrations') }}" class="btn btn-sm btn-outline-primary">View All</a>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Registration Date</th>
+                                <th>Payment Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for registration in recent_registrations %}
+                            <tr>
+                                <td>{{ registration.name }}</td>
+                                <td>{{ registration.email }}</td>
+                                <td>{{ registration.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                                <td>
+                                    {% if registration.payment_status == 'paid' %}
+                                    <span class="badge bg-success">Paid</span>
+                                    {% elif registration.payment_status == 'pending' %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                    {% else %}
+                                    <span class="badge bg-danger">{{ registration.payment_status }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('admin_registration_detail', registration_id=registration.registration_id) }}" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center py-4">No recent registrations found</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('admin_registrations') }}" class="btn btn-primary">
+                        <i class="fas fa-list me-1"></i>View All Registrations
+                    </a>
+                    <a href="#" class="btn btn-outline-success">
+                        <i class="fas fa-download me-1"></i>Export Registration Data
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary">
+                        <i class="fas fa-envelope me-1"></i>Send Bulk Email
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card shadow-sm">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Registration Summary</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <h6>Registration Status</h6>
+                    <div class="progress" style="height: 20px;">
+                        {% set paid_percent = (paid_registrations / total_registrations * 100) if total_registrations > 0 else 0 %}
+                        {% set pending_percent = 100 - paid_percent %}
+                        <div class="progress-bar bg-success" style="width: {{ paid_percent }}%" role="progressbar" 
+                            aria-valuenow="{{ paid_percent }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ "%.1f"|format(paid_percent) }}%
+                        </div>
+                        <div class="progress-bar bg-warning" style="width: {{ pending_percent }}%" role="progressbar" 
+                            aria-valuenow="{{ pending_percent }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ "%.1f"|format(pending_percent) }}%
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1">
+                        <small>Paid: {{ paid_registrations }}</small>
+                        <small>Pending: {{ total_registrations - paid_registrations }}</small>
+                    </div>
+                </div>
+                
+                <div>
+                    <h6>Accommodation Requests</h6>
+                    <div class="progress" style="height: 20px;">
+                        {% set accommodation_percent = (total_accommodation / total_registrations * 100) if total_registrations > 0 else 0 %}
+                        <div class="progress-bar bg-info" style="width: {{ accommodation_percent }}%" role="progressbar" 
+                            aria-valuenow="{{ accommodation_percent }}" aria-valuemin="0" aria-valuemax="100">
+                            {{ "%.1f"|format(accommodation_percent) }}%
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-1">
+                        <small>With Accommodation: {{ total_accommodation }}</small>
+                        <small>Without: {{ total_registrations - total_accommodation }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

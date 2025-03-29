@@ -49,13 +49,17 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'admin_login'
 
+# Import models after initializing db
+from models import Registration, Admin
+
 # Setup the Flask-Login user loader
 @login_manager.user_loader
 def load_user(user_id):
     return Admin.query.get(int(user_id))
 
-# Import models after initializing db
-from models import Registration, Admin
+# Create all database tables
+with app.app_context():
+    db.create_all()
 
 # Formspree endpoint - we will skip this since it's not working
 FORMSPREE_ENDPOINT = None

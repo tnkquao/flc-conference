@@ -37,14 +37,17 @@ function setupPaymentOptions() {
             }
             
             // Show/hide payment forms based on selection
+            const stripeForm = document.getElementById('stripe-button-container');
             const paypalForm = document.getElementById('paypal-button-container');
             const creditCardForm = document.getElementById('credit-card-form');
             
             if (this.dataset.method === 'paypal' && paypalForm) {
                 paypalForm.style.display = 'block';
                 if (creditCardForm) creditCardForm.style.display = 'none';
+                if (stripeForm) stripeForm.style.display = 'none';
             } else if (this.dataset.method === 'credit-card' && creditCardForm) {
-                creditCardForm.style.display = 'block';
+                stripeForm.style.display = 'block';
+                creditCardForm.style.display = 'none';
                 if (paypalForm) paypalForm.style.display = 'none';
             }
         });

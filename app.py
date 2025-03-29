@@ -4,6 +4,7 @@ import logging
 import qrcode
 import smtplib
 import json
+import stripe
 from io import BytesIO
 from datetime import datetime
 from email.mime.text import MIMEText
@@ -22,6 +23,10 @@ logging.basicConfig(level=logging.DEBUG)
 # Create Flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "church_conference_secret_key")
+
+# Stripe configuration
+stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
+YOUR_DOMAIN = os.environ.get('REPLIT_DEV_DOMAIN') if os.environ.get('REPLIT_DEPLOYMENT') != '' else os.environ.get('REPLIT_DOMAINS', '').split(',')[0]
 
 # Database configuration
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///conference.db")
@@ -165,6 +170,158 @@ def payment():
     return render_template('payment.html', 
                           registration=registration_data,
                           accommodation=accommodation_data)
+
+@app.route('/create-checkout-session', methods=['POST'])
+def create_checkout_session():
+    # Check if user has completed registration and accommodation
+    if 'registration' not in session or 'accommodation' not in session:
+        flash('Please complete registration and accommodation booking first', 'error')
+        return redirect(url_for('index'))
+    
+    registration_data = session.get('registration', {})
+    accommodation_data = session.get('accommodation', {})
+    
+    # Calculate total amount
+    total_amount = 50  # Base registration fee
+    line_items = [
+        {
+            'price_data': {
+                'currency': 'usd',
+                'product_data': {
+                    'name': 'Conference Registration',
+                    'description': 'First Love Church Conference Registration Fee'
+                },
+                'unit_amount': 5000,  # Amount in cents (50 USD)
+            },
+            'quantity': 1,
+        }
+    ]
+    
+    # Add accommodation if needed
+    if accommodation_data.get('needs_accommodation', False):
+        room_type = accommodation_data.get('room_type')
+        nights = accommodation_data.get('nights', 0)
+        room_price = accommodation_data.get('room_price', 0)
+        
+        room_type_names = {
+            'single': 'Single Room',
+            'double': 'Double Room',
+            'shared': 'Shared Room'
+        }
+        
+        accommodation_line_item = {
+            'price_data': {
+                'currency': 'usd',
+                'product_data': {
+                    'name': f'{room_type_names.get(room_type, "Room")} - {nights} night(s)',
+                    'description': f'Accommodation at Anagkazo Campus ({nights} night(s))'
+                },
+                'unit_amount': int(room_price * 100),  # Convert to cents
+            },
+            'quantity': nights,
+        }
+        
+        line_items.append(accommodation_line_item)
+        total_amount += accommodation_data.get('total_cost', 0)
+    
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=line_items,
+            metadata={
+                'registration_name': registration_data.get('name', ''),
+                'registration_email': registration_data.get('email', ''),
+                'registration_phone': registration_data.get('phone', ''),
+                'needs_accommodation': str(accommodation_data.get('needs_accommodation', False)),
+                'room_type': accommodation_data.get('room_type', ''),
+                'nights': str(accommodation_data.get('nights', 0)),
+            },
+            mode='payment',
+            success_url=f'https://{YOUR_DOMAIN}/payment/success?session_id={{CHECKOUT_SESSION_ID}}',
+            cancel_url=f'https://{YOUR_DOMAIN}/payment',
+        )
+        
+        # Store checkout session ID in session
+        session['checkout_session_id'] = checkout_session.id
+        
+        return redirect(checkout_session.url, code=303)
+    except Exception as e:
+        app.logger.error(f"Error creating checkout session: {str(e)}")
+        flash('Error creating payment session. Please try again.', 'error')
+        return redirect(url_for('payment'))
+
+@app.route('/payment/success')
+def payment_success():
+    session_id = request.args.get('session_id')
+    
+    if not session_id:
+        flash('Invalid payment session', 'error')
+        return redirect(url_for('payment'))
+    
+    try:
+        # Retrieve checkout session to verify payment
+        checkout_session = stripe.checkout.Session.retrieve(session_id)
+        
+        if checkout_session.payment_status != 'paid':
+            flash('Payment has not been completed yet', 'error')
+            return redirect(url_for('payment'))
+        
+        # Get registration data from session
+        registration_data = session.get('registration', {})
+        accommodation_data = session.get('accommodation', {})
+        
+        # Create new registration record
+        registration = Registration(
+            name=registration_data.get('name'),
+            email=registration_data.get('email'),
+            phone=registration_data.get('phone'),
+            address=registration_data.get('address'),
+            city=registration_data.get('city'),
+            zip_code=registration_data.get('zip_code'),
+            church=registration_data.get('church'),
+            dietary_restrictions=str(registration_data.get('dietary', [])),
+            special_needs=registration_data.get('special_needs'),
+            referral=registration_data.get('referral'),
+            
+            # Accommodation details
+            needs_accommodation=accommodation_data.get('needs_accommodation', False),
+            room_type=accommodation_data.get('room_type'),
+            nights=accommodation_data.get('nights'),
+            room_price=accommodation_data.get('room_price'),
+            
+            # Payment details
+            registration_fee=50.0,  # $50 registration fee
+            total_paid=checkout_session.amount_total / 100,  # Convert cents to dollars
+            payment_method='stripe',
+            payment_id=checkout_session.id,
+            payment_date=datetime.utcnow(),
+            payment_status='paid'
+        )
+        
+        # Save registration to database
+        db.session.add(registration)
+        db.session.commit()
+        
+        # Generate QR code
+        generate_qr_code(registration)
+        
+        # Send confirmation email
+        send_confirmation_email(registration)
+        
+        # Clear session data after successful payment
+        session.pop('registration', None)
+        session.pop('accommodation', None)
+        session.pop('checkout_session_id', None)
+        
+        # Store registration ID in session for success page
+        session['registration_id'] = registration.registration_id
+        
+        flash('Payment successful! Your conference registration is complete.', 'success')
+        return redirect(url_for('success'))
+    except Exception as e:
+        app.logger.error(f"Error processing payment: {str(e)}")
+        flash('There was an error processing your payment. Please contact support.', 'error')
+        return redirect(url_for('error'))
 
 @app.route('/payment/process', methods=['POST'])
 def process_payment():

@@ -134,53 +134,24 @@
                 <!-- Hidden payment method input -->
                 <input type="hidden" id="paymentMethod" name="payment_method" value="paypal">
                 
+                <!-- Stripe Checkout Button -->
+                <div id="stripe-button-container" class="mb-4">
+                    <form action="{{ url_for('create_checkout_session') }}" method="POST">
+                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                            <i class="far fa-credit-card me-2"></i> Pay with Stripe Checkout
+                        </button>
+                        <small class="d-block text-center mt-2 text-muted">Secure payment processing with Stripe</small>
+                    </form>
+                </div>
+                
                 <!-- PayPal Payment Form -->
                 <div id="paypal-button-container" class="mb-4"></div>
                 
-                <!-- Credit Card Payment Form -->
+                <!-- Credit Card Form (Commented out as we're using Stripe Checkout now) -->
                 <div id="credit-card-form" style="display: none;">
-                    <form class="needs-validation" novalidate>
-                        <div class="mb-3">
-                            <label for="cardNumber" class="form-label">Card Number <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" required>
-                                <span class="input-group-text">
-                                    <i class="fab fa-cc-visa me-1"></i>
-                                    <i class="fab fa-cc-mastercard me-1"></i>
-                                    <i class="fab fa-cc-amex"></i>
-                                </span>
-                            </div>
-                            <div class="invalid-feedback">
-                                Please enter a valid card number
-                            </div>
-                        </div>
-                        
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="cardName" class="form-label">Name on Card <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="cardName" placeholder="Enter name on card" required>
-                                <div class="invalid-feedback">
-                                    Please enter the name on your card
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="cardExpiry" class="form-label">Expiry Date <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="cardExpiry" placeholder="MM/YY" required>
-                                <div class="invalid-feedback">
-                                    Enter a valid expiry date
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="cardCVC" class="form-label">CVC <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="cardCVC" placeholder="CVC" required>
-                                <div class="invalid-feedback">
-                                    Enter a valid CVC
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-lg w-100">Complete Payment</button>
-                    </form>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> For credit card payments, please use the Stripe Checkout option above for secure payment processing.
+                    </div>
                 </div>
                 
                 <div class="mt-4 text-center">

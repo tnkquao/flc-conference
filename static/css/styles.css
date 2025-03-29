@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-    --primary-color: #ff5733;
+    --primary-color: #e11d20; /* First Love Church red */
     --secondary-color: #ffc107;
     --tertiary-color: #f8f9fa;
     --text-color: #333;
@@ -20,7 +20,7 @@ body {
 
 /* Header Styles */
 .header {
-    background: linear-gradient(to right, var(--primary-color), #ff8c66);
+    background: linear-gradient(to right, var(--primary-color), #f57175);
     color: white;
     padding: 2rem 0;
     text-align: center;
@@ -105,7 +105,7 @@ body {
 
 .form-control:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(255, 87, 51, 0.25);
+    box-shadow: 0 0 0 0.2rem rgba(225, 29, 32, 0.25);
 }
 
 .form-label {
@@ -127,8 +127,8 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #e14b2a;
-    border-color: #e14b2a;
+    background-color: #c21316;
+    border-color: #c21316;
     transform: translateY(-2px);
 }
 
@@ -497,7 +497,7 @@ body {
 
 .payment-option.selected {
     border-color: var(--primary-color);
-    background-color: rgba(255, 87, 51, 0.05);
+    background-color: rgba(225, 29, 32, 0.05);
 }
 
 .payment-option-icon {

@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 from app import db
+from flask_login import UserMixin
 
 class Registration(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -90,7 +91,7 @@ class Registration(db.Model):
             'confirmation_date': self.confirmation_date.strftime('%Y-%m-%d %H:%M:%S') if self.confirmation_date else None,
         }
 
-class Admin(db.Model):
+class Admin(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)

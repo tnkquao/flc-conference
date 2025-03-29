@@ -90,8 +90,8 @@
                             </div>
                             {% else %}
                             <div class="mb-3">
-                                <h6>Accommodation Details</h6>
-                                <p class="text-muted">No accommodation requested</p>
+                                <h6>Accommodation</h6>
+                                <p class="text-muted">No accommodation selected (optional)</p>
                             </div>
                             {% endif %}
                         {% endif %}
@@ -99,7 +99,7 @@
                         <hr>
                         <div class="d-flex justify-content-between">
                             <span class="fw-bold">Total Amount:</span>
-                            <span class="price-tag" id="totalAmount">${{ 50 + (accommodation.total_cost if accommodation else 0) }}.00</span>
+                            <span class="price-tag" id="totalAmount">${{ 50 + (accommodation.total_cost if accommodation and accommodation.needs_accommodation else 0) }}.00</span>
                         </div>
                     </div>
                 </div>

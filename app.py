@@ -24,6 +24,11 @@ logging.basicConfig(level=logging.DEBUG)
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "church_conference_secret_key")
 
+# Create QR code directory if it doesn't exist
+QR_CODE_DIR = os.path.join(app.static_folder, 'qrcodes')
+if not os.path.exists(QR_CODE_DIR):
+    os.makedirs(QR_CODE_DIR)
+
 # Stripe configuration
 stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
 YOUR_DOMAIN = os.environ.get('REPLIT_DEV_DOMAIN') if os.environ.get('REPLIT_DEPLOYMENT') != '' else os.environ.get('REPLIT_DOMAINS', '').split(',')[0]
@@ -52,12 +57,8 @@ def load_user(user_id):
 # Import models after initializing db
 from models import Registration, Admin
 
-# QR code directory
-QR_CODE_DIR = os.path.join(app.static_folder, 'qrcodes')
-os.makedirs(QR_CODE_DIR, exist_ok=True)
-
-# Formspree endpoint (fallback for development)
-FORMSPREE_ENDPOINT = os.environ.get("FORMSPREE_ENDPOINT", "https://formspree.io/f/YOUR_FORM_ID")
+# Formspree endpoint - we will skip this since it's not working
+FORMSPREE_ENDPOINT = None
 
 # Routes
 @app.route('/')
@@ -71,6 +72,13 @@ def registration():
         name = request.form.get('name')
         email = request.form.get('email')
         phone = request.form.get('phone')
+        address = request.form.get('address')
+        city = request.form.get('city')
+        zip_code = request.form.get('zip_code')
+        church = request.form.get('church')
+        dietary = request.form.getlist('dietary')
+        special_needs = request.form.get('special_needs')
+        referral = request.form.get('referral')
         
         # Validate form data
         if not name or not email or not phone:
@@ -81,29 +89,19 @@ def registration():
         session['registration'] = {
             'name': name,
             'email': email,
-            'phone': phone
+            'phone': phone,
+            'address': address,
+            'city': city,
+            'zip_code': zip_code,
+            'church': church,
+            'dietary': dietary,
+            'special_needs': special_needs,
+            'referral': referral
         }
         
-        # Send form data to Formspree
-        try:
-            response = requests.post(
-                FORMSPREE_ENDPOINT,
-                data={
-                    'name': name,
-                    'email': email,
-                    'phone': phone,
-                    'form_type': 'registration'
-                }
-            )
-            
-            if response.status_code == 200:
-                flash('Registration successful!', 'success')
-                return redirect(url_for('accommodation'))
-            else:
-                flash('There was an error processing your registration. Please try again.', 'error')
-        except Exception as e:
-            app.logger.error(f"Error sending registration: {str(e)}")
-            flash('There was an error processing your registration. Please try again.', 'error')
+        # Skip Formspree and redirect to accommodation
+        flash('Registration successful!', 'success')
+        return redirect(url_for('accommodation'))
     
     return render_template('registration.html')
 

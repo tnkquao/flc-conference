@@ -37,6 +37,9 @@
                         <a class="nav-link {% if request.path == url_for('index') %}active{% endif %}" href="{{ url_for('index') }}">Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('timeline') %}active{% endif %}" href="{{ url_for('timeline') }}">Timeline</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {% if request.path == url_for('registration') %}active{% endif %}" href="{{ url_for('registration') }}">Register</a>
                     </li>
                     <li class="nav-item">
@@ -113,6 +116,7 @@
                 <div class="col-md-4 mb-4 mb-md-0">
                     <h5>Quick Links</h5>
                     <a href="{{ url_for('index') }}" class="footer-link">Home</a>
+                    <a href="{{ url_for('timeline') }}" class="footer-link">Timeline</a>
                     <a href="{{ url_for('registration') }}" class="footer-link">Registration</a>
                     <a href="{{ url_for('accommodation') }}" class="footer-link">Accommodation</a>
                     <a href="{{ url_for('payment') }}" class="footer-link">Payment</a>

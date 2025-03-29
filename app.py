@@ -69,6 +69,11 @@ FORMSPREE_ENDPOINT = None
 def index():
     return render_template('index.html')
 
+@app.route('/timeline')
+def timeline():
+    """Interactive event timeline with animated milestone markers"""
+    return render_template('timeline.html')
+
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     if request.method == 'POST':

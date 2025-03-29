@@ -86,6 +86,13 @@
                         <div class="timeline-content">Final worship service, communion, and sending forth</div>
                     </div>
                 </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('timeline') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-calendar-alt me-2"></i>View Interactive Timeline
+                    </a>
+                    <p class="text-muted mt-2"><small>Explore our new interactive day-by-day schedule</small></p>
+                </div>
             </div>
         </div>
     </div>
@@ -139,7 +146,14 @@
         <p class="lead mb-4">Secure your spot at the First Love Church Conference at Anagkazo Campus today!</p>
         <div class="d-grid gap-2 col-md-6 mx-auto">
             <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg">Register Now</a>
-            <a href="{{ url_for('accommodation') }}" class="btn btn-outline-primary">Book Accommodation</a>
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <a href="{{ url_for('accommodation') }}" class="btn btn-outline-primary w-100">Book Accommodation</a>
+                </div>
+                <div class="col-md-6">
+                    <a href="{{ url_for('timeline') }}" class="btn btn-outline-primary w-100">View Timeline</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block title %}Conference Timeline{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="text-center mb-4">First Love Church Conference Timeline</h2>
+            <p class="lead text-center mb-5">Join us for a spiritual journey from July 20-25, 2025. See what's in store each day.</p>
+            
+            <div class="conference-timeline">
+                <div class="timeline-container">
+                    <!-- Progress bar to show conference progress -->
+                    <div class="timeline-progress-container">
+                        <div class="timeline-progress" style="width: 0%;"></div>
+                    </div>
+
+                    <!-- Days remaining counter -->
+                    <div class="days-counter">Loading conference timeline...</div>
+                    
+                    <!-- Vertical line for timeline -->
+                    <div class="timeline-vertical-line"></div>
+                    
+                    <!-- Day 1: July 20 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">JUL<br>20</div>
+                        <div class="milestone-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Opening Ceremony</h3>
+                            <p class="timeline-description">Welcome address by Senior Pastor, followed by praise and worship session.</p>
+                            <div class="milestone-details">
+                                <h4>Day 1 Details</h4>
+                                <ul>
+                                    <li><strong>9:00 AM - 10:30 AM:</strong> Registration and Check-in</li>
+                                    <li><strong>11:00 AM - 12:30 PM:</strong> Opening Ceremony</li>
+                                    <li><strong>12:30 PM - 2:00 PM:</strong> Lunch Break</li>
+                                    <li><strong>2:00 PM - 4:00 PM:</strong> Keynote Address: "The Power of Faith"</li>
+                                    <li><strong>4:30 PM - 6:00 PM:</strong> Praise and Worship Session</li>
+                                    <li><strong>6:00 PM - 7:30 PM:</strong> Dinner Break</li>
+                                    <li><strong>7:30 PM - 9:00 PM:</strong> Evening Service</li>
+                                </ul>
+                                <p class="text-muted mt-3">Click the red dot to collapse this section</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 2: July 21 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">JUL<br>21</div>
+                        <div class="milestone-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Youth & Family Day</h3>
+                            <p class="timeline-description">Special focus on youth development and building stronger families.</p>
+                            <div class="milestone-details">
+                                <h4>Day 2 Details</h4>
+                                <ul>
+                                    <li><strong>7:00 AM - 8:30 AM:</strong> Morning Devotion</li>
+                                    <li><strong>9:00 AM - 10:30 AM:</strong> Workshop: "Raising Godly Children"</li>
+                                    <li><strong>11:00 AM - 12:30 PM:</strong> Youth Session: "Navigating Life as a Christian Youth"</li>
+                                    <li><strong>12:30 PM - 2:00 PM:</strong> Lunch Break</li>
+                                    <li><strong>2:00 PM - 3:30 PM:</strong> Family Counseling Sessions</li>
+                                    <li><strong>4:00 PM - 5:30 PM:</strong> Family Games and Activities</li>
+                                    <li><strong>6:00 PM - 7:30 PM:</strong> Dinner Break</li>
+                                    <li><strong>7:30 PM - 9:00 PM:</strong> Evening Worship Service</li>
+                                </ul>
+                                <p class="text-muted mt-3">Click the red dot to collapse this section</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 3: July 22 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">JUL<br>22</div>
+                        <div class="milestone-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Leadership Training</h3>
+                            <p class="timeline-description">Focus on developing leadership skills within the church and community.</p>
+                            <div class="milestone-details">
+                                <h4>Day 3 Details</h4>
+                                <ul>
+                                    <li><strong>7:00 AM - 8:30 AM:</strong> Morning Devotion</li>
+                                    <li><strong>9:00 AM - 10:30 AM:</strong> Leadership Seminar: "Christian Leadership Principles"</li>
+                                    <li><strong>11:00 AM - 12:30 PM:</strong> Panel Discussion: "Facing Leadership Challenges"</li>
+                                    <li><strong>12:30 PM - 2:00 PM:</strong> Lunch Break</li>
+                                    <li><strong>2:00 PM - 3:30 PM:</strong> Workshop: "Mentoring the Next Generation"</li>
+                                    <li><strong>4:00 PM - 5:30 PM:</strong> Small Group Leadership Training</li>
+                                    <li><strong>6:00 PM - 7:30 PM:</strong> Dinner Break</li>
+                                    <li><strong>7:30 PM - 9:00 PM:</strong> Evening Worship and Ministry Service</li>
+                                </ul>
+                                <p class="text-muted mt-3">Click the red dot to collapse this section</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 4: July 23 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">JUL<br>23</div>
+                        <div class="milestone-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Healing and Deliverance Service</h3>
+                            <p class="timeline-description">Special services focused on spiritual, emotional, and physical healing.</p>
+                            <div class="milestone-details">
+                                <h4>Day 4 Details</h4>
+                                <ul>
+                                    <li><strong>7:00 AM - 8:30 AM:</strong> Morning Devotion</li>
+                                    <li><strong>9:00 AM - 10:30 AM:</strong> Teaching: "Biblical Principles of Healing"</li>
+                                    <li><strong>11:00 AM - 1:00 PM:</strong> Healing and Deliverance Service</li>
+                                    <li><strong>1:00 PM - 2:30 PM:</strong> Lunch Break</li>
+                                    <li><strong>2:30 PM - 4:00 PM:</strong> Testimonial Session</li>
+                                    <li><strong>4:30 PM - 6:00 PM:</strong> Prayer Counseling Sessions</li>
+                                    <li><strong>6:00 PM - 7:30 PM:</strong> Dinner Break</li>
+                                    <li><strong>7:30 PM - 9:30 PM:</strong> Evening Worship and Prayer Vigil</li>
+                                </ul>
+                                <p class="text-muted mt-3">Click the red dot to collapse this section</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 5: July 24 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">JUL<br>24</div>
+                        <div class="milestone-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Mission & Outreach</h3>
+                            <p class="timeline-description">Exploring how to reach communities with the gospel and serve others effectively.</p>
+                            <div class="milestone-details">
+                                <h4>Day 5 Details</h4>
+                                <ul>
+                                    <li><strong>7:00 AM - 8:30 AM:</strong> Morning Devotion</li>
+                                    <li><strong>9:00 AM - 11:00 AM:</strong> Community Outreach Activities</li>
+                                    <li><strong>11:30 AM - 12:30 PM:</strong> Mission Reports and Testimonies</li>
+                                    <li><strong>12:30 PM - 2:00 PM:</strong> Lunch Break</li>
+                                    <li><strong>2:00 PM - 3:30 PM:</strong> Workshop: "Effective Evangelism in Today's World"</li>
+                                    <li><strong>4:00 PM - 5:30 PM:</strong> Panel Discussion: "Meeting Community Needs"</li>
+                                    <li><strong>6:00 PM - 7:30 PM:</strong> Dinner Break</li>
+                                    <li><strong>7:30 PM - 9:00 PM:</strong> Worship Service: "The Heart of Missions"</li>
+                                </ul>
+                                <p class="text-muted mt-3">Click the red dot to collapse this section</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 6: July 25 -->
+                    <div class="timeline-item">
+                        <div class="timeline-date">JUL<br>25</div>
+                        <div class="milestone-marker"></div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Closing Ceremony</h3>
+                            <p class="timeline-description">Final service, commissioning, and sending forth ceremony.</p>
+                            <div class="milestone-details">
+                                <h4>Day 6 Details</h4>
+                                <ul>
+                                    <li><strong>7:00 AM - 8:30 AM:</strong> Morning Devotion</li>
+                                    <li><strong>9:00 AM - 10:30 AM:</strong> Reflection Session: "What We've Learned"</li>
+                                    <li><strong>11:00 AM - 1:00 PM:</strong> Closing Service</li>
+                                    <li><strong>1:00 PM - 2:30 PM:</strong> Farewell Lunch</li>
+                                    <li><strong>2:30 PM - 4:00 PM:</strong> Commissioning and Sending Forth Ceremony</li>
+                                    <li><strong>4:00 PM:</strong> Conference Concludes</li>
+                                </ul>
+                                <p class="text-muted mt-3">Click the red dot to collapse this section</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg">Register Now</a>
+                <p class="text-muted mt-3">Secure your spot at this transformative event</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/timeline.js') }}"></script>
+{% endblock %}

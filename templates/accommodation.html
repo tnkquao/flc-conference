@@ -11,64 +11,69 @@
             </div>
             <div class="card-body">
                 <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i> Select your preferred accommodation option and duration for the conference.
+                    <i class="fas fa-info-circle me-2"></i> Select your preferred accommodation option and duration for the conference, or proceed directly to payment if you don't need accommodation.
                 </div>
                 
                 <form id="accommodationForm" action="{{ url_for('accommodation') }}" method="POST" class="needs-validation" novalidate>
                     <div class="mb-4">
-                        <label for="room" class="form-label">Accommodation Type <span class="text-danger">*</span></label>
-                        <select class="form-select" id="room" name="room" required>
-                            <option value="" selected disabled>Select your accommodation</option>
-                            <option value="single">Single Room - $50/night</option>
-                            <option value="double">Double Room - $80/night</option>
-                            <option value="shared">Shared Room - $30/night</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Please select an accommodation type.
-                        </div>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label for="nights" class="form-label">Number of Nights <span class="text-danger">*</span></label>
-                        <input type="number" class="form-control" id="nights" name="nights" min="1" max="10" placeholder="Enter number of nights" required>
-                        <div class="form-text">Enter number of nights you need accommodation (maximum 10 nights)</div>
-                        <div class="invalid-feedback">
-                            Please enter a valid number of nights (1-10).
-                        </div>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label for="check-in" class="form-label">Check-in Date <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control" id="check-in" name="check_in" required>
-                        <div class="invalid-feedback">
-                            Please select a check-in date.
-                        </div>
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label for="roommate" class="form-label">Preferred Roommate (for Shared or Double rooms)</label>
-                        <input type="text" class="form-control" id="roommate" name="roommate" placeholder="Enter name of preferred roommate (optional)">
-                    </div>
-                    
-                    <div class="mb-4">
-                        <label class="form-label">Room Preferences</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="non-smoking" id="non-smoking" name="preferences[]">
-                            <label class="form-check-label" for="non-smoking">
-                                Non-smoking
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="1" id="needsAccommodation" name="needs_accommodation" checked>
+                            <label class="form-check-label fw-bold" for="needsAccommodation">
+                                I need accommodation for this conference
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="quiet" id="quiet" name="preferences[]">
-                            <label class="form-check-label" for="quiet">
-                                Quiet area
-                            </label>
+                    </div>
+                    
+                    <div id="accommodationOptions">
+                        <div class="mb-4">
+                            <label for="room" class="form-label">Accommodation Type <span class="text-danger">*</span></label>
+                            <select class="form-select" id="room" name="room">
+                                <option value="" selected disabled>Select your accommodation</option>
+                                <option value="single">Single Room - $50/night</option>
+                                <option value="double">Double Room - $80/night</option>
+                                <option value="shared">Shared Room - $30/night</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select an accommodation type.
+                            </div>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="accessible" id="accessible" name="preferences[]">
-                            <label class="form-check-label" for="accessible">
-                                Accessible room
-                            </label>
+                        
+                        <div class="mb-4">
+                            <label for="nights" class="form-label">Number of Nights <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="nights" name="nights" min="1" max="10" placeholder="Enter number of nights">
+                            <div class="form-text">Enter number of nights you need accommodation (maximum 10 nights)</div>
+                            <div class="invalid-feedback">
+                                Please enter a valid number of nights (1-10).
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="check-in" class="form-label">Check-in Date <span class="text-danger">*</span></label>
+                            <input type="date" class="form-control" id="check-in" name="check_in">
+                            <div class="invalid-feedback">
+                                Please select a check-in date.
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="roommate" class="form-label">Preferred Roommate (for Shared or Double rooms)</label>
+                            <input type="text" class="form-control" id="roommate" name="roommate" placeholder="Enter name of preferred roommate (optional)">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label">Room Preferences</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="quiet" id="quiet" name="preferences[]">
+                                <label class="form-check-label" for="quiet">
+                                    Quiet area
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="accessible" id="accessible" name="preferences[]">
+                                <label class="form-check-label" for="accessible">
+                                    Accessible room
+                                </label>
+                            </div>
                         </div>
                     </div>
                     
@@ -149,6 +154,32 @@
 
 {% block extra_js %}
 <script>
+    // Toggle accommodation options visibility
+    document.getElementById('needsAccommodation').addEventListener('change', function() {
+        const accommodationOptions = document.getElementById('accommodationOptions');
+        
+        if (this.checked) {
+            accommodationOptions.style.display = 'block';
+            
+            // Make fields required if accommodation is needed
+            document.getElementById('room').required = true;
+            document.getElementById('nights').required = true;
+            document.getElementById('check-in').required = true;
+        } else {
+            accommodationOptions.style.display = 'none';
+            
+            // Remove required attribute if accommodation is not needed
+            document.getElementById('room').required = false;
+            document.getElementById('nights').required = false;
+            document.getElementById('check-in').required = false;
+            
+            // Clear cost summary
+            document.getElementById('roomTypeDisplay').textContent = '-';
+            document.getElementById('nightsDisplay').textContent = '-';
+            document.getElementById('totalCost').textContent = '$0';
+        }
+    });
+    
     // Update room type display when selection changes
     document.getElementById('room').addEventListener('change', function() {
         const roomSelect = document.getElementById('room');
@@ -180,6 +211,7 @@
     
     // Calculate and update total cost
     function updateTotal() {
+        const needsAccommodation = document.getElementById('needsAccommodation').checked;
         const roomSelect = document.getElementById('room');
         const nightsInput = document.getElementById('nights');
         const totalCostElement = document.getElementById('totalCost');
@@ -192,7 +224,7 @@
         
         let totalCost = 0;
         
-        if (roomSelect.value && nightsInput.value && !isNaN(nightsInput.value) && parseInt(nightsInput.value) > 0) {
+        if (needsAccommodation && roomSelect.value && nightsInput.value && !isNaN(nightsInput.value) && parseInt(nightsInput.value) > 0) {
             const roomPrice = roomPrices[roomSelect.value] || 0;
             const nights = parseInt(nightsInput.value);
             totalCost = roomPrice * nights;
@@ -221,6 +253,14 @@
         
         // Set default value to conference start date
         checkInInput.value = formatDate(conferenceStartDate);
+        
+        // Initial check for the accommodation option
+        const needsAccommodationCheckbox = document.getElementById('needsAccommodation');
+        if (needsAccommodationCheckbox) {
+            // Trigger the change event to set the initial state
+            const event = new Event('change');
+            needsAccommodationCheckbox.dispatchEvent(event);
+        }
     });
 </script>
 {% endblock %}

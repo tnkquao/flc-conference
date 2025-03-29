@@ -60,33 +60,40 @@
                         {% endif %}
                         
                         {% if accommodation %}
-                        <div class="mb-3">
-                            <h6>Accommodation Details</h6>
-                            <div class="d-flex justify-content-between">
-                                <span>Room Type:</span>
-                                <span>
-                                    {% if accommodation.room_type == 'single' %}
-                                        Single Room
-                                    {% elif accommodation.room_type == 'double' %}
-                                        Double Room
-                                    {% elif accommodation.room_type == 'shared' %}
-                                        Shared Room
-                                    {% endif %}
-                                </span>
+                            {% if accommodation.needs_accommodation %}
+                            <div class="mb-3">
+                                <h6>Accommodation Details</h6>
+                                <div class="d-flex justify-content-between">
+                                    <span>Room Type:</span>
+                                    <span>
+                                        {% if accommodation.room_type == 'single' %}
+                                            Single Room
+                                        {% elif accommodation.room_type == 'double' %}
+                                            Double Room
+                                        {% elif accommodation.room_type == 'shared' %}
+                                            Shared Room
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Number of Nights:</span>
+                                    <span>{{ accommodation.nights }} night{% if accommodation.nights > 1 %}s{% endif %}</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Room Rate:</span>
+                                    <span>${{ accommodation.room_price }}.00 per night</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Accommodation Cost:</span>
+                                    <span>${{ accommodation.total_cost }}.00</span>
+                                </div>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Number of Nights:</span>
-                                <span>{{ accommodation.nights }} night{% if accommodation.nights > 1 %}s{% endif %}</span>
+                            {% else %}
+                            <div class="mb-3">
+                                <h6>Accommodation Details</h6>
+                                <p class="text-muted">No accommodation requested</p>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Room Rate:</span>
-                                <span>${{ accommodation.room_price }}.00 per night</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Accommodation Cost:</span>
-                                <span>${{ accommodation.total_cost }}.00</span>
-                            </div>
-                        </div>
+                            {% endif %}
                         {% endif %}
                         
                         <hr>

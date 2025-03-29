@@ -65,38 +65,50 @@ def registration():
 @app.route('/accommodation', methods=['GET', 'POST'])
 def accommodation():
     if request.method == 'POST':
-        # Get form data
-        room_type = request.form.get('room')
-        nights = request.form.get('nights')
+        # Check if user needs accommodation
+        needs_accommodation = request.form.get('needs_accommodation') == '1'
         
-        # Validate form data
-        if not room_type or not nights:
-            flash('Please fill in all required fields', 'error')
-            return render_template('accommodation.html')
-        
-        # Calculate costs
-        room_prices = {
-            'single': 50,
-            'double': 80,
-            'shared': 30
-        }
-        
-        try:
-            nights = int(nights)
-            room_price = room_prices.get(room_type, 0)
-            total_cost = room_price * nights
+        if needs_accommodation:
+            # Get form data
+            room_type = request.form.get('room')
+            nights = request.form.get('nights')
             
-            # Store accommodation data in session
-            session['accommodation'] = {
-                'room_type': room_type,
-                'nights': nights,
-                'room_price': room_price,
-                'total_cost': total_cost
+            # Validate form data
+            if not room_type or not nights:
+                flash('Please fill in all required accommodation fields', 'error')
+                return render_template('accommodation.html')
+            
+            # Calculate costs
+            room_prices = {
+                'single': 50,
+                'double': 80,
+                'shared': 30
             }
             
-            return redirect(url_for('payment'))
-        except ValueError:
-            flash('Please enter a valid number of nights', 'error')
+            try:
+                nights = int(nights)
+                room_price = room_prices.get(room_type, 0)
+                total_cost = room_price * nights
+                
+                # Store accommodation data in session
+                session['accommodation'] = {
+                    'room_type': room_type,
+                    'nights': nights,
+                    'room_price': room_price,
+                    'total_cost': total_cost,
+                    'needs_accommodation': True
+                }
+            except ValueError:
+                flash('Please enter a valid number of nights', 'error')
+                return render_template('accommodation.html')
+        else:
+            # User doesn't need accommodation
+            session['accommodation'] = {
+                'needs_accommodation': False,
+                'total_cost': 0
+            }
+        
+        return redirect(url_for('payment'))
     
     return render_template('accommodation.html')
 

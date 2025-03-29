@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration Complete{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto text-center">
+        <div class="card">
+            <div class="card-body p-5">
+                <div class="success-checkmark">
+                    <div class="check-icon">
+                        <span class="icon-line line-tip"></span>
+                        <span class="icon-line line-long"></span>
+                    </div>
+                </div>
+                
+                <h2 class="mb-4">Registration Complete!</h2>
+                <p class="lead mb-4">Thank you for registering for the First Love Church Conference.</p>
+                <p>We're excited to see you at the event. A confirmation email has been sent to your registered email address with all the details.</p>
+                
+                <div class="card bg-light my-4">
+                    <div class="card-body">
+                        <h5>Conference Details</h5>
+                        <div class="row">
+                            <div class="col-md-6 text-md-end">
+                                <p><strong>Date:</strong></p>
+                                <p><strong>Time:</strong></p>
+                                <p><strong>Location:</strong></p>
+                                <p><strong>Check-in:</strong></p>
+                            </div>
+                            <div class="col-md-6 text-md-start">
+                                <p>July 20-25, 2025</p>
+                                <p>Opening session begins at 7:00 PM on July 20</p>
+                                <p>First Love Church Campus</p>
+                                <p>From 3:00 PM on July 20</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="mb-4">If you have any questions or need to make changes to your registration, please contact us at <strong>conference@firstlovechurch.org</strong> or call <strong>(123) 456-7890</strong>.</p>
+                
+                <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Return to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0">Prepare for the Conference</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-map-marker-alt fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="text-center">Directions</h5>
+                        <p>Get detailed directions to the venue and information about parking options.</p>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Directions</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-calendar-alt fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="text-center">Schedule</h5>
+                        <p>View the complete conference schedule and plan your sessions.</p>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Schedule</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="text-center mb-3">
+                            <i class="fas fa-suitcase fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="text-center">What to Bring</h5>
+                        <p>Check our suggested packing list to ensure you have everything you need.</p>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-outline-primary btn-sm">Packing List</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

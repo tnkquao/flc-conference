@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block title %}First Love Church Conference - Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto text-center mb-5">
+        <h2 class="mb-4">Welcome to the Annual First Love Church Conference</h2>
+        <p class="lead">Join us for an unforgettable time of worship, fellowship, and inspiration as we gather together to grow in faith and community.</p>
+        <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg mt-3">Register Now</a>
+    </div>
+</div>
+
+<!-- Event Details -->
+<div class="row mb-5">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Event Details
+            </div>
+            <div class="card-body">
+                <div class="event-details">
+                    <div class="event-detail-item">
+                        <div class="event-detail-label">Date:</div>
+                        <div class="event-detail-value">July 20-25, 2025</div>
+                    </div>
+                    <div class="event-detail-item">
+                        <div class="event-detail-label">Location:</div>
+                        <div class="event-detail-value">First Love Church Campus, 123 Faith Avenue</div>
+                    </div>
+                    <div class="event-detail-item">
+                        <div class="event-detail-label">Registration Fee:</div>
+                        <div class="event-detail-value">$50 per person</div>
+                    </div>
+                    <div class="event-detail-item">
+                        <div class="event-detail-label">Meals:</div>
+                        <div class="event-detail-value">Breakfast and lunch included</div>
+                    </div>
+                </div>
+                <h5 class="mt-4">What to Expect</h5>
+                <ul class="mt-3">
+                    <li>Inspiring worship sessions led by our worship team</li>
+                    <li>Powerful messages from renowned speakers</li>
+                    <li>Interactive workshops and breakout sessions</li>
+                    <li>Fellowship opportunities with other attendees</li>
+                    <li>Prayer and ministry times</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-header">
+                Conference Schedule
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-badge"></div>
+                        <div class="timeline-title">Opening Ceremony</div>
+                        <div class="timeline-date">July 20, 7:00 PM</div>
+                        <div class="timeline-content">Welcome address, worship, and keynote message</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-badge"></div>
+                        <div class="timeline-title">Morning Sessions</div>
+                        <div class="timeline-date">July 21-24, 9:00 AM - 12:00 PM</div>
+                        <div class="timeline-content">Worship, Bible study, and main teaching sessions</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-badge"></div>
+                        <div class="timeline-title">Afternoon Workshops</div>
+                        <div class="timeline-date">July 21-24, 2:00 PM - 4:00 PM</div>
+                        <div class="timeline-content">Specialized workshops and breakout sessions</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-badge"></div>
+                        <div class="timeline-title">Evening Services</div>
+                        <div class="timeline-date">July 21-24, 7:00 PM - 9:00 PM</div>
+                        <div class="timeline-content">Worship and ministry sessions</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-badge"></div>
+                        <div class="timeline-title">Closing Ceremony</div>
+                        <div class="timeline-date">July 25, 10:00 AM - 12:30 PM</div>
+                        <div class="timeline-content">Final worship service, communion, and sending forth</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Speakers -->
+<h3 class="text-center mb-4">Featured Speakers</h3>
+<div class="row mb-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                </div>
+                <h5>Pastor John Smith</h5>
+                <p class="text-muted">Senior Pastor, First Love Church</p>
+                <p>Leading our morning sessions on "Faith That Moves Mountains"</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                </div>
+                <h5>Dr. Sarah Johnson</h5>
+                <p class="text-muted">Bible Teacher & Author</p>
+                <p>Special workshop on "Spiritual Disciplines for Modern Life"</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="fas fa-user-circle fa-5x text-primary"></i>
+                </div>
+                <h5>Rev. Michael Davis</h5>
+                <p class="text-muted">International Evangelist</p>
+                <p>Evening revival services focused on "Renewal & Revival"</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="card bg-light mb-5">
+    <div class="card-body p-5 text-center">
+        <h3>Ready to join us?</h3>
+        <p class="lead mb-4">Secure your spot at the First Love Church Conference today!</p>
+        <div class="d-grid gap-2 col-md-6 mx-auto">
+            <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg">Register Now</a>
+            <a href="{{ url_for('accommodation') }}" class="btn btn-outline-primary">Book Accommodation</a>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials -->
+<h3 class="text-center mb-4">What Past Attendees Say</h3>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="mb-3 text-warning">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="card-text">"The conference was life-changing! I left feeling spiritually renewed and equipped to face life's challenges with stronger faith."</p>
+                <p class="card-text text-end fst-italic">- James Wilson</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="mb-3 text-warning">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="card-text">"The worship sessions were incredible, and the messages spoke directly to my heart. I can't wait to attend again next year!"</p>
+                <p class="card-text text-end fst-italic">- Mary Thompson</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="mb-3 text-warning">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="card-text">"The workshops provided practical tools that I'm still using months later. The fellowship was also amazing - I made lifelong friends!"</p>
+                <p class="card-text text-end fst-italic">- Robert Johnson</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

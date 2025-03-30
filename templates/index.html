@@ -3,11 +3,35 @@
 {% block title %}First Love Church Ghana Conference - Home{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-lg-8 mx-auto text-center mb-5">
-        <h2 class="mb-4">Welcome to the Annual First Love Church Conference at Anagkazo Campus</h2>
-        <p class="lead">Join us in Ghana for an unforgettable time of worship, fellowship, and inspiration as we gather together to grow in faith and community.</p>
-        <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg mt-3">Register Now</a>
+<div class="hero-section text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ url_for('static', filename='images/anagkazo_campus.jpg') }}') center/cover; color: white; min-height: 80vh; display: flex; align-items: center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="display-4 mb-4 fw-bold">First Love Church Conference 2025</h1>
+                <p class="lead mb-4">Join us for an unforgettable time of worship, fellowship, and inspiration at Anagkazo Campus</p>
+                <div class="countdown-timer mb-4">
+                    <div class="d-flex justify-content-center gap-4">
+                        <div class="countdown-item">
+                            <div class="h2" id="days">00</div>
+                            <div class="small">Days</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="h2" id="hours">00</div>
+                            <div class="small">Hours</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="h2" id="minutes">00</div>
+                            <div class="small">Minutes</div>
+                        </div>
+                        <div class="countdown-item">
+                            <div class="h2" id="seconds">00</div>
+                            <div class="small">Seconds</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg px-5 py-3">Register Now</a>
+            </div>
+        </div>
     </div>
 </div>
 

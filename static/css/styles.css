@@ -1,3 +1,29 @@
+
+/* Hero Section Styles */
+.hero-section {
+    position: relative;
+    margin-top: -2rem;
+}
+
+.countdown-item {
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    min-width: 100px;
+}
+
+.countdown-item .h2 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.btn-primary {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
 /* Global Styles */
 :root {
     --primary-color: #e11d20; /* First Love Church red */

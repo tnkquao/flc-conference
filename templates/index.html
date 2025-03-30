@@ -139,39 +139,18 @@
     </div>
 </div>
 
-<!-- External Resources -->
-<div class="row mb-5">
-    <h3 class="text-center mb-4">External Resources</h3>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
+<!-- Resource Banner -->
+<div class="resource-banner mb-5 py-4 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-around align-items-center">
             <a href="https://dagbooks.org/" target="_blank" class="text-decoration-none">
-                <img src="{{ url_for('static', filename='images/dag books.jpg') }}" class="card-img-top" alt="Dag Books" style="height: 200px; object-fit: cover;">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-dark">Dag Books</h5>
-                    <p class="card-text text-muted">Explore Bishop Dag's Books</p>
-                </div>
+                <img src="{{ url_for('static', filename='images/dag books.jpg') }}" alt="Dag Books" style="height: 100px; object-fit: contain;">
             </a>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
             <a href="https://play.google.com/store/search?q=dag+sermons&c=apps&hl=en&pli=1" target="_blank" class="text-decoration-none">
-                <img src="{{ url_for('static', filename='images/Dag bible.png') }}" class="card-img-top" alt="Dag Sermons App" style="height: 200px; object-fit: contain; background: #000;">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-dark">Mobile Apps</h5>
-                    <p class="card-text text-muted">Get Dag Sermons on Your Device</p>
-                </div>
+                <img src="{{ url_for('static', filename='images/Dag bible.png') }}" alt="Dag Sermons App" style="height: 100px; object-fit: contain;">
             </a>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
             <a href="https://dagpreaching.org/" target="_blank" class="text-decoration-none">
-                <img src="{{ url_for('static', filename='images/sermons.jpg') }}" class="card-img-top" alt="Dag Preaching" style="height: 200px; object-fit: contain; background: #000;">
-                <div class="card-body text-center">
-                    <h5 class="card-title text-dark">Dag Preaching</h5>
-                    <p class="card-text text-muted">Listen to Powerful Sermons</p>
-                </div>
+                <img src="{{ url_for('static', filename='images/sermons.jpg') }}" alt="Dag Preaching" style="height: 100px; object-fit: contain;">
             </a>
         </div>
     </div>

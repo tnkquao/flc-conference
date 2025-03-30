@@ -107,19 +107,19 @@
 }
 
 .worship-section {
-    background-image: url('../images/conference_worship.jpg');
+    background-image: url('/static/images/image-51-1.jpg');
 }
 
 .flags-section {
-    background-image: url('../images/conference_flags.jpg');
+    background-image: url('/static/images/image-51-2.jpg');
 }
 
 .teaching-section {
-    background-image: url('../images/conference_teaching.jpg');
+    background-image: url('/static/images/image-51-3.jpg');
 }
 
 .fellowship-section {
-    background-image: url('../images/conference_fellowship.jpg');
+    background-image: url('/static/images/image-51-4.jpg');
 }
 
 .highlight-content {

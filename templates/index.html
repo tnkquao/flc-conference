@@ -140,17 +140,27 @@
 </div>
 
 <!-- Resource Banner -->
-<div class="resource-banner mb-5 py-4 bg-light">
+<div class="resource-banner mb-5">
     <div class="container">
-        <div class="d-flex justify-content-around align-items-center">
-            <a href="https://dagbooks.org/" target="_blank" class="text-decoration-none">
-                <img src="{{ url_for('static', filename='images/dag books.jpg') }}" alt="Dag Books" style="height: 100px; object-fit: contain;">
+        <h4 class="text-center mb-4">Resources</h4>
+        <div class="resource-grid">
+            <a href="https://dagbooks.org/" target="_blank" class="resource-item">
+                <img src="{{ url_for('static', filename='images/dag books.jpg') }}" alt="Dag Books">
+                <div class="resource-overlay">
+                    <span>Browse Books</span>
+                </div>
             </a>
-            <a href="https://play.google.com/store/search?q=dag+sermons&c=apps&hl=en&pli=1" target="_blank" class="text-decoration-none">
-                <img src="{{ url_for('static', filename='images/Dag bible.png') }}" alt="Dag Sermons App" style="height: 100px; object-fit: contain;">
+            <a href="https://play.google.com/store/search?q=dag+sermons&c=apps&hl=en&pli=1" target="_blank" class="resource-item">
+                <img src="{{ url_for('static', filename='images/Dag bible.png') }}" alt="Dag Sermons App">
+                <div class="resource-overlay">
+                    <span>Get the App</span>
+                </div>
             </a>
-            <a href="https://dagpreaching.org/" target="_blank" class="text-decoration-none">
-                <img src="{{ url_for('static', filename='images/sermons.jpg') }}" alt="Dag Preaching" style="height: 100px; object-fit: contain;">
+            <a href="https://dagpreaching.org/" target="_blank" class="resource-item">
+                <img src="{{ url_for('static', filename='images/sermons.jpg') }}" alt="Dag Preaching">
+                <div class="resource-overlay">
+                    <span>Listen to Sermons</span>
+                </div>
             </a>
         </div>
     </div>

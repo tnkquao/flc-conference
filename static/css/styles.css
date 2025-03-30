@@ -1,8 +1,8 @@
 
 .accommodation-page {
-    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('../images/accommodation-bg.jpg');
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url('../images/accommodation-bg.jpg');
     background-size: cover;
-    background-position: center;
+    background-position: top;
     background-attachment: fixed;
     min-height: 100vh;
     padding: 2rem 0;

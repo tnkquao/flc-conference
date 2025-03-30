@@ -4,24 +4,24 @@
 
 {% block content %}
 <!-- Hero Section -->
-<div class="hero-section">
-    <div class="hero-content">
-        <h1>Give Thyself Wholly Conference 2025</h1>
-        <p class="lead">A Time of Spiritual Renewal and Ministry Training</p>
-        <div class="countdown-container">
-            <div class="countdown-item">
+<div class="hero">
+    <div class="container">
+        <h1>First Love Church Conference 2025</h1>
+        <p>Join us for an extraordinary time of ministry and spiritual growth</p>
+        <div id="countdown" class="countdown">
+            <div>
                 <span id="days">00</span>
                 <span>Days</span>
             </div>
-            <div class="countdown-item">
+            <div>
                 <span id="hours">00</span>
                 <span>Hours</span>
             </div>
-            <div class="countdown-item">
+            <div>
                 <span id="minutes">00</span>
                 <span>Minutes</span>
             </div>
-            <div class="countdown-item">
+            <div>
                 <span id="seconds">00</span>
                 <span>Seconds</span>
             </div>
@@ -31,104 +31,87 @@
 </div>
 
 <!-- About Section -->
-<section class="about-section">
+<div class="about section">
     <div class="container">
         <h2>About The Conference</h2>
-        <p>Join us for an extraordinary gathering of believers from around the world. The Give Thyself Wholly Conference is designed to equip, empower, and encourage ministers and believers in their spiritual journey.</p>
-        <div class="features-grid">
-            <div class="feature-item">
-                <i class="fas fa-pray"></i>
-                <h3>Powerful Worship</h3>
-                <p>Experience transformative worship sessions</p>
+        <p>Join us for this transformative conference experience where you'll be equipped with practical ministry tools and spiritual insights.</p>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-church"></i>
+                <h3>Powerful Sessions</h3>
+                <p>Experience dynamic teaching and ministry sessions</p>
             </div>
-            <div class="feature-item">
-                <i class="fas fa-book-reader"></i>
-                <h3>Biblical Teaching</h3>
-                <p>Deep dive into God's Word</p>
-            </div>
-            <div class="feature-item">
-                <i class="fas fa-users"></i>
-                <h3>Fellowship</h3>
-                <p>Connect with believers worldwide</p>
-            </div>
-            <div class="feature-item">
+            <div class="feature">
                 <i class="fas fa-hands-helping"></i>
                 <h3>Ministry Training</h3>
-                <p>Practical ministry skills</p>
+                <p>Get equipped with practical ministry skills</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-users"></i>
+                <h3>Fellowship</h3>
+                <p>Connect with other believers</p>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- Speakers Section -->
-<section class="speakers-section">
-    <div class="container">
-        <h2>Featured Speakers</h2>
-        <div class="speakers-grid">
-            <div class="speaker-card">
-                <div class="speaker-image">
-                    <img src="{{ url_for('static', filename='images/bishop_dag.jpg') }}" alt="Bishop Dag">
+<!-- Featured Speakers -->
+<h3 class="text-center mb-4">Featured Speakers</h3>
+<div class="row mb-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <img src="{{ url_for('static', filename='images/bishop_dag.jpg') }}" alt="Bishop Dag Heward Mills" class="rounded-circle img-fluid" style="width: 200px; height: 200px; object-fit: cover;">
                 </div>
-                <div class="speaker-info">
-                    <h3>Bishop Dag Heward-Mills</h3>
-                    <p>Founder & Presiding Bishop</p>
-                    <div class="speaker-social">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
+                <h5>Bishop Dag Heward Mills</h5>
+                <p class="text-muted">Lead Pastor, First Love Church</p>
+                <p>Leading our morning sessions on "Faith That Moves Mountains"</p>
             </div>
-            <!-- Add more speaker cards as needed -->
         </div>
     </div>
-</section>
+</div>
 
 <!-- Schedule Section -->
-<section class="schedule-section">
+<div class="schedule section">
     <div class="container">
         <h2>Conference Schedule</h2>
         <div class="schedule-grid">
-            <div class="schedule-day">
+            <div class="day">
                 <h3>Day 1</h3>
-                <div class="schedule-item">
+                <div class="event">
                     <span class="time">9:00 AM</span>
-                    <span class="event">Opening Ceremony</span>
+                    <span class="title">Opening Ceremony</span>
                 </div>
-                <div class="schedule-item">
+                <div class="event">
                     <span class="time">10:30 AM</span>
-                    <span class="event">Morning Session</span>
+                    <span class="title">Morning Session</span>
                 </div>
-                <!-- Add more schedule items -->
             </div>
-            <!-- Add more days -->
         </div>
     </div>
-</section>
+</div>
 
 <!-- Location Section -->
-<section class="location-section">
+<div class="location section">
     <div class="container">
         <h2>Location</h2>
         <div class="location-details">
-            <div class="location-info">
-                <h3>Anagkazo Campus</h3>
-                <p>Mampong, Eastern Region<br>Ghana</p>
-                <a href="#" class="location-button">Get Directions</a>
-            </div>
-            <div class="location-map">
-                <!-- Add map iframe here -->
+            <div>
+                <h3>Conference Venue</h3>
+                <p>First Love Church<br>Anagkazo Campus<br>Mampong, Eastern Region</p>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Registration CTA -->
-<section class="cta-section">
+<div class="cta section">
     <div class="container">
         <h2>Join Us at the Conference</h2>
         <p>Don't miss this life-changing experience</p>
         <a href="{{ url_for('registration') }}" class="cta-button">Register Now</a>
     </div>
-</section>
+</div>
 {% endblock %}

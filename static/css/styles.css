@@ -1,22 +1,18 @@
 
+/* Base styles */
 :root {
-    --primary-color: #1a1a1a;
-    --secondary-color: #4a4a4a;
-    --accent-color: #97fb00;
+    --primary-color: #1a73e8;
+    --secondary-color: #4285f4;
     --text-color: #333;
-    --bg-color: #ffffff;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    --light-bg: #f8f9fa;
 }
 
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
+    margin: 0;
+    padding: 0;
 }
 
 .container {
@@ -27,8 +23,9 @@ body {
 
 /* Navigation */
 .navbar {
-    background: var(--primary-color);
+    background: white;
     padding: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: fixed;
     width: 100%;
     top: 0;
@@ -42,29 +39,39 @@ body {
 }
 
 .logo img {
-    height: 50px;
+    height: 40px;
 }
 
 .nav-links a {
-    color: var(--bg-color);
+    color: var(--text-color);
     text-decoration: none;
     margin-left: 2rem;
     font-weight: 500;
 }
 
 .nav-cta {
-    background: var(--accent-color);
+    background: var(--primary-color);
+    color: white !important;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    color: var(--primary-color) !important;
+    transition: background-color 0.3s;
+}
+
+.nav-cta:hover {
+    background: var(--secondary-color);
 }
 
 /* Hero Section */
 .hero {
-    background: var(--primary-color);
-    color: var(--bg-color);
-    padding: 150px 0 100px;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../images/conference-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
     text-align: center;
+    color: white;
+    padding: 0 20px;
 }
 
 .hero h1 {
@@ -72,17 +79,23 @@ body {
     margin-bottom: 1rem;
 }
 
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+/* Countdown */
 .countdown {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin: 3rem 0;
+    margin-bottom: 2rem;
 }
 
 .countdown div {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.1);
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 5px;
     min-width: 100px;
 }
 
@@ -91,13 +104,29 @@ body {
 }
 
 .countdown span:first-child {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
+}
+
+/* CTA Button */
+.cta-button {
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    display: inline-block;
+}
+
+.cta-button:hover {
+    background: var(--secondary-color);
 }
 
 /* Sections */
 .section {
-    padding: 80px 0;
+    padding: 5rem 0;
 }
 
 .section h2 {
@@ -110,64 +139,48 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    margin-top: 3rem;
-}
-
-.feature {
     text-align: center;
-    padding: 2rem;
-    background: #f9f9f9;
-    border-radius: 10px;
 }
 
 .feature i {
     font-size: 2.5rem;
-    color: var(--accent-color);
+    color: var(--primary-color);
     margin-bottom: 1rem;
 }
 
 /* Schedule */
 .schedule-grid {
-    display: grid;
-    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.day {
+    margin-bottom: 2rem;
 }
 
 .event {
-    background: #f9f9f9;
-    padding: 1rem;
-    border-radius: 5px;
-    margin-bottom: 1rem;
     display: flex;
-    align-items: center;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: var(--light-bg);
+    border-radius: 5px;
 }
 
 .time {
-    font-weight: bold;
-    margin-right: 1rem;
-    color: var(--accent-color);
+    min-width: 100px;
+    font-weight: 600;
 }
 
-/* Buttons */
-.cta-button {
-    display: inline-block;
-    background: var(--accent-color);
-    color: var(--primary-color);
-    text-decoration: none;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background 0.3s;
-}
-
-.cta-button:hover {
-    background: #86de00;
+/* Location */
+.location-details {
+    text-align: center;
 }
 
 /* Footer */
 .footer {
-    background: var(--primary-color);
-    color: var(--bg-color);
-    padding: 50px 0 20px;
+    background: var(--text-color);
+    color: white;
+    padding: 3rem 0;
 }
 
 .footer-content {
@@ -183,20 +196,40 @@ body {
 }
 
 .footer-links a {
-    color: var(--bg-color);
+    color: white;
     text-decoration: none;
     display: block;
     margin-bottom: 0.5rem;
 }
 
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
 .social-links a {
-    color: var(--bg-color);
-    margin-right: 1rem;
+    color: white;
     font-size: 1.5rem;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .countdown {
+        gap: 1rem;
+    }
+    
+    .countdown div {
+        min-width: 70px;
+    }
 }

@@ -3,13 +3,40 @@
 {% block title %}First Love Church Ghana Conference - Home{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-lg-8 mx-auto text-center mb-5">
-        <h2 class="mb-4">Welcome to the Annual First Love Church Conference at Anagkazo Campus</h2>
-        <p class="lead">Join us in Ghana for an unforgettable time of worship, fellowship, and inspiration as we gather together to grow in faith and community.</p>
-        <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg mt-3">Register Now</a>
+<!-- Hero Section -->
+<div class="hero-section">
+    <img src="{{ url_for('static', filename='images/conference_crowd.jpg') }}" alt="Conference Crowd" class="hero-image">
+    <div class="hero-content">
+        <h1>Welcome to the Annual First Love Church Conference</h1>
+        <p>Join us at Anagkazo Campus for an unforgettable time of worship, fellowship, and inspiration as we gather together to grow in faith and community.</p>
+        <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg">Register Now</a>
     </div>
 </div>
+
+<!-- Past Events Gallery -->
+<section class="image-gallery">
+    <div class="container">
+        <h2 class="text-center mb-5">Glimpses from Past Events</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='images/conference_worship.jpg') }}" alt="Worship Session">
+                <div class="gallery-caption">Powerful Worship Moments</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='images/conference_flags.jpg') }}" alt="International Flags">
+                <div class="gallery-caption">International Community</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='images/conference_teaching.jpg') }}" alt="Teaching Session">
+                <div class="gallery-caption">Engaging Teaching Sessions</div>
+            </div>
+            <div class="gallery-item">
+                <img src="{{ url_for('static', filename='images/conference_fellowship.jpg') }}" alt="Fellowship">
+                <div class="gallery-caption">Fellowship & Community</div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Event Details -->
 <div class="row mb-5">

@@ -1,186 +1,134 @@
 {% extends 'base.html' %}
 
-{% block title %}First Love Church Ghana Conference - Home{% endblock %}
+{% block title %}Give Thyself Wholly Conference{% endblock %}
 
 {% block content %}
-<div class="hero-section text-center py-5" style="background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('{{ url_for('static', filename='images/anagkazo_campus.jpg') }}') center/cover; color: white; min-height: 80vh; display: flex; align-items: center;">
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Give Thyself Wholly Conference 2025</h1>
+        <p class="lead">A Time of Spiritual Renewal and Ministry Training</p>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <span>Days</span>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <span>Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <span>Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <span>Seconds</span>
+            </div>
+        </div>
+        <a href="{{ url_for('registration') }}" class="cta-button">Register Now</a>
+    </div>
+</div>
+
+<!-- About Section -->
+<section class="about-section">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h1 class="display-4 mb-4 fw-bold">First Love Church Conference 2025</h1>
-                <p class="lead mb-4">Join us for an unforgettable time of worship, fellowship, and inspiration at Anagkazo Campus</p>
-                <div class="countdown-timer mb-4">
-                    <div class="d-flex justify-content-center gap-4">
-                        <div class="countdown-item">
-                            <div class="h2" id="days">00</div>
-                            <div class="small">Days</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div class="h2" id="hours">00</div>
-                            <div class="small">Hours</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div class="h2" id="minutes">00</div>
-                            <div class="small">Minutes</div>
-                        </div>
-                        <div class="countdown-item">
-                            <div class="h2" id="seconds">00</div>
-                            <div class="small">Seconds</div>
-                        </div>
-                    </div>
-                </div>
-                <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg px-5 py-3">Register Now</a>
+        <h2>About The Conference</h2>
+        <p>Join us for an extraordinary gathering of believers from around the world. The Give Thyself Wholly Conference is designed to equip, empower, and encourage ministers and believers in their spiritual journey.</p>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-pray"></i>
+                <h3>Powerful Worship</h3>
+                <p>Experience transformative worship sessions</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-book-reader"></i>
+                <h3>Biblical Teaching</h3>
+                <p>Deep dive into God's Word</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-users"></i>
+                <h3>Fellowship</h3>
+                <p>Connect with believers worldwide</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-hands-helping"></i>
+                <h3>Ministry Training</h3>
+                <p>Practical ministry skills</p>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<!-- Event Details -->
-<div class="row mb-5">
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-header">
-                Event Details
-            </div>
-            <div class="card-body">
-                <div class="event-details">
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Date:</div>
-                        <div class="event-detail-value">July 20-25, 2025</div>
-                    </div>
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Location:</div>
-                        <div class="event-detail-value">Anagkazo Campus, Mampong, Eastern Region, Ghana</div>
-                    </div>
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Registration Fee:</div>
-                        <div class="event-detail-value">$50 per person</div>
-                    </div>
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Meals:</div>
-                        <div class="event-detail-value">Breakfast and lunch included</div>
+<!-- Speakers Section -->
+<section class="speakers-section">
+    <div class="container">
+        <h2>Featured Speakers</h2>
+        <div class="speakers-grid">
+            <div class="speaker-card">
+                <div class="speaker-image">
+                    <img src="{{ url_for('static', filename='images/bishop_dag.jpg') }}" alt="Bishop Dag">
+                </div>
+                <div class="speaker-info">
+                    <h3>Bishop Dag Heward-Mills</h3>
+                    <p>Founder & Presiding Bishop</p>
+                    <div class="speaker-social">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <h5 class="mt-4">What to Expect</h5>
-                <ul class="mt-3">
-                    <li>Inspiring worship sessions led by our worship team</li>
-                    <li>Powerful messages from renowned speakers</li>
-                    <li>Interactive workshops and breakout sessions</li>
-                    <li>Fellowship opportunities with other attendees</li>
-                    <li>Prayer and ministry times</li>
-                </ul>
             </div>
+            <!-- Add more speaker cards as needed -->
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-header">
-                Conference Schedule
-            </div>
-            <div class="card-body">
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Opening Ceremony</div>
-                        <div class="timeline-date">July 20, 7:00 PM</div>
-                        <div class="timeline-content">Welcome address, worship, and keynote message</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Morning Sessions</div>
-                        <div class="timeline-date">July 21-24, 9:00 AM - 12:00 PM</div>
-                        <div class="timeline-content">Worship, Bible study, and main teaching sessions</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Afternoon Workshops</div>
-                        <div class="timeline-date">July 21-24, 2:00 PM - 4:00 PM</div>
-                        <div class="timeline-content">Specialized workshops and breakout sessions</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Evening Services</div>
-                        <div class="timeline-date">July 21-24, 7:00 PM - 9:00 PM</div>
-                        <div class="timeline-content">Worship and ministry sessions</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Closing Ceremony</div>
-                        <div class="timeline-date">July 25, 10:00 AM - 12:30 PM</div>
-                        <div class="timeline-content">Final worship service, communion, and sending forth</div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-4">
-                    <a href="{{ url_for('timeline') }}" class="btn btn-outline-primary">
-                        <i class="fas fa-calendar-alt me-2"></i>View Interactive Timeline
-                    </a>
-                    <p class="text-muted mt-2"><small>Explore our new interactive day-by-day schedule</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</section>
 
-<!-- Featured Speakers -->
-<h3 class="text-center mb-4">Featured Speakers</h3>
-<div class="row mb-5">
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <div class="mb-3">
-                    <img src="{{ url_for('static', filename='images/bishop_dag.jpg') }}" alt="Bishop Dag Heward Mills" class="rounded-circle img-fluid" style="width: 200px; height: 200px; object-fit: cover;">
+<!-- Schedule Section -->
+<section class="schedule-section">
+    <div class="container">
+        <h2>Conference Schedule</h2>
+        <div class="schedule-grid">
+            <div class="schedule-day">
+                <h3>Day 1</h3>
+                <div class="schedule-item">
+                    <span class="time">9:00 AM</span>
+                    <span class="event">Opening Ceremony</span>
                 </div>
-                <h5>Bishop Dag Heward Mills</h5>
-                <p class="text-muted">Lead Pastor, First Love Church</p>
-                <p>Leading our morning sessions on "Faith That Moves Mountains"</p>
+                <div class="schedule-item">
+                    <span class="time">10:30 AM</span>
+                    <span class="event">Morning Session</span>
+                </div>
+                <!-- Add more schedule items -->
             </div>
+            <!-- Add more days -->
         </div>
     </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <div class="mb-3">
-                    <i class="fas fa-user-circle fa-5x text-primary"></i>
-                </div>
-                <h5>Bishop Edwin Morgan OGOE</h5>
-                <p class="text-muted">Bishop, First Love Church</p>
-                <p>Special workshop on "Spiritual Disciplines for Modern Life"</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <div class="mb-3">
-                    <i class="fas fa-user-circle fa-5x text-primary"></i>
-                </div>
-                <h5>Bishop Joshua Dag Heward Mills</h5>
-                <p class="text-muted">Bishop, First Love Church</p>
-                <p>Evening revival services focused on "Renewal & Revival"</p>
-            </div>
-        </div>
-    </div>
-</div>
+</section>
 
-<!-- Call to Action -->
-<div class="card bg-light mb-5">
-    <div class="card-body p-5 text-center">
-        <h3>Ready to join us in Ghana?</h3>
-        <p class="lead mb-4">Secure your spot at the First Love Church Conference at Anagkazo Campus today!</p>
-        <div class="d-grid gap-2 col-md-6 mx-auto">
-            <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg">Register Now</a>
-            <div class="row mt-3">
-                <div class="col-md-6">
-                    <a href="{{ url_for('accommodation') }}" class="btn btn-outline-primary w-100">Book Accommodation</a>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ url_for('timeline') }}" class="btn btn-outline-primary w-100">View Timeline</a>
-                </div>
+<!-- Location Section -->
+<section class="location-section">
+    <div class="container">
+        <h2>Location</h2>
+        <div class="location-details">
+            <div class="location-info">
+                <h3>Anagkazo Campus</h3>
+                <p>Mampong, Eastern Region<br>Ghana</p>
+                <a href="#" class="location-button">Get Directions</a>
+            </div>
+            <div class="location-map">
+                <!-- Add map iframe here -->
             </div>
         </div>
     </div>
-</div>
+</section>
 
-
+<!-- Registration CTA -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Join Us at the Conference</h2>
+        <p>Don't miss this life-changing experience</p>
+        <a href="{{ url_for('registration') }}" class="cta-button">Register Now</a>
+    </div>
+</section>
 {% endblock %}

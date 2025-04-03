@@ -53,10 +53,24 @@
                     
                     <div class="mb-3">
                         <label for="church" class="form-label">Home Church</label>
-                        <input type="text" class="form-control" id="church" name="church" placeholder="Enter your home church name">
+                        <!-- <input type="text" class="form-control" id="church" name="church" placeholder="Enter your home church name"> -->
+                        <select id="countries" name="countries">
+                            <option value="" disabled selected>Select a country</option>
+                            <option value="usa">United States</option>
+                            <option value="canada">Canada</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="india">India</option>
+                            <option value="australia">Australia</option>
+                            <option value="germany">Germany</option>
+                            <option value="france">France</option>
+                            <option value="italy">Italy</option>
+                            <option value="spain">Spain</option>
+                            <option value="brazil">Brazil</option>
+                            <!-- Add more countries as needed -->
+                        </select>
                     </div>
                     
-                    <div class="mb-3">
+                    <!-- <div class="mb-3">
                         <label class="form-label">Dietary Restrictions</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="vegetarian" id="vegetarian" name="dietary[]">
@@ -82,7 +96,7 @@
                                 Other
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                     
                     <div class="mb-3">
                         <label for="special-needs" class="form-label">Special Needs or Accommodations</label>

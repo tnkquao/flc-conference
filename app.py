@@ -1,7 +1,7 @@
 import os
 import uuid
 import logging
-import qrcode
+# import qrcode
 import smtplib
 import json
 import stripe
@@ -50,7 +50,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'admin_login'
 
 # Import models after initializing db
-from models import Registration, Admin
+# from models import Registration, Admin
 
 # Setup the Flask-Login user loader
 @login_manager.user_loader
@@ -402,8 +402,8 @@ def process_payment():
         return redirect(url_for('payment'))
 
 # QR Code Generation and Email Helper Functions
-def generate_qr_code(registration):
-    """Generate a QR code for the registration confirmation"""
+""" def generate_qr_code(registration):
+    #Generate a QR code for the registration confirmation
     try:
         # Create QR code with registration details
         qr_data = {
@@ -444,7 +444,7 @@ def generate_qr_code(registration):
     except Exception as e:
         app.logger.error(f"Error generating QR code: {str(e)}")
         return False
-
+ """
 def send_confirmation_email(registration):
     """Send a confirmation email with QR code to the attendee"""
     if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
@@ -722,3 +722,7 @@ def page_not_found(e):
 @app.errorhandler(500)
 def server_error(e):
     return render_template('error.html', error_message="Internal server error"), 500
+
+
+if __name__ == '__main__':
+    app.run(debug=True)

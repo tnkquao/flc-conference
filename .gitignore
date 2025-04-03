@@ -1,0 +1,7 @@
+generated-icon.png
+pyproject.toml 
+uv.lock
+instance/ 
+replit.nix
+.replit
+__pycache__/

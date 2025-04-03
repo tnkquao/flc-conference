@@ -1,173 +1,780 @@
 {% extends 'base.html' %}
 
-{% block title %}First Love Church Ghana Conference - Home{% endblock %}
+{% block title %}First Love Conference{% endblock %}
 
 {% block content %}
 <!-- Hero Section -->
 <div class="hero-section">
-    <img src="{{ url_for('static', filename='images/472183808_10163325176983623_4353500367647613438_n.jpg') }}" alt="Conference Crowd" class="hero-image">
+    <img src="{{ url_for('static', filename='images/Conference 3 copy.png') }}" alt="Conference Flyer"
+        class="hero-image">
     <div class="hero-content">
-        <h1>Welcome to the Annual First Love Church Conference</h1>
-        <p>Join us at Anagkazo Campus for an unforgettable time of worship, fellowship, and inspiration as we gather together to grow in faith and community.</p>
-        <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg">Register Now</a>
+        <!-- <h1>Road to The First Love Conference</h1>
+         <p>Join us at First Love Center for an unforgettable time of worship, fellowship, and inspiration as we gather together to grow in faith and community.</p> -->
+        <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg"><strong>REGISTER NOW</strong></a>
     </div>
 </div>
 
 <!-- Conference Highlights -->
 <section class="conference-highlights">
-    <div class="highlight-section worship-section">
-        <div class="highlight-content">
-            <h3>Powerful Worship Moments</h3>
-            <p>Experience spirit-filled worship with our international worship team</p>
+    <div class="countdown-container">
+        <a href="{{ url_for('registration') }}" class="carousel-item">
+            <div class="countdown-carousel">
+                <div class="countdown-banner">
+                    <span id="countdown-days" class="countdown-number">00</span>
+                    <span class="countdown-unit">Days</span>
+                    <span id="countdown-hours" class="countdown-number">00</span>
+                    <span class="countdown-unit">Hours</span>
+                    <span id="countdown-minutes" class="countdown-number">00</span>
+                    <span class="countdown-unit">Minutes</span>
+                    <span class="register-text">To Go - Register Today</span>
+                </div>
+            </div>
+
+        </a>
+    </div>
+    <div class="marquee-countdown background-color-pink text-color-white"></div>
+    <div class="core-speakers">
+        <div class="site-container cc-speakers">
+            <div data-reveal-container class="_2-column">
+                <div data-reveal-item class="core-speakers_intro revealed">
+                    <h2>The <strong>Meet Our Theme &amp; Confirmed 2025 First Love Conference Speakers</strong></h2>
+                    <p class="site-paragraph is-medium text-weight-500"><strong>Experience The First Love
+                            Conference</strong></p>
+                    <p class="site-paragraph is-medium text-weight-500">The <strong>First Love Conference</strong> is a
+                        spirit filled international event that brings together
+                        <strong>young people and adults from over 49 nations</strong>, united by a passion for Jesus and
+                        a desire to experience His presence in a deeper way.<br>
+                    </p>
+                    <p class="site-paragraph is-medium text-weight-500">
+                        With thousands joining from <strong>America, Europe, the Caribbean, Australia, New Zealand, and
+                            across Africa</strong>, this electrifying gathering features <strong>powerful worship,
+                            transformational teachings, and an atmosphere charged with inspiration.</strong>
+                    </p>
+                    <p class="site-paragraph is-medium text-weight-500">
+                        Join globally renowned speakers and a diverse community as we explore this year's theme,
+                        <strong>“THE LORD IS THERE”</strong>—a call to experience His presence, power, and purpose like
+                        never before.
+                    </p>
+                    <p class="site-paragraph is-medium text-weight-500">
+                        <strong>This is more than a conference—it's an encounter with His presence.</strong> See you
+                        there!
+                    </p>
+
+                </div>
+                <!-- <div data-reveal-item id="w-node-_039498d4-bae6-9cad-26b6-ff32f6c23406-4c49b90e"
+                    class="event-hero_footer-wrapper is-2025 revealed"> -->
+                <div class="intro-video ">
+                    <img src="{{ url_for('static', filename='images/Conference 3 copy.png') }}" class="video-thumbnail"
+                        onclick="openModal()" alt="Conference intro video">
+
+                    <!-- Modal Popup -->
+                    <div id="videoModal" class="modal">
+                        <div class="modal-content">
+                            <button class="close" onclick="closeModal()">×</button>
+                            <video id="popupVideo" controls>
+                                <source src="{{ url_for('static', filename='videos/FLC 20.mp4') }}" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- </div> -->
+            </div>
+
+            <!--  SPEAKERS -->
+            <div data-reveal-container class="featured-speakers">
+                <h1 data-reveal-item class="heading-3 revealed">Featured Speakers</h1>
+                <div role="list" class="featured-speakers__list w-dyn-items">
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Joshua Heward-Mills.jpg') }}"
+                            loading="lazy" width="405" alt="Joshua Heward-Mills">
+                        <h3>Joshua Heward-Mills</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers"><strong>Host and Lead
+                                Pastor</strong>, First Love Church</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Prophet Dag Heward-Mills.jpg') }}"
+                            loading="lazy" width="405" alt="Prophet Dag Heward-Mills">
+                        <h3>Prophet Dag Heward-Mills</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Founder of The United
+                            Denominations Originating from the Lighthouse
+                            Group of Churches (UD-OLGC), Ghana</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Glyn Barrett.jpg') }}"
+                            loading="lazy" width="405" alt="Glyn Barrett">
+                        <h3>Glyn Barrett</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior Pastor Audacious, UK and
+                            National leader of Assemblies of God UK</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Ben Fitzgerald.jpg') }}"
+                            loading="lazy" width="405" alt="Ben Fitzgerald">
+                        <h3>Ben Fitzgerald</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior leader Awakening Europe,
+                            Germany</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Daniel Chand.jpg') }}"
+                            loading="lazy" width="405" alt="Daniel Chand">
+                        <h3>Daniel Chand</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Leader of Walking Like Jesus
+                            Ministries, UK</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/David Diga Hernandez.jpg') }}"
+                            loading="lazy" width="405" alt="David Diga Hernandez">
+                        <h3>David Diga Hernandez</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Evangelist, healing minister and
+                            TV host, USA</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Joshua McCauley.jpg') }}"
+                            loading="lazy" width="405" alt="Joshua McCauley">
+                        <h3>Joshua McCauley</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior Pastor Redemption Church
+                            and Rhema, South Africa</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Kong Hee.jpg') }}"
+                            loading="lazy" width="405" alt="Kong Hee">
+                        <h3>Kong Hee</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior Pastor, City Harvest
+                            Church, Singapore</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Markus Wenz.jpg') }}"
+                            loading="lazy" width="405" alt="Markus Wenz">
+                        <h3>Markus Wenz</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Leader of Holy Spirit Night
+                            Movement at the Gospel Forum, Germany</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Teo Hayashi.jpg') }}"
+                            loading="lazy" width="405" alt="Teo Hayashi">
+                        <h3>Teo Hayashi</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Pastor, Dunamis Movement and
+                            Monte Sião Church, Brazil</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speakers Carousal-->
+            <div class="carousel-container core-speakers_list-wrapper splide__track">
+                <h1 class="heading-3">all speakers</h1>
+                <div class="carousel-track">
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Joshua Heward-Mills.jpg') }}"
+                            alt="Joshua Heward-Mills" class="speaker-image">
+                        <h4>Joshua Heward-Mills</h4>
+                        <p class="speaker-title">Host and Lead Pastor, First Love Church</p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Prophet Dag Heward-Mills.jpg') }}"
+                            alt="Prophet Dag Heward-Mills" class="speaker-image">
+                        <h4>Prophet Dag Heward-Mills</h4>
+                        <p class="speaker-title">Founder of The United Denominations Originating from the Lighthouse
+                            Group of Churches (UD-OLGC), Ghana
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Glyn Barrett.jpg') }}"
+                            alt="Glyn Barrett" class="speaker-image">
+                        <h4>Glyn Barrett</h4>
+                        <p class="speaker-title">Senior Pastor Audacious, UK and National leader of Assemblies of God UK
+                        </p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Ben Fitzgerald.jpg') }}"
+                            alt="Ben Fitzgerald" class="speaker-image">
+                        <h4>Ben Fitzgerald</h4>
+                        <p class="speaker-title">Senior leader Awakening Europe, Germany</p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Daniel Chand.jpg') }}"
+                            alt="Daniel Chand" class="speaker-image">
+                        <h4>Daniel Chand</h4>
+                        <p class="speaker-title">Leader of Walking Like Jesus Ministries, UK</p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/David Diga Hernandez.jpg') }}"
+                            alt="David Diga Hernandez" class="speaker-image">
+                        <h4>David Diga Hernandez</h4>
+                        <p class="speaker-title">Evangelist, healing minister and TV host USA</p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Joshua McCauley.jpg') }}"
+                            alt="Joshua McCauley" class="speaker-image">
+                        <h4>Joshua McCauley</h4>
+                        <p class="speaker-title">Senior Pastor Redemption Church and Rhema, South Africa</p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Kong Hee.jpg') }}"
+                            alt="Kong Hee" class="speaker-image">
+                        <h4>Kong Hee</h4>
+                        <p class="speaker-title">Senior Pastor, City Harvest Church, Singapore</p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Markus Wenz.jpg') }}"
+                            alt="Markus Wenz" class="speaker-image">
+                        <h4>Markus Wenz</h4>
+                        <p class="speaker-title">Leader of Holy Spirit Night Movement at the Gospel Forum, Germany</p>
+                    </div>
+                    <div class="speaker-card">
+                        <img src="{{ url_for('static', filename='images/conference-speakers/Teo Hayashi.jpg') }}"
+                            alt="Teo Hayashi" class="speaker-image">
+                        <h4>Teo Hayashi</h4>
+                        <p class="speaker-title">Pastor, Dunamis Movement and Monte Sião Church, Brazil</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <div class="highlight-section flags-section">
-        <div class="highlight-content">
-            <h3>International Community</h3>
-            <p>Join believers from over 50 nations worldwide</p>
+
+    <!--  EXCLUSIVES -->
+    <div class="event-exclusive">
+        <div data-reveal-container="" class="site-container is-event-exclusive">
+            <div data-reveal-item class="event-exclusive_left revealed">
+                <h6 class="text-color-purple">Exclusive Growth opportunity</h6>
+                <div class="event-exclusive_heading">
+                    <h2>Why Attend?</h2>
+                    <div class="div-spacer"></div>
+                </div>
+                <div class="event-exclusive_benefits cc-2025">
+                    <div class="event-exclusive_benefits-item">
+                        <div class="event-exclusive_benefits-item_top">
+                            <h3 class="cc-purple">01</h3>
+                            <div>
+                                <p class="site-paragraph is-medium text-weight-500">Encounter God's Presence & Power –
+                                    Experience life-changing worship, inspiring teachings, and an atmosphere where faith
+                                    is ignited.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="event-exclusive_benefits-item">
+                        <div class="event-exclusive_benefits-item_top">
+                            <div>
+                                <h3 class="cc-purple">02</h3>
+                            </div>
+                            <p class="site-paragraph is-medium text-weight-500">Connect with a Global Faith Community –
+                                Join passionate believers from around the world and be part of a worldwide move of God.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="event-exclusive_benefits-item">
+                        <div class="event-exclusive_benefits-item_top">
+                            <div>
+                                <h3 class="cc-purple">03</h3>
+                            </div>
+                            <p class="site-paragraph is-medium text-weight-500">Be Equipped & Transformed – Receive
+                                fresh vision, spiritual renewal, and guidance from influential Christian leaders.</p>
+                        </div>
+                    </div>
+                </div>
+                <h4>3 Days to Grow Your Business, Community &amp; Impact</h4>
+                <div class="div_listcontainer">
+                    <div class="div_listitem">
+                        <div class="div_listicon">
+                            <img src="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d8c0f7a71d1112793c083b_Checkmark.svg"
+                                loading="lazy" alt="" class="img_checkmark">
+                        </div>
+                        <div class="div_listtext">
+                            <p>Exclusive Networking Experiences &amp; Receptions designed to spark meaningful
+                                connections.</p>
+                        </div>
+                    </div>
+                    <div class="div_listitem">
+                        <div class="div_listicon">
+                            <img src="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d8c0f7a71d1112793c083b_Checkmark.svg"
+                                loading="lazy" alt="" class="img_checkmark">
+                        </div>
+                        <div class="div_listtext">
+                            <p>Inspiring Main Stage Keynotes from visionaries like Oprah Winfrey, T.D. Jakes, Vusi
+                                Thembekwayo, Jerry Lorenzo, Janell Stephens, Wallstreet Trapper, and more.</p>
+                        </div>
+                    </div>
+                    <div class="div_listitem">
+                        <div class="div_listicon">
+                            <img src="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d8c0f7a71d1112793c083b_Checkmark.svg"
+                                loading="lazy" alt="" class="img_checkmark">
+                        </div>
+                        <div class="div_listtext">
+                            <p>15+ Expert-Led Breakout Sessions covering scaling operations, marketing &amp; brand
+                                storytelling, AI, and more.</p>
+                        </div>
+                    </div>
+                    <div class="div_listitem">
+                        <div class="div_listicon">
+                            <img src="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d8c0f7a71d1112793c083b_Checkmark.svg"
+                                loading="lazy" alt="" class="img_checkmark">
+                        </div>
+                        <div class="div_listtext">
+                            <p> Live On-Site Investment Opportunities—potential funding right at your fingertips!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <a id="prekindle-register" href="{{ url_for('registration') }}" target="_blank"
+                    class="site-button is-small is-yellow w-button"><strong>REGISTER
+                        NOW<br></strong></a>
+            </div>
+            <div data-reveal-item class="event-exclusive_right revealed">
+                <div class="event-exclusive_images">
+                    <div class="event-exclusive_image-top">
+                        <img src="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend.jpg"
+                            loading="lazy" width="616" sizes="(max-width: 767px) 100vw, 616px" alt=""
+                            srcset="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-500.jpg 500w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-800.jpg 800w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-1080.jpg 1080w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-1600.jpg 1600w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend.jpg 2000w"
+                            class="image-fullwidth">
+                    </div>
+                    <div class="event-exclusive_image-middle"></div>
+                    <!-- <div class="event-exclusive_image-bottom">
+                     <img src="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/65d11e9e2899dc24f222d65e_event-exclusive-image-bottom.jpg" loading="lazy" alt="" class="image-fit-cover">
+                 </div> -->
+                </div>
+            </div>
         </div>
     </div>
-    <div class="highlight-section teaching-section">
-        <div class="highlight-content">
-            <h3>Engaging Teaching Sessions</h3>
-            <p>Learn from experienced ministers and teachers of the Word</p>
+
+
+    <div id="register-now" class="pricing-cards">
+        <div id="pricing" data-reveal-container="" class="site-container">
+            <div data-reveal-item class="ticket-prices_heading revealed">
+                <h6 class="cc-yellow cc-center"><strong>CHOOSE YOUR PACKAGE</strong></h6>
+                <h2 class="site-heading is-ticketpricing">Register Now</h2>
+            </div>
+            <!-- <div class="site-faq_marquee splide cc-hide">
+                 <div class="site-faq_marquee-track splide__track">
+                     <div class="site-faq_marquee-list splide__list">
+                         <div class="site-faq_marquee-item splide__slide cc-white">
+                             <h2 class="site-heading is-site-faq-marquee">Admission Options</h2>
+                         </div>
+                     </div>
+                 </div>
+             </div> -->
+            <div class="pricing-cards__list">
+                <div data-reveal-item class="pricing-cards__item revealed">
+                    <div class="pricing-cards__item-heading is-yellow">USA Admission</div>
+                    <div class="pricing-cards__item-main">
+                        <div class="pricing-cards__item-price">
+                            <div class="pricing-cards__item-price__label">Price:</div>
+                            <div class="pricing-cards__item-price__amount">$100</div>
+                        </div>
+                        <div class="pricing-cards__item-includes">
+                            <div class="pricing-cards__item-includes__label">Includes:</div>
+                            <ul role="list" class="pricing-cards__item-includes__list">
+                                <li class="pricing-cards__item-includes__item">Full access to sessions and workshops
+                                </li>
+                                <li class="pricing-cards__item-includes__item">Curated networking events with fellow
+                                    entrepreneurs</li>
+                                <li class="pricing-cards__item-includes__item">Access to exhibitor areas showcasing
+                                    innovative businesses and resources</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a id="prekindle-register" href="{{ url_for('registration') }}" target="_blank"
+                        class="site-button is-small is-yellow is-pricing-cards__item w-button"><strong>REGISTER
+                            NOW<br></strong></a>
+                </div>
+                <div data-reveal-item class="pricing-cards__item revealed">
+                    <div class="pricing-cards__item-heading is-purple">UK Admission</div>
+                    <div class="pricing-cards__item-main">
+                        <div class="pricing-cards__item-price">
+                            <div class="pricing-cards__item-price__label">Price:</div>
+                            <div class="pricing-cards__item-price__amount">£100</div>
+                        </div>
+                        <div class="pricing-cards__item-includes">
+                            <div class="pricing-cards__item-includes__label">Includes:<br><span
+                                    class="pricing-cards__item-includes__label-span"><strong><em>General Admission
+                                            benefits, plus:</em></strong></span>
+                            </div>
+                            <ul role="list" class="pricing-cards__item-includes__list">
+                                <li class="pricing-cards__item-includes__item">Priority seating at all sessions</li>
+                                <li class="pricing-cards__item-includes__item">Access to exclusive VIP-only
+                                    networking
+                                    events, including investor connections</li>
+                                <li class="pricing-cards__item-includes__item">An intimate breakout session with
+                                    select
+                                    speakers for deeper engagement</li>
+                                <li class="pricing-cards__item-includes__item">Premium dining experience and
+                                    designated
+                                    networking events</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a id="prekindle-register" href="{{ url_for('registration') }}" target="_blank"
+                        class="site-button is-small is-yellow is-pricing-cards__item w-button"><strong>REGISTER
+                            NOW<br></strong></a>
+                </div>
+                <div data-reveal-item class="pricing-cards__item revealed">
+                    <div class="pricing-cards__item-heading is-green">Europe Admission</div>
+                    <div class="pricing-cards__item-main">
+                        <div class="pricing-cards__item-price">
+                            <div class="pricing-cards__item-price__label">Price:</div>
+                            <div class="pricing-cards__item-price__amount">€100</div>
+                        </div>
+                        <div class="pricing-cards__item-includes">
+                            <div class="pricing-cards__item-includes__label">
+                                Includes:<br><span class="pricing-cards__item-includes__label-span"><strong><em>VIP
+                                            benefits, plus:</em></strong></span>
+                            </div>
+                            <ul role="list" class="pricing-cards__item-includes__list">
+                                <li class="pricing-cards__item-includes__item">Meet-and-greet session with industry
+                                    leaders and influential speakers</li>
+                                <li class="pricing-cards__item-includes__item">One-on-one consulting sessions with
+                                    business experts</li>
+                                <li class="pricing-cards__item-includes__item">A premium swag package with exclusive
+                                    event merchandise</li>
+                                <li class="pricing-cards__item-includes__item">Priority entry to all events and
+                                    sessions
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a id="prekindle-register" href="{{ url_for('registration') }}" target="_blank"
+                        class="site-button is-small is-yellow is-pricing-cards__item w-button"><strong>REGISTER
+                            NOW<br></strong></a>
+                </div>
+                <div data-reveal-item class="pricing-cards__item revealed">
+                    <div class="pricing-cards__item-heading">African</div>
+                    <div class="pricing-cards__item-main">
+                        <div class="pricing-cards__item-price">
+                            <div class="pricing-cards__item-price__label">Price:</div>
+                            <div class="pricing-cards__item-price__amount">₵100</div>
+                        </div>
+                        <div class="pricing-cards__item-includes">
+                            <div class="pricing-cards__item-includes__label">Includes:<br><span
+                                    class="pricing-cards__item-includes__label-span"><strong><em>Executive/Platinum
+                                            Access, plus:</em></strong></span>
+                            </div>
+                            <ul role="list" class="pricing-cards__item-includes__list">
+                                <li class="pricing-cards__item-includes__item">Luxury five-star hotel accommodations
+                                    and
+                                    local ground transportation (2 nights)</li>
+                                <li class="pricing-cards__item-includes__item">A personalized concierge service for
+                                    seamless event participation</li>
+                                <li class="pricing-cards__item-includes__item">Exclusive networking opportunities
+                                    with
+                                    select speakers, investors, and fellow Legacy members</li>
+                                <li class="pricing-cards__item-includes__item">Private engagements reserved
+                                    exclusively
+                                    for Legacy Circle members</li>
+                                <li class="pricing-cards__item-includes__item">Special recognition as a Legacy
+                                    Circle
+                                    member throughout the forum</li>
+                                <li class="pricing-cards__item-includes__item">Luxury Swag Box from Serita Jakes
+                                    Home
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a id="prekindle-register" href="{{ url_for('registration') }}" target="_blank"
+                        class="site-button is-small is-yellow is-pricing-cards__item w-button"><strong>REGISTER
+                            NOW<br></strong></a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="highlight-section fellowship-section">
-        <div class="highlight-content">
-            <h3>Fellowship & Community</h3>
-            <p>Build lasting relationships with fellow believers</p>
+
+    <!-- Event Details -->
+    <!-- <div class="row mb-5">
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    Event Details
+                </div>
+                <div class="card-body">
+                    <div class="event-details">
+                        <div class="event-detail-item">
+                            <div class="event-detail-label">Date:</div>
+                            <div class="event-detail-value">July 20-25, 2025</div>
+                        </div>
+                        <div class="event-detail-item">
+                            <div class="event-detail-label">Location:</div>
+                            <div class="event-detail-value">First Love Center, East Legon, Accra, Ghana</div>
+                        </div>
+                        <div class="event-detail-item">
+                            <div class="event-detail-label">Registration Fee:</div>
+                            <div class="event-detail-value">$50 per person</div>
+                        </div>
+                        <div class="event-detail-item">
+                            <div class="event-detail-label">Meals:</div>
+                            <div class="event-detail-value">Breakfast and lunch included</div>
+                        </div>
+                    </div>
+                    <h5 class="mt-4">What to Expect</h5>
+                    <ul class="mt-3">
+                        <li>Inspiring worship sessions led by our worship team</li>
+                        <li>Powerful messages from renowned speakers</li>
+                        <li>Interactive workshops and breakout sessions</li>
+                        <li>Fellowship opportunities with other attendees</li>
+                        <li>Prayer and ministry times</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card h-100">
+                <div class="card-header">
+                    Conference Schedule
+                </div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-title">Opening Ceremony</div>
+                            <div class="timeline-date">July 20, 7:00 PM</div>
+                            <div class="timeline-content">Welcome address, worship, and keynote message</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-title">Morning Sessions</div>
+                            <div class="timeline-date">July 21-24, 9:00 AM - 12:00 PM</div>
+                            <div class="timeline-content">Worship, Bible study, and main teaching sessions</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-title">Afternoon Workshops</div>
+                            <div class="timeline-date">July 21-24, 2:00 PM - 4:00 PM</div>
+                            <div class="timeline-content">Specialized workshops and breakout sessions</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-title">Evening Services</div>
+                            <div class="timeline-date">July 21-24, 7:00 PM - 9:00 PM</div>
+                            <div class="timeline-content">Worship and ministry sessions</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-badge"></div>
+                            <div class="timeline-title">Closing Ceremony</div>
+                            <div class="timeline-date">July 25, 10:00 AM - 12:30 PM</div>
+                            <div class="timeline-content">Final worship service, communion, and sending forth</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="{{ url_for('timeline') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-calendar-alt me-2"></i>View Interactive Timeline
+                        </a>
+                        <p class="text-muted mt-2"><small>Explore our new interactive day-by-day schedule</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="event-schedule background-color-black text-color-white">
+        <div class="event-schedule_main">
+            <div data-reveal-container="" class="site-container is-event-schedule_main">
+                <div data-reveal-item class="event-schedule_heading revealed">
+                    <h2 class="site-heading is-event-schedule">Schedule</h2>
+                </div>
+                <div data-reveal-item class="event-schedule_days revealed">
+                    <div data-reveal-item class="event-schedule_day cc-hide revealed">
+                        <div class="event-schedule_day-title">
+                            <h3>Wednesday, &nbsp;JUNE 11</h3>
+                        </div>
+                        <div class="event-schedule_day-list-wrapper w-dyn-list" style="display: block;">
+                            <div role="list" class="event-schedule_day-list w-dyn-items">
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">5:00 pm</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">Hangouts (5pm - 8pm) - Multiple
+                                            Locations
+                                        </h5>
+                                        <div class="event-schedule_day-item__rtb w-richtext">
+                                            <p><strong>Topics of Conversation </strong><br></p>
+                                            <ul role="list">
+                                                <li>Tech </li>
+                                                <li>Real Estate</li>
+                                                <li>Health </li>
+                                                <li>Business Consulting / Coaching</li>
+                                                <li>Beauty, Wellness &amp; Personal Care<strong> </strong></li>
+                                            </ul>
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="5:00 pm" data-schedule-popup="" data-schedule-date="Jun 11"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-reveal-item class="event-schedule_day cc-hide revealed">
+                        <div class="event-schedule_day-title">
+                            <h3>THURSDAY, &nbsp;JUNE 12</h3>
+                        </div>
+                        <div class="event-schedule_day-list-wrapper w-dyn-list">
+                            <div role="list" class="event-schedule_day-list w-dyn-items">
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">8:30 am</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">Doors Open for Check-In</h5>
+                                        <div
+                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="8:30 am" data-schedule-popup="" data-schedule-date="Jun 12"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">11:30 am</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">Breakout Sessions I</h5>
+                                        <div class="event-schedule_day-item__rtb w-richtext">
+                                            <ul role="list">
+                                                <li>Workshop A - Hammond Hall (Winspear) - <strong>Data-Driven
+                                                        Success</strong>
+                                                </li>
+                                                <li>Workshop B - Hall Arts - <strong>Equitable Outcomes</strong> </li>
+                                                <li>Workshop C - Loggia Area (Winspear) - <strong>Metrics of
+                                                        Accountability</strong> </li>
+                                                <li>Workshop D - Hall Arts - <strong>Scaling for Impact</strong></li>
+                                            </ul>
+                                            <p>‍</p>
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="11:30 am" data-schedule-popup="" data-schedule-date="Jun 12"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">1:00 pm</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">Opening Inspiration Session -
+                                            (Winspear)
+                                        </h5>
+                                        <div class="event-schedule_day-item__rtb w-richtext">
+                                            <ul role="list">
+                                                <li>Vusi Thembekwayo</li>
+                                            </ul>
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="1:00 pm" data-schedule-popup="" data-schedule-date="Jun 12"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">2:00 pm</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">Linda Clemmons (Body
+                                            Language/Sales
+                                            Negotiation Techniques) </h5>
+                                        <div
+                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="2:00 pm" data-schedule-popup="" data-schedule-date="Jun 12"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">3:00 pm</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">Breakout Sessions II </h5>
+                                        <div class="event-schedule_day-item__rtb w-richtext">
+                                            <ul role="list">
+                                                <li>Workshop A - Hammond Hall (Winspear) - <strong>Digital
+                                                        Transformation</strong></li>
+                                                <li>Workshop B - Hall Arts - <strong>Tech-Enabled Scaling</strong></li>
+                                                <li>Workshop C - Loggia Area (Winspear) - <strong>Cybersecurity and Data
+                                                        Privacy</strong></li>
+                                                <li>Workshop D - Hall Arts - <strong>Innovation through
+                                                        Technology</strong>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="3:00 pm" data-schedule-popup="" data-schedule-date="Jun 12"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">4:30 pm</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">GA Networking </h5>
+                                        <div
+                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="4:30 pm" data-schedule-popup="" data-schedule-date="Jun 12"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
+                                    <div class="event-schedule_day-item_time">7:00 pm</div>
+                                    <div class="event-schedule_day-item_title">
+                                        <h5 class="event-schedule_day-item_title-text">Evening Fireside Chat (Winspear)
+                                            -
+                                            Chairman Jakes and Special Guest</h5>
+                                        <div
+                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
+                                        </div>
+                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
+                                    </div>
+                                    <div class="event-schedule_day-item_speaker-wrapper">
+                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
+                                    </div>
+                                    <!-- <div class="event-schedule_day-item_location w-dyn-bind-empty"></div><a href="#"
+                                data-schedule-hour="7:00 pm" data-schedule-popup="" data-schedule-date="Jun 12"
+                                class="site-button is-small is-outline is-white w-condition-invisible w-button">Register</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- <div data-reveal-item class="event-disclaimer revealed">
+                <p class="paragraph"><strong class="text-disclaimer">*Schedule is subject to change</strong></p>
+            </div> -->
+                </div>
+                <!-- <div class="site-buttons hide-in-mobile cc-hide"><a
+                href="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/666c7243b325a0cbffffcd0b_GOODSOILGUIDE-compressed.pdf"
+                target="_blank" class="site-button is-yellow w-button">Download Schedule</a><a
+                href="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/66688c60fcfce2e9a80b9b6f_GSF%20Venue%20Map%20Illustration%201920x1080.jpg"
+                target="_blank" class="site-button is-outline cc-white w-button">View Map</a></div> -->
+            </div>
         </div>
     </div>
 </section>
-
-<!-- Event Details -->
-<div class="row mb-5">
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-header">
-                Event Details
-            </div>
-            <div class="card-body">
-                <div class="event-details">
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Date:</div>
-                        <div class="event-detail-value">July 20-25, 2025</div>
-                    </div>
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Location:</div>
-                        <div class="event-detail-value">Anagkazo Campus, Mampong, Eastern Region, Ghana</div>
-                    </div>
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Registration Fee:</div>
-                        <div class="event-detail-value">$50 per person</div>
-                    </div>
-                    <div class="event-detail-item">
-                        <div class="event-detail-label">Meals:</div>
-                        <div class="event-detail-value">Breakfast and lunch included</div>
-                    </div>
-                </div>
-                <h5 class="mt-4">What to Expect</h5>
-                <ul class="mt-3">
-                    <li>Inspiring worship sessions led by our worship team</li>
-                    <li>Powerful messages from renowned speakers</li>
-                    <li>Interactive workshops and breakout sessions</li>
-                    <li>Fellowship opportunities with other attendees</li>
-                    <li>Prayer and ministry times</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card h-100">
-            <div class="card-header">
-                Conference Schedule
-            </div>
-            <div class="card-body">
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Opening Ceremony</div>
-                        <div class="timeline-date">July 20, 7:00 PM</div>
-                        <div class="timeline-content">Welcome address, worship, and keynote message</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Morning Sessions</div>
-                        <div class="timeline-date">July 21-24, 9:00 AM - 12:00 PM</div>
-                        <div class="timeline-content">Worship, Bible study, and main teaching sessions</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Afternoon Workshops</div>
-                        <div class="timeline-date">July 21-24, 2:00 PM - 4:00 PM</div>
-                        <div class="timeline-content">Specialized workshops and breakout sessions</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Evening Services</div>
-                        <div class="timeline-date">July 21-24, 7:00 PM - 9:00 PM</div>
-                        <div class="timeline-content">Worship and ministry sessions</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-badge"></div>
-                        <div class="timeline-title">Closing Ceremony</div>
-                        <div class="timeline-date">July 25, 10:00 AM - 12:30 PM</div>
-                        <div class="timeline-content">Final worship service, communion, and sending forth</div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-4">
-                    <a href="{{ url_for('timeline') }}" class="btn btn-outline-primary">
-                        <i class="fas fa-calendar-alt me-2"></i>View Interactive Timeline
-                    </a>
-                    <p class="text-muted mt-2"><small>Explore our new interactive day-by-day schedule</small></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Featured Speakers -->
-<h3 class="text-center mb-4">Featured Speakers</h3>
-<div class="row mb-5">
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <div class="mb-3">
-                    <img src="{{ url_for('static', filename='images/bishop_dag.jpg') }}" alt="Bishop Dag Heward Mills" class="rounded-circle img-fluid" style="width: 200px; height: 200px; object-fit: cover;">
-                </div>
-                <h5>Bishop Dag Heward Mills</h5>
-                <p class="text-muted">Lead Pastor, First Love Church</p>
-                <p>Leading our morning sessions on "Faith That Moves Mountains"</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <div class="mb-3">
-                    <img src="{{ url_for('static', filename='images/speakers/bishop-edwin-new.jpg') }}" alt="Bishop Edwin Morgan Ogoe" class="rounded-circle speaker-image">
-                </div>
-                <h5>Bishop Edwin Morgan OGOE</h5>
-                <p class="text-muted">Bishop, First Love Church</p>
-                <p>Special workshop on "Spiritual Disciplines for Modern Life"</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body text-center">
-                <div class="mb-3">
-                    <img src="{{ url_for('static', filename='images/speakers/bishop-joshua.jpg') }}" alt="Bishop Joshua Dag Heward Mills" class="rounded-circle speaker-image">
-                </div>
-                <h5>Bishop Joshua Dag Heward Mills</h5>
-                <p class="text-muted">Bishop, First Love Church</p>
-                <p>Evening revival services focused on "Renewal & Revival"</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- Resource Banner -->
 <div class="resource-banner mb-5">
@@ -180,7 +787,8 @@
                     <span>Browse Books</span>
                 </div>
             </a>
-            <a href="https://play.google.com/store/search?q=dag+sermons&c=apps&hl=en&pli=1" target="_blank" class="resource-item">
+            <a href="https://play.google.com/store/search?q=dag+sermons&c=apps&hl=en&pli=1" target="_blank"
+                class="resource-item">
                 <img src="{{ url_for('static', filename='images/Dag bible.png') }}" alt="Dag Sermons App">
                 <div class="resource-overlay">
                     <span>Get the App</span>
@@ -209,15 +817,16 @@
 </div>
 
 <!-- Call to Action -->
-<div class="card bg-light mb-5">
+<!-- <div class="card bg-light mb-5">
     <div class="card-body p-5 text-center">
         <h3>Ready to join us in Ghana?</h3>
-        <p class="lead mb-4">Secure your spot at the First Love Church Conference at Anagkazo Campus today!</p>
+        <p class="lead mb-4">Secure your spot at the First Love Conference happening at the First Love Center today!</p>
         <div class="d-grid gap-2 col-md-6 mx-auto">
             <a href="{{ url_for('registration') }}" class="btn btn-primary btn-lg">Register Now</a>
             <div class="row mt-3">
                 <div class="col-md-6">
-                    <a href="{{ url_for('accommodation') }}" class="btn btn-outline-primary w-100">Book Accommodation</a>
+                    <a href="{{ url_for('accommodation') }}" class="btn btn-outline-primary w-100">Book
+                        Accommodation</a>
                 </div>
                 <div class="col-md-6">
                     <a href="{{ url_for('timeline') }}" class="btn btn-outline-primary w-100">View Timeline</a>
@@ -225,7 +834,86 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+<script>
+    // CAROUSEL
+    document.addEventListener('DOMContentLoaded', function () {
+        const track = document.querySelector('.carousel-track');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const playBtn = document.getElementById('playBtn');
+
+        // Pause/play functionality
+        pauseBtn.addEventListener('click', function () {
+            track.style.animationPlayState = 'paused';
+        });
+
+        playBtn.addEventListener('click', function () {
+            track.style.animationPlayState = 'running';
+        });
+
+        // Update dot indicators based on scroll position
+        function updateDots() {
+            const scrollPosition = Math.abs(parseInt(track.style.transform?.replace('translateX(', '').replace('%)', '') || 0));
+            const activeIndex = Math.floor(scrollPosition / (33.333 + 0.666)) % 4; // 4 original cards
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === activeIndex);
+            });
+        }
+    });
+
+    // COUNTDOWN TIMER
+    function updateCountdown() {
+        const conferenceDate = new Date("2025-07-29T00:00:00");
+
+        const now = new Date();
+        const diff = conferenceDate - now;
+
+        if (diff <= 0) {
+            document.querySelector('.countdown-banner').innerHTML =
+                '<span class="register-text">Conference Started - Join Now!</span>';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+        document.getElementById('countdown-days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('countdown-hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('countdown-minutes').textContent = minutes.toString().padStart(2, '0');
+    }
+
+    // Update immediately and then every minute
+    updateCountdown();
+    setInterval(updateCountdown, 60000);
+
+    /* PROMO VIDEO */
+    function openModal() {
+        let modal = document.getElementById("videoModal");
+        let video = document.getElementById("popupVideo");
+
+        modal.style.display = "flex";
+        video.play();
+    }
+
+    function closeModal() {
+        let modal = document.getElementById("videoModal");
+        let video = document.getElementById("popupVideo");
+
+        video.pause();
+        video.currentTime = 0;
+        modal.style.display = "none";
+    }
+
+    window.onclick = function (event) {
+        let modal = document.getElementById("videoModal");
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+</script>
 
 
 {% endblock %}

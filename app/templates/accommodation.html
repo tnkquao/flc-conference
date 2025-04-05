@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Accommodation{% endblock %}
+
+{% block content %}
+<div class="accommodation-page">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Accommodation Booking</h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Accommodation is <strong>optional</strong>. You can
+                        select your preferred accommodation option below, or uncheck the accommodation option to proceed
+                        with registration only ($50).
+                    </div>
+
+                    <form id="accommodationForm" action="{{ url_for('accommodation') }}" method="POST"
+                        class="needs-validation" novalidate>
+                        <div class="mb-4">
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" value="1" id="needsAccommodation"
+                                    name="needs_accommodation">
+                                <label class="form-check-label fw-bold" for="needsAccommodation">
+                                    I need accommodation for this conference
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="accommodationOptions">
+                            <div class="mb-4">
+                                <label for="room" class="form-label">Accommodation Type <span
+                                        class="text-danger">*</span></label>
+                                <select class="form-select" id="room" name="room">
+                                    <option value="" selected disabled>Select your accommodation</option>
+                                    <option value="single">Single Room - $50/night</option>
+                                    <option value="double">Double Room - $80/night</option>
+                                    <option value="shared">Shared Room - $30/night</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select an accommodation type.
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="nights" class="form-label">Number of Nights <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="nights" name="nights" min="1" max="10"
+                                    placeholder="Enter number of nights">
+                                <div class="form-text">Enter number of nights you need accommodation (maximum 10 nights)
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter a valid number of nights (1-10).
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="check-in" class="form-label">Check-in Date <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="check-in" name="check_in">
+                                <div class="invalid-feedback">
+                                    Please select a check-in date.
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="roommate" class="form-label">Preferred Roommate (for Shared or Double
+                                    rooms)</label>
+                                <input type="text" class="form-control" id="roommate" name="roommate"
+                                    placeholder="Enter name of preferred roommate (optional)">
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Room Preferences</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="quiet" id="quiet"
+                                        name="preferences[]">
+                                    <label class="form-check-label" for="quiet">
+                                        Quiet area
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="accessible" id="accessible"
+                                        name="preferences[]">
+                                    <label class="form-check-label" for="accessible">
+                                        Accessible room
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="mb-4">
+                            <label class="form-label">Special Requests</label>
+                            <textarea class="form-control" id="special-requests" name="special_requests" rows="3"
+                                placeholder="Enter any special requests or requirements"></textarea>
+                        </div> -->
+                        <!-- <div class="mb-4">
+                            <label class="form-label">Promo code</label>
+                            <input class="form-control" id="special-requests" name="special_requests" rows="3"
+                                placeholder="Apply promo code">
+                        </div> -->
+
+                        <div class="card bg-light mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Cost Summary</h5>
+                                <div class="d-flex justify-content-between">
+                                    <span>Registration Fee:</span>
+                                    <span>$50.00</span>
+                                </div>
+                                <div id="accommodationCostSection">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Accommodation type:</span>
+                                        <span id="roomTypeDisplay">-</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Number of nights:</span>
+                                        <span id="nightsDisplay">-</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Accommodation cost:</span>
+                                        <span id="totalCost">$0</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="d-flex justify-content-between">
+                                    <span class="fw-bold">Total amount:</span>
+                                    <span class="price-tag" id="grandTotal">$50.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('registration') }}" class="btn btn-outline-primary"><i
+                                    class="fas fa-arrow-left me-2"></i> Back to Registration</a>
+                            <button type="submit" class="btn btn-primary">Proceed to Payment <i
+                                    class="fas fa-arrow-right ms-2"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Accommodation Info Cards -->
+            <div class="row mt-4">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Single Room</h5>
+                            <div class="my-3">
+                                <i class="fas fa-bed fa-3x text-primary"></i>
+                            </div>
+                            <p class="card-text">Private room with a single bed, desk, and private bathroom.</p>
+                            <p class="price-tag">$50 per night</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Double Room</h5>
+                            <div class="my-3">
+                                <i class="fas fa-bed fa-3x text-primary"></i>
+                                <i class="fas fa-bed fa-3x text-primary ms-2"></i>
+                            </div>
+                            <p class="card-text">Spacious room with two beds, ideal for couples or friends.</p>
+                            <p class="price-tag">$80 per night</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Shared Room</h5>
+                            <div class="my-3">
+                                <i class="fas fa-users fa-3x text-primary"></i>
+                            </div>
+                            <p class="card-text">Dormitory-style accommodation with 4 beds per room.</p>
+                            <p class="price-tag">$30 per night</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    // Toggle accommodation options visibility
+    document.getElementById('needsAccommodation').addEventListener('change', function () {
+        const accommodationOptions = document.getElementById('accommodationOptions');
+        const accommodationCostSection = document.getElementById('accommodationCostSection');
+
+        if (this.checked) {
+            accommodationOptions.style.display = 'block';
+            accommodationCostSection.style.display = 'block';
+
+            // Make fields required if accommodation is needed
+            document.getElementById('room').required = true;
+            document.getElementById('nights').required = true;
+            document.getElementById('check-in').required = true;
+        } else {
+            accommodationOptions.style.display = 'none';
+            accommodationCostSection.style.display = 'none';
+
+            // Remove required attribute if accommodation is not needed
+            document.getElementById('room').required = false;
+            document.getElementById('nights').required = false;
+            document.getElementById('check-in').required = false;
+
+            // Clear cost summary
+            document.getElementById('roomTypeDisplay').textContent = '-';
+            document.getElementById('nightsDisplay').textContent = '-';
+            document.getElementById('totalCost').textContent = '$0';
+
+            // Update the grand total to show registration fee only
+            document.getElementById('grandTotal').textContent = '$50.00';
+        }
+
+        updateTotal();
+    });
+
+    // Update room type display when selection changes
+    document.getElementById('room').addEventListener('change', function () {
+        const roomSelect = document.getElementById('room');
+        const roomTypeDisplay = document.getElementById('roomTypeDisplay');
+        const selectedOption = roomSelect.options[roomSelect.selectedIndex];
+
+        if (selectedOption.value) {
+            roomTypeDisplay.textContent = selectedOption.text;
+        } else {
+            roomTypeDisplay.textContent = '-';
+        }
+
+        updateTotal();
+    });
+
+    // Update nights display when input changes
+    document.getElementById('nights').addEventListener('input', function () {
+        const nightsInput = document.getElementById('nights');
+        const nightsDisplay = document.getElementById('nightsDisplay');
+
+        if (nightsInput.value && !isNaN(nightsInput.value) && parseInt(nightsInput.value) > 0) {
+            nightsDisplay.textContent = nightsInput.value + ' night' + (parseInt(nightsInput.value) > 1 ? 's' : '');
+        } else {
+            nightsDisplay.textContent = '-';
+        }
+
+        updateTotal();
+    });
+
+    // Calculate and update total cost
+    function updateTotal() {
+        const needsAccommodation = document.getElementById('needsAccommodation').checked;
+        const roomSelect = document.getElementById('room');
+        const nightsInput = document.getElementById('nights');
+        const totalCostElement = document.getElementById('totalCost');
+        const grandTotalElement = document.getElementById('grandTotal');
+        const accommodationCostSection = document.getElementById('accommodationCostSection');
+
+        const roomPrices = {
+            'single': 50,
+            'double': 80,
+            'shared': 30
+        };
+
+        const registrationFee = 50;
+        let accommodationCost = 0;
+
+        if (needsAccommodation && roomSelect.value && nightsInput.value && !isNaN(nightsInput.value) && parseInt(nightsInput.value) > 0) {
+            const roomPrice = roomPrices[roomSelect.value] || 0;
+            const nights = parseInt(nightsInput.value);
+            accommodationCost = roomPrice * nights;
+            accommodationCostSection.style.display = 'block';
+        } else {
+            if (!needsAccommodation) {
+                accommodationCostSection.style.display = 'none';
+            }
+        }
+
+        totalCostElement.textContent = '$' + accommodationCost + '.00';
+        grandTotalElement.textContent = '$' + (registrationFee + accommodationCost) + '.00';
+    }
+
+    // Set minimum date for check-in to conference start date
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkInInput = document.getElementById('check-in');
+        const conferenceStartDate = new Date('2025-07-20');
+        const conferenceEndDate = new Date('2025-07-25');
+
+        // Format date as YYYY-MM-DD for the input value
+        const formatDate = (date) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+
+        // Set min and max dates
+        checkInInput.min = formatDate(conferenceStartDate);
+        checkInInput.max = formatDate(conferenceEndDate);
+
+        // Set default value to conference start date
+        checkInInput.value = formatDate(conferenceStartDate);
+
+        // Initial check for the accommodation option
+        const needsAccommodationCheckbox = document.getElementById('needsAccommodation');
+        if (needsAccommodationCheckbox) {
+            // Trigger the change event to set the initial state
+            const event = new Event('change');
+            needsAccommodationCheckbox.dispatchEvent(event);
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

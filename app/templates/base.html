@@ -52,7 +52,7 @@
         </div>
 
         <div class="site-header-middle">
-          <a href="#" class="w-nav-brand w--current">
+          <a href="/" class="w-nav-brand w--current">
             <div class="header-text-container">
               <strong class="logo-main"> 2025 First Love Conference</strong>
               <span class="presented-by">Presented by</span>
@@ -67,7 +67,7 @@
             <a href="https://firstlovecenter.com/" class="site-nav_link">About</a>
           </div>
           <div class="site-header_button">
-            <a id="prekindle-register" href="{{ url_for('registration') }}"
+            <a id="prekindle-register" href="{{ url_for('pre_registration') }}"
               class="site-button is-small is-yellow isnt-mobile w-button">
               <strong>REGISTER FOR&nbsp;2025<br></strong>
             </a>
@@ -93,22 +93,19 @@
   <main class="container my-5">
     <!-- Progress Steps for multi-step forms -->
     {% if request.path not in [url_for('index'), url_for('success'),
-    url_for('error')] %}
+    url_for('error'), url_for('pre_registration')] %}
     <div class="progress-steps mb-5">
       <div
-        class="step {% if request.path == url_for('registration') %}active{% elif request.path in [url_for('accommodation'), url_for('payment')] %}completed{% endif %}">
+        class="step {% if request.path == url_for('fl_registration') or request.path == url_for('nonfl_registration') %}active{% elif request.path in [url_for('payment')] %}completed{% endif %}">
         <div class="step-circle">1</div>
         <div class="step-text">Registration</div>
       </div>
-      <div
-        class="step {% if request.path == url_for('accommodation') %}active{% elif request.path == url_for('payment') %}completed{% endif %}">
-        <div class="step-circle">2</div>
-        <div class="step-text">Accommodation</div>
-      </div>
+      {% if request.path != url_for('fl_registration') %}
       <div class="step {% if request.path == url_for('payment') %}active{% endif %}">
-        <div class="step-circle">3</div>
+        <div class="step-circle">2</div>
         <div class="step-text">Payment</div>
       </div>
+      {% endif %}
     </div>
     {% endif %} {% block content %}{% endblock %}
   </main>
@@ -126,11 +123,6 @@
         <div class="col-md-6 mb-4 mb-md-0">
           <h5>Quick Links</h5>
           <a href="{{ url_for('index') }}" class="footer-link">Home</a>
-          <a href="{{ url_for('timeline') }}" class="footer-link">Timeline</a>
-          <!-- <a href="{{ url_for('registration') }}" class="footer-link">Registration</a>
-                    <a href="{{ url_for('accommodation') }}" class="footer-link">Accommodation</a>
-                    <a href="{{ url_for('payment') }}" class="footer-link">Payment</a> -->
-          <!-- <a href="{{ url_for('admin_login') }}" class="footer-link"><i class="fas fa-lock"></i> Admin Dashboard</a> -->
         </div>
         <div class="col-md-2">
           <h5>Connect With Us</h5>

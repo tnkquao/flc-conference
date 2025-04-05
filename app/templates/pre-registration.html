@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Conference Timeline{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row pre-reg">
+        <div class="col-lg-12">
+            <!-- <div class="conference-timeline">
+                <div class="timeline-container">
+
+                </div>
+            </div> -->
+            <div class="text-center mt-5">
+                <h5>First Love Registrations</h5>
+                <a href="{{ url_for('fl_registration') }}" class="btn btn-primary btn-lg">Register Now</a>
+            </div>
+            <div class="text-center mt-5">
+                <h5>Non-First Love Registrations</h5>
+                <a href="{{ url_for('nonfl_registration') }}" class="btn btn-primary btn-lg">Register Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/timeline.js') }}"></script>
+{% endblock %}

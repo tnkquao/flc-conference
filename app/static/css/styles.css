@@ -16,7 +16,7 @@
 @media (min-width: 992px) {
     .col-lg-8 {
         flex: 0 0 auto;
-        width: 90%;
+        width: 80%;
     }
 }
 
@@ -40,6 +40,7 @@ a {
 
 .container {
     max-width: 100%;
+    /* padding-top: 25px; */
 }
 
 .my-5 {
@@ -50,6 +51,19 @@ a {
 .container.my-5 {
     padding-left: 0%;
     padding-right: 0%;
+}
+
+.container.my-5>.row {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* .fl-form {
+    margin-top: 110px;
+} */
+
+.pre-reg {
+    padding-top: 50px;
 }
 
 /* Hero Section */
@@ -710,7 +724,33 @@ html:not(.wf-design-mode):not(.w-editor) [data-reveal-item] {
 
 .form-label {
     font-weight: 600;
+    font-size: 15px;
     margin-bottom: 0.5rem;
+}
+
+select {
+    font-size: 16px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    width: 200px;
+    appearance: none;
+    /* Removes default dropdown appearance (cross-browser) */
+    -webkit-appearance: none;
+    /* For Safari */
+    -moz-appearance: none;
+    /* For Firefox */
+}
+
+select:focus {
+    border-color: gray;
+    outline: none;
+}
+
+.mb-3 {
+    /* width: 40%; */
 }
 
 /* Button Styling */
@@ -722,6 +762,9 @@ html:not(.wf-design-mode):not(.w-editor) [data-reveal-item] {
     transition: all 0.3s;
     position: relative;
     /*display: block;*/
+}
+
+.hero-btn {
     top: 18rem;
 }
 
@@ -741,6 +784,11 @@ html:not(.wf-design-mode):not(.w-editor) [data-reveal-item] {
 .btn-lg {
     padding: 12px 24px;
     font-size: 14px;
+}
+
+button.form-btn {
+    background-color: #000;
+    color: var(--yellow);
 }
 
 /* Price Display */
@@ -997,19 +1045,40 @@ img {
     display: inline-block;
 }
 
-.event-hero_video-play {
-    background-color: var(--purple);
-    cursor: pointer;
-    background-image: url(https://cdn.prod.website-files.com/65cca57…/65d0f8a…_event-hero-video-play.svg);
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-size: auto;
-    width: 118px;
-    height: 118px;
+.thumbnail-container {
+    position: relative;
+    display: inline-block;
+}
+
+.video-thumbnail {
+    width: 100%;
+    /* You can adjust the width to your needs */
+    height: auto;
+    display: block;
+}
+
+.play-button {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 10;
+    /* Ensures the play button is on top */
+}
+
+.play-button svg {
+    fill: var(--yellow);
+    /* Change color of play button */
+    opacity: 0.9;
+    /* Optional: adjust opacity for a more subtle effect */
+    transition: opacity 0.5s ease;
+}
+
+.thumbnail-container:hover .play-button svg {
+    opacity: 1;
+    transform: translate(-10%, -10%);
+    /* Play button becomes fully visible on hover */
 }
 
 .event-hero_footer-middle {
@@ -1038,7 +1107,10 @@ img {
     align-self: start;
 }
 
-
+.flc-btn {
+    background-color: crimson;
+    color: var(--light-color);
+}
 
 /* Accommodation Details */
 .cc-yellow {
@@ -1096,11 +1168,27 @@ h2 {
     color: #fff;
     text-transform: capitalize;
     background-color: #333;
-    padding: 20px;
+    padding: 40px 20px;
     font-family: "Anton", sans-serif;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 400;
     line-height: .8;
+    text-align: center;
+}
+
+.pricing-cards__item-price {
+    line-height: 1.1;
+}
+
+.pricing-cards__item-price__label {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.pricing-cards__item-price__amount {
+    font-family: "Anton", sans-serif;
+    font-size: 55px;
+    /* line-height: .8; */
 }
 
 .pricing-cards__item-includes__list {
@@ -1252,7 +1340,7 @@ div.row.mb-5 {
 /* Progress Steps */
 .progress-steps {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-bottom: 30px;
     position: relative;
     padding: 75px 30px 0 30px;
@@ -1705,7 +1793,7 @@ div.row.mb-5 {
     display: flex;
     width: calc(300% + 60px);
     /* Extra space for seamless looping */
-    animation: scroll 45s linear infinite;
+    animation: scroll 40s linear 3s infinite;
 }
 
 @keyframes scroll {
@@ -1929,7 +2017,7 @@ div.row.mb-5 {
 
 h5 {
     margin-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     font-family: "Montserrat", sans-serif;
     font-size: 24px;
     font-weight: 700;

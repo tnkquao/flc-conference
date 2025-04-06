@@ -67,7 +67,7 @@
             <a href="https://firstlovecenter.com/" class="site-nav_link">About</a>
           </div>
           <div class="site-header_button">
-            <a id="prekindle-register" href="{{ url_for('pre_registration') }}"
+            <a id="prekindle-register" href="{{ url_for('main.pre_registration') }}"
               class="site-button is-small is-yellow isnt-mobile w-button">
               <strong>REGISTER FOR&nbsp;2025<br></strong>
             </a>
@@ -92,16 +92,16 @@
   <!-- Main Content -->
   <main class="container my-5">
     <!-- Progress Steps for multi-step forms -->
-    {% if request.path not in [url_for('index'), url_for('success'),
-    url_for('error'), url_for('pre_registration')] %}
+    {% if request.path not in [url_for('main.index'), url_for('main.success'),
+    url_for('main.error'), url_for('main.pre_registration')] %}
     <div class="progress-steps mb-5">
       <div
-        class="step {% if request.path == url_for('fl_registration') or request.path == url_for('nonfl_registration') %}active{% elif request.path in [url_for('payment')] %}completed{% endif %}">
+        class="step {% if request.path == url_for('registrations.fl_registration') or request.path == url_for('registrations.nonfl_registration') %}active{% elif request.path in [url_for('payments.checkout')] %}completed{% endif %}">
         <div class="step-circle">1</div>
         <div class="step-text">Registration</div>
       </div>
-      {% if request.path != url_for('fl_registration') %}
-      <div class="step {% if request.path == url_for('payment') %}active{% endif %}">
+      {% if request.path != url_for('registrations.fl_registration') %}
+      <div class="step {% if request.path == url_for('payments.checkout') %}active{% endif %}">
         <div class="step-circle">2</div>
         <div class="step-text">Payment</div>
       </div>
@@ -115,14 +115,15 @@
     <div class="container">
       <div class="row">
         <div class="col-md-4 mb-4 mb-md-0">
-          <!--<img src="{{ url_for('static', filename='images/first_love_logo.png') }}" alt="First Love Church Logo" class="mb-3" height="80" style="filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.2));">-->
+          <!-- <img src="{{ url_for('static', filename='images/first_love_logo.png') }}" alt="First Love Church Logo" -->
+          class="mb-3" height="80" style="filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.2));">
           <h5>First Love Church</h5>
           <p>First Love Center<br />East Legon, Accra, Ghana</p>
           <p>Phone: (233) 456-7890<br />Email: info@firstlovechurch.org</p>
         </div>
         <div class="col-md-6 mb-4 mb-md-0">
           <h5>Quick Links</h5>
-          <a href="{{ url_for('index') }}" class="footer-link">Home</a>
+          <a href="{{ url_for('main.index') }}" class="footer-link">Home</a>
         </div>
         <div class="col-md-2">
           <h5>Connect With Us</h5>

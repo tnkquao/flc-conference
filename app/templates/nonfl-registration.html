@@ -10,7 +10,7 @@
                 <h3 class="mb-0">Non-First Love Registration</h3>
             </div>
             <div class="card-body">
-                <form id="registrationForm" action="{{ url_for('nonfl_registration') }}" method="POST"
+                <form id="registrationForm" action="{{ url_for('registrations.nonfl_registration') }}" method="POST"
                     class="needs-validation" novalidate>
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
@@ -100,12 +100,6 @@
                     <div class="">
                         <button type="submit" class="btn btn-primary btn-lg form-btn">Proceed to Payment</button>
                     </div>
-
-                    <!-- Link to accommodation page for users who want to skip directly to accommodation -->
-                    <!-- <div class="text-center mt-3">
-                        <a href="{{ url_for('payment') }}" class="text-muted">Already registered? Go directly to
-                            accommodation</a>
-                    </div> -->
                 </form>
             </div>
         </div>

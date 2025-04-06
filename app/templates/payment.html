@@ -103,7 +103,7 @@
 
                 <!-- Stripe Checkout Button -->
                 <div id="stripe-button-container" class="mb-4">
-                    <form action="{{ url_for('create_checkout_session') }}" method="POST">
+                    <form action="{{ url_for('payments.create_checkout_session') }}" method="POST">
                         <button type="submit" class="btn btn-primary btn-lg w-100">
                             <i class="far fa-credit-card me-2"></i> Pay with Stripe Checkout
                         </button>
@@ -130,7 +130,7 @@
                 </div>
 
                 <div class="d-flex justify-content-between mt-4">
-                    <a href="{{ url_for('nonfl_registration') }}" class="btn btn-outline-primary"><i
+                    <a href="{{ url_for('registrations.nonfl_registration') }}" class="btn btn-outline-primary"><i
                             class="fas fa-arrow-left me-2"></i> Back to Registration Form</a>
                 </div>
             </div>

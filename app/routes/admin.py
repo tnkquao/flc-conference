@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, Blueprint
 from datetime import datetime
 from flask_login import login_required
-from app.models import Admin
+from app.models import Admin, Registration
 
 admin_bp = Blueprint('admin',__name__, 
                 template_folder='../templates',

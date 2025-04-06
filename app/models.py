@@ -42,10 +42,6 @@ class Registration(db.Model):
     # def total_cost(self):
     #     return self.registration_fee + self.total_accommodation_cost
     
-    # @property
-    # def is_paid(self):
-    #     return self.payment_status == 'paid'
-    
     def to_dict(self):
         return {
             'id': self.id,
@@ -58,13 +54,6 @@ class Registration(db.Model):
             'special_needs': self.special_needs,
             'referral': self.referral,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None,
-            'total_cost': self.total_cost,
-            'total_paid': self.total_paid,
-            'payment_method': self.payment_method,
-            'payment_id': self.payment_id,
-            'payment_date': self.payment_date.strftime('%Y-%m-%d %H:%M:%S') if self.payment_date else None,
-            'payment_status': self.payment_status,
-            'is_paid': self.is_paid,
             'confirmation_sent': self.confirmation_sent,
             'confirmation_date': self.confirmation_date.strftime('%Y-%m-%d %H:%M:%S') if self.confirmation_date else None,
         }
@@ -81,6 +70,24 @@ class Payment(db.Model):
 
     # Foreign key linking back to RegistrationData
     registration_id = db.Column(db.Integer, db.ForeignKey('registration.id'), nullable=False)
+
+    @property
+    def is_paid(self):
+        return self.payment_status == 'paid'
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'total_paid': self.total_paid,
+            'payment_method': self.payment_method,
+            'payment_id': self.payment_id,
+            'payment_date': self.payment_date.strftime('%Y-%m-%d %H:%M:%S') if self.payment_date else None,
+            'payment_status': self.payment_status,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S') if self.created_at else None,
+            'is_paid': self.is_paid,
+            'confirmation_sent': self.confirmation_sent,
+            'confirmation_date': self.confirmation_date.strftime('%Y-%m-%d %H:%M:%S') if self.confirmation_date else None,
+        }
 
 class Admin(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)

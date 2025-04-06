@@ -1,7 +1,6 @@
 import os
 import uuid
 import logging
-# import qrcode
 import smtplib
 import json
 import stripe
@@ -10,18 +9,23 @@ from datetime import datetime
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.image import MIMEImage
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify, send_file
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_file
 import requests
-from werkzeug.utils import secure_filename
+# from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+from werkzeug.security import gen_salt  # For generating simple tokens
+from db import db
+
+from app.models import Registration, Admin
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Create Flask app
-app = Flask(__name__)
+app = Flask(__name__, template_folder='app/templates', 
+            static_folder='app/static',  # Path to static files
+            static_url_path='/static')   # URL prefix)
 app.secret_key = os.environ.get("SESSION_SECRET", "church_conference_secret_key")
 
 # Create QR code directory if it doesn't exist
@@ -34,7 +38,8 @@ stripe.api_key = os.environ.get("STRIPE_SECRET_KEY")
 YOUR_DOMAIN = os.environ.get('REPLIT_DEV_DOMAIN') if os.environ.get('REPLIT_DEPLOYMENT') != '' else os.environ.get('REPLIT_DOMAINS', '').split(',')[0]
 
 # Database configuration
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///conference.db")
+# app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL", "sqlite:///conference.db")
+app.config['SQLALCHEMY_DATABASE_URI'] =  os.environ.get("DATABASE_URL", "postgresql://tarek:Bible63@localhost/flc_conference_dev")    
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Email configuration
@@ -45,17 +50,17 @@ EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "conference@firstlovechurch.org")
 
 # Initialize extensions
-db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'admin_login'
 
-# Import models after initializing db
-# from models import Registration, Admin
 
 # Setup the Flask-Login user loader
 @login_manager.user_loader
 def load_user(user_id):
     return Admin.query.get(int(user_id))
+
+# Initialize the db with the app
+db.init_app(app)
 
 # Create all database tables
 with app.app_context():
@@ -69,127 +74,136 @@ FORMSPREE_ENDPOINT = None
 def index():
     return render_template('index.html')
 
-@app.route('/timeline')
-def timeline():
-    """Interactive event timeline with animated milestone markers"""
-    return render_template('timeline.html')
+@app.route('/pre-registration')
+def pre_registration():
+    """Page to choose type of registration"""
+    return render_template('pre-registration.html')
 
-@app.route('/registration', methods=['GET', 'POST'])
-def registration():
+with open('app/static/countries.json', 'r') as f:
+    COUNTRIES = json.load(f)
+
+
+@app.route('/fl-registration', methods=['GET', 'POST'])
+def fl_registration():
+
     if request.method == 'POST':
         # Get form data
         name = request.form.get('name')
         email = request.form.get('email')
         phone = request.form.get('phone')
-        address = request.form.get('address')
         city = request.form.get('city')
-        zip_code = request.form.get('zip_code')
-        church = request.form.get('church')
-        dietary = request.form.getlist('dietary')
-        special_needs = request.form.get('special_needs')
+        country = request.form.get('country')
         referral = request.form.get('referral')
+        is_firstlover = True
         
         # Validate form data
-        if not name or not email or not phone:
+        if not name or not email or not phone or not country:
             flash('Please fill in all required fields', 'error')
             return render_template('registration.html')
         
         # Store registration data in session
-        session['registration'] = {
+        session['fl_registration_data'] = {
             'name': name,
             'email': email,
             'phone': phone,
-            'address': address,
             'city': city,
-            'zip_code': zip_code,
-            'church': church,
-            'dietary': dietary,
-            'special_needs': special_needs,
+            'country': country,
             'referral': referral
         }
+        fl_registration = Registration(
+            name=name,
+            email=email,
+            phone=phone,
+            city=city,
+            country=country,
+            is_firstlover=is_firstlover
+        )
+        db.session.add(fl_registration)
+        db.session.commit()
         
         # Skip Formspree and redirect to accommodation
         flash('Registration successful!', 'success')
-        return redirect(url_for('accommodation'))
+        return redirect(url_for('success'))
     
-    return render_template('registration.html')
+    return render_template('registration.html', countries=COUNTRIES)
 
-@app.route('/accommodation', methods=['GET', 'POST'])
-def accommodation():
+@app.route('/nonfl-registration', methods=['GET', 'POST'])
+def nonfl_registration():
     if request.method == 'POST':
-        # Check if user needs accommodation
-        needs_accommodation = request.form.get('needs_accommodation') == '1'
+        # Get form data
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        city = request.form.get('city')
+        country = request.form.get('country')
+        special_needs = request.form.get('special_needs')
+        referral = request.form.get('referral')
         
-        if needs_accommodation:
-            # Get form data
-            room_type = request.form.get('room')
-            nights = request.form.get('nights')
-            
-            # Validate form data
-            if not room_type or not nights:
-                flash('Please fill in all required accommodation fields', 'error')
-                return render_template('accommodation.html')
-            
-            # Calculate costs
-            room_prices = {
-                'single': 50,
-                'double': 80,
-                'shared': 30
-            }
-            
-            try:
-                nights = int(nights)
-                room_price = room_prices.get(room_type, 0)
-                total_cost = room_price * nights
-                
-                # Store accommodation data in session
-                session['accommodation'] = {
-                    'room_type': room_type,
-                    'nights': nights,
-                    'room_price': room_price,
-                    'total_cost': total_cost,
-                    'needs_accommodation': True
-                }
-            except ValueError:
-                flash('Please enter a valid number of nights', 'error')
-                return render_template('accommodation.html')
-        else:
-            # User doesn't need accommodation
-            session['accommodation'] = {
-                'needs_accommodation': False,
-                'total_cost': 0
-            }
+        # Validate form data
+        if not name or not email or not phone or not country:
+            flash('Please fill in all required fields', 'error')
+            return render_template('nonfl-registration.html')
         
+        # Store registration data in session
+        session['nonfl_registration'] = {
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'city': city,
+            'country': country,
+            'special_needs': special_needs,
+            'referral': referral
+        }
+
+        # Generate and store a payment access token
+        session['payment_token'] = gen_salt(16)
         return redirect(url_for('payment'))
+        
+        # Skip Formspree and redirect to accommodation
+        # flash('Registration successful!', 'success')
+        # return redirect(url_for('payment'))
     
-    return render_template('accommodation.html')
+    return render_template('nonfl-registration.html', countries=COUNTRIES)
+
 
 @app.route('/payment')
 def payment():
     # Check if user has completed registration and accommodation
-    if 'registration' not in session or 'accommodation' not in session:
+    if not session.get('payment_token') or not session.get('nonfl_registration'):
+        # Redirect back to registration if not coming from there
+        return redirect(url_for('nonfl_registration'))
+    
+    # Clear the token so it can't be reused (one-time access)
+    payment_token = session.pop('payment_token', None)
+    print(payment_token)
+
+    # Get registration data
+    registration_data = session.get('nonfl_registration', {})
+    
+    return render_template('payment.html', registration=registration_data)
+    """ if 'registration' not in session:
         flash('Please complete registration and accommodation booking first', 'error')
-        return redirect(url_for('index'))
+        return redirect(url_for('nonfl_registration'))
     
     registration_data = session.get('registration', {})
     accommodation_data = session.get('accommodation', {})
     
     return render_template('payment.html', 
                           registration=registration_data,
-                          accommodation=accommodation_data)
+                          accommodation=accommodation_data) """
 
-@app.route('/create-checkout-session', methods=['POST'])
+@app.route('/checkout-session', methods=['POST'])
 def create_checkout_session():
     # Check if user has completed registration and accommodation
-    if 'registration' not in session or 'accommodation' not in session:
+    if 'registration' not in session:
         flash('Please complete registration and accommodation booking first', 'error')
-        return redirect(url_for('index'))
+        return redirect(url_for('nonfl_registration'))
     
     registration_data = session.get('registration', {})
-    accommodation_data = session.get('accommodation', {})
+    # accommodation_data = session.get('accommodation', {})
     
     # Calculate total amount
-    total_amount = 50  # Base registration fee
+    total_amount = 100  # Base registration fee
     line_items = [
         {
             'price_data': {
@@ -204,33 +218,6 @@ def create_checkout_session():
         }
     ]
     
-    # Add accommodation if needed
-    if accommodation_data.get('needs_accommodation', False):
-        room_type = accommodation_data.get('room_type')
-        nights = accommodation_data.get('nights', 0)
-        room_price = accommodation_data.get('room_price', 0)
-        
-        room_type_names = {
-            'single': 'Single Room',
-            'double': 'Double Room',
-            'shared': 'Shared Room'
-        }
-        
-        accommodation_line_item = {
-            'price_data': {
-                'currency': 'usd',
-                'product_data': {
-                    'name': f'{room_type_names.get(room_type, "Room")} - {nights} night(s)',
-                    'description': f'Accommodation at Anagkazo Campus ({nights} night(s))'
-                },
-                'unit_amount': int(room_price * 100),  # Convert to cents
-            },
-            'quantity': nights,
-        }
-        
-        line_items.append(accommodation_line_item)
-        total_amount += accommodation_data.get('total_cost', 0)
-    
     try:
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -239,9 +226,9 @@ def create_checkout_session():
                 'registration_name': registration_data.get('name', ''),
                 'registration_email': registration_data.get('email', ''),
                 'registration_phone': registration_data.get('phone', ''),
-                'needs_accommodation': str(accommodation_data.get('needs_accommodation', False)),
-                'room_type': accommodation_data.get('room_type', ''),
-                'nights': str(accommodation_data.get('nights', 0)),
+                # 'needs_accommodation': str(accommodation_data.get('needs_accommodation', False)),
+                # 'room_type': accommodation_data.get('room_type', ''),
+                # 'nights': str(accommodation_data.get('nights', 0)),
             },
             mode='payment',
             success_url=f'https://{YOUR_DOMAIN}/payment/success?session_id={{CHECKOUT_SESSION_ID}}',
@@ -282,11 +269,8 @@ def payment_success():
             name=registration_data.get('name'),
             email=registration_data.get('email'),
             phone=registration_data.get('phone'),
-            address=registration_data.get('address'),
             city=registration_data.get('city'),
-            zip_code=registration_data.get('zip_code'),
-            church=registration_data.get('church'),
-            dietary_restrictions=str(registration_data.get('dietary', [])),
+            country=registration_data.get('country'),
             special_needs=registration_data.get('special_needs'),
             referral=registration_data.get('referral'),
             
@@ -297,7 +281,7 @@ def payment_success():
             room_price=accommodation_data.get('room_price'),
             
             # Payment details
-            registration_fee=50.0,  # $50 registration fee
+            registration_fee=100.0,  # $50 registration fee
             total_paid=checkout_session.amount_total / 100,  # Convert cents to dollars
             payment_method='stripe',
             payment_id=checkout_session.id,
@@ -316,7 +300,7 @@ def payment_success():
         send_confirmation_email(registration)
         
         # Clear session data after successful payment
-        session.pop('registration', None)
+        session.pop('nonfl_registration', None)
         session.pop('accommodation', None)
         session.pop('checkout_session_id', None)
         
@@ -355,23 +339,14 @@ def process_payment():
             name=registration_data.get('name'),
             email=registration_data.get('email'),
             phone=registration_data.get('phone'),
-            address=registration_data.get('address'),
             city=registration_data.get('city'),
-            zip_code=registration_data.get('zip_code'),
-            church=registration_data.get('church'),
-            dietary_restrictions=str(registration_data.get('dietary', [])),
+            country=registration_data.get('country'),
             special_needs=registration_data.get('special_needs'),
             referral=registration_data.get('referral'),
-            
-            # Accommodation details
-            needs_accommodation=accommodation_data.get('needs_accommodation', False),
-            room_type=accommodation_data.get('room_type'),
-            nights=accommodation_data.get('nights'),
-            room_price=accommodation_data.get('room_price'),
-            
+                       
             # Payment details
-            registration_fee=50.0,  # $50 registration fee
-            total_paid=payment_details.get('amount', 50.0),
+            registration_fee=100.0,  # $50 registration fee
+            total_paid=payment_details.get('amount', 100.0),
             payment_method=payment_details.get('method', 'paypal'),
             payment_id=payment_id,
             payment_date=datetime.utcnow(),
@@ -389,7 +364,7 @@ def process_payment():
         send_confirmation_email(registration)
         
         # Clear session data after successful payment
-        session.pop('registration', None)
+        session.pop('nonfl_registration', None)
         session.pop('accommodation', None)
         
         # Store registration ID in session for success page
@@ -401,50 +376,6 @@ def process_payment():
         flash('Payment processing failed. Please try again.', 'error')
         return redirect(url_for('payment'))
 
-# QR Code Generation and Email Helper Functions
-""" def generate_qr_code(registration):
-    #Generate a QR code for the registration confirmation
-    try:
-        # Create QR code with registration details
-        qr_data = {
-            'registration_id': registration.registration_id,
-            'name': registration.name,
-            'email': registration.email,
-            'event': 'First Love Church Conference',
-            'status': 'Paid',
-            'timestamp': datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
-        }
-        
-        # Convert data to JSON string
-        qr_content = json.dumps(qr_data)
-        
-        # Generate QR code
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
-        )
-        qr.add_data(qr_content)
-        qr.make(fit=True)
-        
-        # Create an image from the QR Code
-        img = qr.make_image(fill_color="black", back_color="white")
-        
-        # Save the QR code to a file
-        filename = f"{registration.registration_id}.png"
-        filepath = os.path.join(QR_CODE_DIR, filename)
-        img.save(filepath)
-        
-        # Update registration with QR code path
-        registration.qr_code = f"qrcodes/{filename}"
-        db.session.commit()
-        
-        return True
-    except Exception as e:
-        app.logger.error(f"Error generating QR code: {str(e)}")
-        return False
- """
 def send_confirmation_email(registration):
     """Send a confirmation email with QR code to the attendee"""
     if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
@@ -488,23 +419,6 @@ def send_confirmation_email(registration):
                     <p><strong>Phone:</strong> {registration.phone}</p>
                     <p><strong>Registration Fee:</strong> ${registration.registration_fee}</p>
         """
-        
-        # Add accommodation details if needed
-        if registration.needs_accommodation:
-            room_types = {
-                'single': 'Single Room',
-                'double': 'Double Room',
-                'shared': 'Shared Room'
-            }
-            room_type_name = room_types.get(registration.room_type, registration.room_type)
-            
-            body += f"""
-                    <h2>Accommodation Details:</h2>
-                    <p><strong>Room Type:</strong> {room_type_name}</p>
-                    <p><strong>Number of Nights:</strong> {registration.nights}</p>
-                    <p><strong>Room Price Per Night:</strong> ${registration.room_price}</p>
-                    <p><strong>Accommodation Total:</strong> ${registration.total_accommodation_cost}</p>
-            """
         
         # Add total cost and QR code instructions
         body += f"""
@@ -611,7 +525,9 @@ def admin_dashboard():
     # Get statistics for dashboard
     total_registrations = Registration.query.count()
     paid_registrations = Registration.query.filter_by(payment_status='paid').count()
-    total_accommodation = Registration.query.filter_by(needs_accommodation=True).count()
+    fl_registrations = Registration.query.filter_by(is_firstlover=True).count()
+
+    # total_accommodation = Registration.query.filter_by(needs_accommodation=True).count()
     
     # Calculate revenue
     total_revenue = db.session.query(db.func.sum(Registration.total_paid)).scalar() or 0
@@ -625,7 +541,8 @@ def admin_dashboard():
     return render_template('admin/dashboard.html', 
                           total_registrations=total_registrations,
                           paid_registrations=paid_registrations,
-                          total_accommodation=total_accommodation,
+                          fl_registrations=fl_registrations,
+                        #   total_accommodation=total_accommodation,
                           total_revenue=total_revenue,
                           recent_registrations=recent_registrations,
                           now=now)
@@ -636,17 +553,17 @@ def admin_registrations():
     page = request.args.get('page', 1, type=int)
     per_page = 20
     status = request.args.get('status')
-    accommodation = request.args.get('accommodation')
+    is_firstlover = request.args.get('is_firstlover')
     
     # Start with base query
     query = Registration.query
-    
+
     # Apply filters
     if status:
         query = query.filter_by(payment_status=status)
     
-    if accommodation == 'true':
-        query = query.filter_by(needs_accommodation=True)
+    if is_firstlover == 'true':
+        query = query.filter_by(is_firstlover=True)
     
     # Get registrations with pagination
     registrations = query.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
@@ -725,4 +642,4 @@ def server_error(e):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)

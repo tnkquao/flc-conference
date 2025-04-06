@@ -13,55 +13,59 @@
                         <span class="icon-line line-long"></span>
                     </div>
                 </div>
-                
+
                 <h2 class="mb-4">Registration Complete!</h2>
-                <p class="lead mb-4">Thank you for registering for the First Love Church Conference.</p>
-                
+                <p class="lead mb-4">Thank you for registering for the First Love Conference.</p>
+
                 {% if registration %}
-                    {% if registration.qr_code %}
-                    <div class="mb-4">
-                        <img src="{{ url_for('static', filename=registration.qr_code) }}" alt="Registration QR Code" style="max-width: 200px;">
-                        <p class="mt-2">Your unique QR code ticket</p>
-                    </div>
-                    {% endif %}
-                    
-                    <div class="alert alert-success mb-4">
-                        <p class="mb-1"><strong>Registration ID:</strong> {{ registration.registration_id }}</p>
-                        <p class="mb-0">Please save this ID for your reference. A confirmation email has also been sent to your registered email address with all the details.</p>
-                    </div>
-                {% else %}
-                    <p>We're excited to see you at the event. A confirmation email has been sent to your registered email address with all the details.</p>
+                {% if registration.qr_code %}
+                <div class="mb-4">
+                    <img src="{{ url_for('static', filename=registration.qr_code) }}" alt="Registration QR Code"
+                        style="max-width: 200px;">
+                    <p class="mt-2">Your unique QR code ticket</p>
+                </div>
                 {% endif %}
-                
+
+                <div class="alert alert-success mb-4">
+                    <p class="mb-1"><strong>Registration ID:</strong> {{ registration.registration_id }}</p>
+                    <p class="mb-0">Please save this ID for your reference. A confirmation email has also been sent to
+                        your registered email address with all the details.</p>
+                </div>
+                {% else %}
+                <p>We're excited to see you at the event. A confirmation email has been sent to your registered email
+                    address with all the details.</p>
+                {% endif %}
+
                 <div class="card bg-light my-4">
                     <div class="card-body">
                         <h5>Conference Details</h5>
                         <div class="row">
                             <div class="col-md-6 text-md-end">
                                 <p><strong>Date:</strong></p>
-                                <p><strong>Time:</strong></p>
+                                <!-- <p><strong>Time:</strong></p> -->
                                 <p><strong>Location:</strong></p>
-                                <p><strong>Check-in:</strong></p>
+                                <!-- <p><strong>Check-in:</strong></p> -->
                             </div>
                             <div class="col-md-6 text-md-start">
-                                <p>July 20-25, 2025</p>
-                                <p>Opening session begins at 7:00 PM on July 20</p>
+                                <p>July 29 - August 3, 2025</p>
+                                <!-- <p>Opening session begins at 7:00 PM on July 20</p> -->
                                 <p>Anagkazo Campus, Mampong, Eastern Region, Ghana</p>
-                                <p>From 3:00 PM on July 20</p>
+                                <!-- <p>From 3:00 PM on July 20</p> -->
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <p class="mb-4">If you have any questions or need to make changes to your registration, please contact us at <strong>conference@firstlovechurch.org</strong> or call <strong>(233) 456-7890</strong>.</p>
-                
+
+                <p class="mb-4">If you have any questions or need to make changes to your registration, please contact
+                    us at <strong>conference@firstlovechurch.org</strong> or call <strong>(233) 456-7890</strong>.</p>
+
                 <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Return to Home</a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row mt-5">
+<!-- <div class="row mt-5">
     <div class="col-lg-8 mx-auto">
         <div class="card">
             <div class="card-header">
@@ -106,5 +110,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 {% endblock %}

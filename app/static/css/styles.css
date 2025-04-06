@@ -412,6 +412,7 @@ body {
     font-family: "Anton", sans-serif;
     letter-spacing: 0.5px;
     color: var(--light-color);
+    text-transform: uppercase;
 }
 
 .logo-year {

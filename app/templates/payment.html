@@ -8,16 +8,16 @@
         cursor: pointer;
         transition: all 0.3s;
     }
-    
+
     .payment-option:hover {
         transform: translateY(-3px);
     }
-    
+
     .payment-option.selected {
         border-color: var(--primary-color);
         background-color: rgba(255, 87, 51, 0.05);
     }
-    
+
     .card-icon {
         font-size: 2rem;
         margin-right: 10px;
@@ -34,9 +34,10 @@
             </div>
             <div class="card-body">
                 <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i> Please review your order details and complete the payment to secure your registration.
+                    <i class="fas fa-info-circle me-2"></i> Please review your order details and complete the payment to
+                    secure your registration.
                 </div>
-                
+
                 <!-- Order Summary -->
                 <div class="card bg-light mb-4">
                     <div class="card-body">
@@ -58,52 +59,18 @@
                             </div>
                         </div>
                         {% endif %}
-                        
-                        {% if accommodation %}
-                            {% if accommodation.needs_accommodation %}
-                            <div class="mb-3">
-                                <h6>Accommodation Details</h6>
-                                <div class="d-flex justify-content-between">
-                                    <span>Room Type:</span>
-                                    <span>
-                                        {% if accommodation.room_type == 'single' %}
-                                            Single Room
-                                        {% elif accommodation.room_type == 'double' %}
-                                            Double Room
-                                        {% elif accommodation.room_type == 'shared' %}
-                                            Shared Room
-                                        {% endif %}
-                                    </span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span>Number of Nights:</span>
-                                    <span>{{ accommodation.nights }} night{% if accommodation.nights > 1 %}s{% endif %}</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span>Room Rate:</span>
-                                    <span>${{ accommodation.room_price }}.00 per night</span>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <span>Accommodation Cost:</span>
-                                    <span>${{ accommodation.total_cost }}.00</span>
-                                </div>
-                            </div>
-                            {% else %}
-                            <div class="mb-3">
-                                <h6>Accommodation</h6>
-                                <p class="text-muted">No accommodation selected (optional)</p>
-                            </div>
-                            {% endif %}
-                        {% endif %}
-                        
+
+
+
                         <hr>
                         <div class="d-flex justify-content-between">
                             <span class="fw-bold">Total Amount:</span>
-                            <span class="price-tag" id="totalAmount">${{ 50 + (accommodation.total_cost if accommodation and accommodation.needs_accommodation else 0) }}.00</span>
+                            <span class="price-tag" id="totalAmount">${{ 50 + (accommodation.total_cost if accommodation
+                                and accommodation.needs_accommodation else 0) }}.00</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Payment Methods -->
                 <h5 class="mb-3">Select Payment Method</h5>
                 <div class="row mb-4">
@@ -130,38 +97,41 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Hidden payment method input -->
                 <input type="hidden" id="paymentMethod" name="payment_method" value="paypal">
-                
+
                 <!-- Stripe Checkout Button -->
                 <div id="stripe-button-container" class="mb-4">
-                    <form action="{{ url_for('create_checkout_session') }}" method="POST">
+                    <form action="{{ url_for('payments.create_checkout_session') }}" method="POST">
                         <button type="submit" class="btn btn-primary btn-lg w-100">
                             <i class="far fa-credit-card me-2"></i> Pay with Stripe Checkout
                         </button>
                         <small class="d-block text-center mt-2 text-muted">Secure payment processing with Stripe</small>
                     </form>
                 </div>
-                
+
                 <!-- PayPal Payment Form -->
                 <div id="paypal-button-container" class="mb-4"></div>
-                
+
                 <!-- Credit Card Form (Commented out as we're using Stripe Checkout now) -->
                 <div id="credit-card-form" style="display: none;">
                     <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i> For credit card payments, please use the Stripe Checkout option above for secure payment processing.
+                        <i class="fas fa-info-circle me-2"></i> For credit card payments, please use the Stripe Checkout
+                        option above for secure payment processing.
                     </div>
                 </div>
-                
+
                 <div class="mt-4 text-center">
                     <small class="text-muted">
-                        <i class="fas fa-lock me-1"></i> All payment information is encrypted and secure. We never store your credit card information.
+                        <i class="fas fa-lock me-1"></i> All payment information is encrypted and secure. We never store
+                        your credit card information.
                     </small>
                 </div>
-                
+
                 <div class="d-flex justify-content-between mt-4">
-                    <a href="{{ url_for('accommodation') }}" class="btn btn-outline-primary"><i class="fas fa-arrow-left me-2"></i> Back to Accommodation</a>
+                    <a href="{{ url_for('registrations.nonfl_registration') }}" class="btn btn-outline-primary"><i
+                            class="fas fa-arrow-left me-2"></i> Back to Registration Form</a>
                 </div>
             </div>
         </div>

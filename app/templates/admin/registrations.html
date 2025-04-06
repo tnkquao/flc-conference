@@ -13,7 +13,8 @@
             </button>
         </form>
         <div class="dropdown">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="exportDropdown"
+                data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-download me-1"></i>Export
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="exportDropdown">
@@ -29,16 +30,20 @@
     <div class="card-header bg-light">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link {% if not request.args.get('status') %}active{% endif %}" href="{{ url_for('admin_registrations') }}">All Registrations</a>
+                <a class="nav-link {% if not request.args.get('status') and not request.args.get('is_firstlover') %}active{% endif %}"
+                    href="{{ url_for('admin_registrations') }}">All Registrations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if request.args.get('status') == 'paid' %}active{% endif %}" href="{{ url_for('admin_registrations') }}?status=paid">Paid</a>
+                <a class="nav-link {% if request.args.get('status') == 'paid' %}active{% endif %}"
+                    href="{{ url_for('admin_registrations') }}?status=paid">Paid</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if request.args.get('status') == 'pending' %}active{% endif %}" href="{{ url_for('admin_registrations') }}?status=pending">Pending</a>
+                <a class="nav-link {% if request.args.get('status') == 'pending' %}active{% endif %}"
+                    href="{{ url_for('admin_registrations') }}?status=pending">Pending</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {% if request.args.get('accommodation') == 'true' %}active{% endif %}" href="{{ url_for('admin_registrations') }}?accommodation=true">With Accommodation</a>
+                <a class="nav-link {% if request.args.get('is_firstlover') == 'true' %}active{% endif %}"
+                    href="{{ url_for('admin_registrations') }}?is_firstlover=true">First Lovers</a>
             </li>
         </ul>
     </div>
@@ -52,7 +57,7 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Registration Date</th>
-                        <th>Accommodation</th>
+                        <th>First Lover</th>
                         <th>Total</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -67,8 +72,8 @@
                         <td>{{ registration.phone }}</td>
                         <td>{{ registration.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
                         <td>
-                            {% if registration.needs_accommodation %}
-                            <span class="badge bg-success">{{ registration.room_type }}</span>
+                            {% if registration.is_firstlover %}
+                            <span class="badge bg-success"> Yes</span>
                             {% else %}
                             <span class="badge bg-secondary">No</span>
                             {% endif %}
@@ -85,13 +90,16 @@
                         </td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ url_for('admin_registration_detail', registration_id=registration.registration_id) }}" class="btn btn-sm btn-outline-primary">
+                                <a href="{{ url_for('admin_registration_detail', registration_id=registration.registration_id) }}"
+                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ url_for('get_qrcode', registration_id=registration.registration_id) }}" class="btn btn-sm btn-outline-info" target="_blank">
+                                <a href="{{ url_for('get_qrcode', registration_id=registration.registration_id) }}"
+                                    class="btn btn-sm btn-outline-info" target="_blank">
                                     <i class="fas fa-qrcode"></i>
                                 </a>
-                                <button type="button" class="btn btn-sm btn-outline-success send-email-btn" data-email="{{ registration.email }}" data-id="{{ registration.id }}">
+                                <button type="button" class="btn btn-sm btn-outline-success send-email-btn"
+                                    data-email="{{ registration.email }}" data-id="{{ registration.id }}">
                                     <i class="fas fa-envelope"></i>
                                 </button>
                             </div>
@@ -112,7 +120,9 @@
             <ul class="pagination justify-content-center mb-0">
                 {% if registrations.has_prev %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ url_for('admin_registrations', page=registrations.prev_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}" aria-label="Previous">
+                    <a class="page-link"
+                        href="{{ url_for('admin_registrations', page=registrations.prev_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}"
+                        aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -123,28 +133,33 @@
                     </a>
                 </li>
                 {% endif %}
-                
-                {% for page_num in registrations.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
-                    {% if page_num %}
-                        {% if page_num == registrations.page %}
-                        <li class="page-item active">
-                            <a class="page-link" href="#">{{ page_num }}</a>
-                        </li>
-                        {% else %}
-                        <li class="page-item">
-                            <a class="page-link" href="{{ url_for('admin_registrations', page=page_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}">{{ page_num }}</a>
-                        </li>
-                        {% endif %}
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">...</a>
-                    </li>
-                    {% endif %}
+
+                {% for page_num in registrations.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2)
+                %}
+                {% if page_num %}
+                {% if page_num == registrations.page %}
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ page_num }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link"
+                        href="{{ url_for('admin_registrations', page=page_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}">{{
+                        page_num }}</a>
+                </li>
+                {% endif %}
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">...</a>
+                </li>
+                {% endif %}
                 {% endfor %}
-                
+
                 {% if registrations.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="{{ url_for('admin_registrations', page=registrations.next_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}" aria-label="Next">
+                    <a class="page-link"
+                        href="{{ url_for('admin_registrations', page=registrations.next_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}"
+                        aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -183,30 +198,30 @@
 
 {% block scripts %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Email sending functionality
-    const emailButtons = document.querySelectorAll('.send-email-btn');
-    const emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
-    const recipientEmailSpan = document.getElementById('recipientEmail');
-    const sendEmailBtn = document.getElementById('sendEmailBtn');
-    let selectedRegistrationId = null;
-    
-    emailButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const email = this.dataset.email;
-            selectedRegistrationId = this.dataset.id;
-            recipientEmailSpan.textContent = email;
-            emailModal.show();
+    document.addEventListener('DOMContentLoaded', function () {
+        // Email sending functionality
+        const emailButtons = document.querySelectorAll('.send-email-btn');
+        const emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
+        const recipientEmailSpan = document.getElementById('recipientEmail');
+        const sendEmailBtn = document.getElementById('sendEmailBtn');
+        let selectedRegistrationId = null;
+
+        emailButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const email = this.dataset.email;
+                selectedRegistrationId = this.dataset.id;
+                recipientEmailSpan.textContent = email;
+                emailModal.show();
+            });
+        });
+
+        sendEmailBtn.addEventListener('click', function () {
+            if (selectedRegistrationId) {
+                // TODO: Implement AJAX call to send email
+                emailModal.hide();
+                alert('Email sent successfully');
+            }
         });
     });
-    
-    sendEmailBtn.addEventListener('click', function() {
-        if (selectedRegistrationId) {
-            // TODO: Implement AJAX call to send email
-            emailModal.hide();
-            alert('Email sent successfully');
-        }
-    });
-});
 </script>
 {% endblock %}

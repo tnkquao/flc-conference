@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block title %}Conference Registration{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto fl-form">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0"> First Love Registration</h3>
+            </div>
+            <div class="card-body">
+                <form id="registrationForm" action="{{ url_for('registrations.fl_registration') }}" method="POST"
+                    class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name"
+                            required>
+                        <div class="invalid-feedback">
+                            Please enter your full name.
+                        </div>
+                    </div>
+
+                    <!-- <div class="mb-3">
+                        <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Enter your email address" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
+                    </div> -->
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" id="phone" name="phone"
+                            placeholder="Enter your phone number" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid phone number.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="col-md-6">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter your city">
+                        </div>
+                    </div>
+                    <!--<div class="row mb-3">
+                        
+                         <div class="col-md-6">
+                            <label for="zip" class="form-label">Zip/Postal Code</label>
+                            <input type="text" class="form-control" id="zip" name="zip"
+                                placeholder="Enter zip/postal code">
+                        </div> 
+                    </div>-->
+
+                    <div class="mb-3">
+                        <label for="region" class="form-label">Region</label><br>
+                        <select id="region" name="region" required>
+                            <option disabled selected>Choose your region</option>
+                            <option value="africa">Africa</option>
+                            <option value="asia">Asia</option>
+                            <option value="europe">Europe</option>
+                            <option value="americas">Americas</option>
+                            <option value="oceania">Oceania</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="country" class="form-label">Home Church Country</label><br>
+                        <select id="country" name="country" required>
+                            <option disabled selected>Choose your country</option>
+                            {% for country in countries %}
+                            <option value="{{country.iso3}}">
+                                {{ country.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="">
+                        <button type="submit" class="btn btn-primary btn-lg form-btn">Submit Registration</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Conference Registration Agreement</h6>
+                <p>By registering for the First Love Church Conference, you agree to the following terms and conditions:
+                </p>
+
+                <h6>1. Registration and Payment</h6>
+                <p>Conference registration is confirmed upon receipt of payment. All fees must be paid in full prior to
+                    the conference unless otherwise arranged with the organizers.</p>
+
+                <h6>2. Cancellation Policy</h6>
+                <p>Cancellations received 30 days or more before the conference start date will receive a full refund
+                    minus a $15 processing fee. Cancellations received 15-29 days before the conference will receive a
+                    50% refund. No refunds will be given for cancellations less than 15 days before the conference.</p>
+
+                <h6>3. Photography and Recording</h6>
+                <p>By attending the conference, you grant First Love Church the right to take photographs or record
+                    videos of you in connection with the conference, and to use these images or videos for promotional
+                    purposes.</p>
+
+                <h6>4. Liability Waiver</h6>
+                <p>First Love Church is not responsible for any injury, loss, or damage that may occur to the attendee
+                    during the conference. Attendees are responsible for their own safety and the security of their
+                    belongings.</p>
+
+                <h6>5. Code of Conduct</h6>
+                <p>Attendees are expected to conduct themselves in a professional and respectful manner at all times.
+                    First Love Church reserves the right to remove any attendee for inappropriate behavior without
+                    refund.</p>
+
+                <h6>6. Privacy Policy</h6>
+                <p>Personal information collected during registration will be used solely for conference-related
+                    communications and will not be shared with third parties without consent.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

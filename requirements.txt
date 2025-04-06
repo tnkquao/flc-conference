@@ -1,0 +1,12 @@
+email-validator
+flask-login
+flask
+flask-sqlalchemy
+gunicorn
+pillow
+psycopg2-binary
+qrcode
+requests
+stripe
+werkzeug
+python-dotenv

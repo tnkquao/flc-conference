@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, Blueprint
 from datetime import datetime
+from app.extensions import db
 from flask_login import login_required
-from app.models import Admin, Registration
+from app.models import Admin, Registration, Payment
 
 admin_bp = Blueprint('admin',__name__, 
                 template_folder='../templates',
@@ -19,7 +20,7 @@ def admin_dashboard():
     fl_registrations = Registration.query.filter_by(is_firstlover=True).count()
     
     # Calculate revenue
-    total_revenue = db.session.query(db.func.sum(Registration.total_paid)).scalar() or 0
+    total_revenue = db.session.query(db.func.sum(Payment.total_paid)).scalar() or 0
     
     # Get recent registrations for dashboard
     recent_registrations = Registration.query.order_by(Registration.created_at.desc()).limit(5).all()
@@ -53,8 +54,17 @@ def admin_registrations():
     if is_firstlover == 'true':
         query = query.filter_by(is_firstlover=True)
     
+    results = db.session.query( Registration.id, Registration.name, Registration.email, Registration.phone,
+        Registration.is_firstlover, Registration.payment_status, Registration.created_at,
+        db.func.coalesce(Payment.total_paid, 0).label('payment_amount'),  
+    ).outerjoin(
+        Payment, 
+        Registration.id == Payment.registration_id
+    )
+
+
+    registrations = results.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
     # Get registrations with pagination
-    registrations = query.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
     
     return render_template('admin/registrations.html', registrations=registrations)
 

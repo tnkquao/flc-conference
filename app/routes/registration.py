@@ -20,7 +20,7 @@ with open('app/static/countries.json', 'r') as f:
     COUNTRIES = json.load(f)
 
 
-@registration_bp.route('/fl', methods=['GET', 'POST'])
+@registration_bp.route('/first-love', methods=['GET', 'POST'])
 def fl_registration():
 
     if request.method == 'POST':
@@ -59,15 +59,15 @@ def fl_registration():
         db.session.commit()
 
         # registration_data = session.get('registration', {})
-        email_service.send_confirmation_email(fl_registration)
+        send_confirmation_email(fl_registration)
         
         # Skip Formspree and redirect to accommodation
         flash('Registration successful!', 'success')
-        return redirect(url_for('success'))
+        return redirect(url_for('main.success'))
     
     return render_template('registration.html', countries=COUNTRIES)
 
-@registration_bp.route('/nonfl-registration', methods=['GET', 'POST'])
+@registration_bp.route('/non-first-love', methods=['GET', 'POST'])
 def nonfl_registration():
     if request.method == 'POST':
         # Get form data

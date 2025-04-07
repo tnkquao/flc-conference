@@ -1,9 +1,11 @@
 import uuid
 from datetime import datetime
-from db import db
+from app.extensions import db
 from flask_login import UserMixin
 
 class Registration(db.Model):
+    __tablename__ = 'registrations'
+
     id = db.Column(db.Integer, primary_key=True)
     registration_id = db.Column(db.String(36), unique=True, default=lambda: str(uuid.uuid4()))
     is_firstlover = db.Column(db.Boolean, default=False, nullable=True)
@@ -14,6 +16,7 @@ class Registration(db.Model):
     country = db.Column(db.String(100), nullable=True)
     special_needs = db.Column(db.Text, nullable=True)
     referral = db.Column(db.String(50), nullable=True)
+    payment_status = db.Column(db.String(20), default='pending')  # pending, paid, failed, refunded
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Define the relationship with the PaymentData model
@@ -30,7 +33,7 @@ class Registration(db.Model):
     # admin_notes = db.Column(db.Text, nullable=True)
     
     def __repr__(self):
-        return f'<Registration {self.name}>'
+        return f'<Registration {self.name}> -  {self.email}'
     
     # @property
     # def total_accommodation_cost(self):
@@ -59,6 +62,8 @@ class Registration(db.Model):
         }
 
 class Payment(db.Model):
+    __tablename__ = 'payments'
+
     # Payment details
     id = db.Column(db.Integer, primary_key=True)
     registration_fee = db.Column(db.Float, nullable=False)  # $50 registration fee
@@ -66,10 +71,9 @@ class Payment(db.Model):
     payment_method = db.Column(db.String(20), nullable=True)
     payment_id = db.Column(db.String(100), nullable=True)
     payment_date = db.Column(db.DateTime, nullable=True)
-    payment_status = db.Column(db.String(20), default='pending')  # pending, paid, failed, refunded
 
     # Foreign key linking back to RegistrationData
-    registration_id = db.Column(db.Integer, db.ForeignKey('registration.id'), nullable=False)
+    registration_id = db.Column(db.Integer, db.ForeignKey('registrations.id'), nullable=False)
 
     @property
     def is_paid(self):

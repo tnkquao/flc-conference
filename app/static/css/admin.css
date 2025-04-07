@@ -144,3 +144,38 @@ h1 {
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
 }
+
+.icon-container {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-container i {
+    font-size: 15px;
+    /* Adjust the icon size */
+}
+
+.icon-container::after {
+    content: attr(data-text);
+    /* Fetch the text from the data-text attribute */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(20%, -60%);
+    opacity: 0;
+    font-size: 14px;
+    /* Font size of the text */
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Background color of the hover text */
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    /* Prevents text from interfering with hover */
+    transition: opacity 0.3s ease-in-out;
+}
+
+.icon-container:hover::after {
+    opacity: 1;
+}

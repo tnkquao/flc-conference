@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,6 +15,7 @@
             justify-content: center;
             min-height: 100vh;
         }
+
         .setup-card {
             max-width: 500px;
             width: 100%;
@@ -22,22 +24,27 @@
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
             background-color: #fff;
         }
+
         .logo {
             text-align: center;
             margin-bottom: 2rem;
         }
+
         .logo i {
             font-size: 3rem;
             color: #0d6efd;
         }
+
         .input-group-text {
             background-color: transparent;
         }
+
         .password-help {
             font-size: 0.85rem;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
@@ -48,23 +55,25 @@
                         <h4 class="mt-2">First Love Church Conference</h4>
                         <p class="text-muted">Admin Account Setup</p>
                     </div>
-                    
+
                     {% with messages = get_flashed_messages(with_categories=true) %}
-                        {% if messages %}
-                            {% for category, message in messages %}
-                            <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show">
-                                {{ message }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
-                    
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle me-2"></i>Welcome to the initial setup. Create your admin account to manage conference registrations.
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div
+                        class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    
-                    <form method="post" action="{{ url_for('admin_setup') }}" id="setupForm">
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>Welcome to the initial setup. Create your admin account
+                        to manage conference registrations.
+                    </div>
+
+                    <form method="post" action="{{ url_for('auth.admin_setup') }}" id="setupForm">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <div class="input-group">
@@ -72,7 +81,7 @@
                                 <input type="text" class="form-control" id="username" name="username" required>
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="email" class="form-label">Email Address</label>
                             <div class="input-group">
@@ -80,7 +89,7 @@
                                 <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <div class="input-group">
@@ -88,27 +97,29 @@
                                 <input type="password" class="form-control" id="password" name="password" required>
                             </div>
                             <div class="password-help text-muted mt-1">
-                                Password should be at least 8 characters long and include numbers and special characters.
+                                Password should be at least 8 characters long and include numbers and special
+                                characters.
                             </div>
                         </div>
-                        
+
                         <div class="mb-4">
                             <label for="confirm_password" class="form-label">Confirm Password</label>
                             <div class="input-group">
                                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                                <input type="password" class="form-control" id="confirm_password"
+                                    name="confirm_password" required>
                             </div>
                         </div>
-                        
+
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg">
                                 <i class="fas fa-user-plus me-2"></i>Create Admin Account
                             </button>
                         </div>
                     </form>
-                    
+
                     <div class="text-center mt-4">
-                        <a href="{{ url_for('index') }}" class="text-decoration-none">
+                        <a href="{{ url_for('main.index') }}" class="text-decoration-none">
                             <i class="fas fa-arrow-left me-1"></i>Return to Conference Site
                         </a>
                     </div>
@@ -116,22 +127,23 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const setupForm = document.getElementById('setupForm');
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirm_password');
-        
-        setupForm.addEventListener('submit', function(e) {
-            if (password.value !== confirmPassword.value) {
-                e.preventDefault();
-                alert('Passwords do not match. Please try again.');
-                confirmPassword.focus();
-            }
+        document.addEventListener('DOMContentLoaded', function () {
+            const setupForm = document.getElementById('setupForm');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirm_password');
+
+            setupForm.addEventListener('submit', function (e) {
+                if (password.value !== confirmPassword.value) {
+                    e.preventDefault();
+                    alert('Passwords do not match. Please try again.');
+                    confirmPassword.focus();
+                }
+            });
         });
-    });
     </script>
 </body>
+
 </html>

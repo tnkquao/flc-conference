@@ -23,10 +23,7 @@ class Config:
 class DevelopmentConfig(Config):
     SECRET_KEY = 'your-secret-key'
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        'DEV_DATABASE_URL', 
-        'postgresql://tarek:Bible63@localhost/flc_conference_dev'
-    )
+    SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL')
     # SESSION_COOKIE_SECURE = False  # Disable in development for HTTP
     TESTING = True
     # TEMPLATES_AUTO_RELOAD = True
@@ -35,12 +32,10 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.getenv(
-        'DATABASE_URL',
-        'postgresql://tarek:Bible63@localhost/flc_conference'
-    )
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     PROPAGATE_EXCEPTIONS = True  # Better error reporting
     PREFERRED_URL_SCHEME = 'https'
+    SESSION_COOKIE_SECURE = True
 
 configs = {
     'development': DevelopmentConfig,

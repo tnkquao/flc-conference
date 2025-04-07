@@ -4,7 +4,7 @@ from flask_login import LoginManager
 # from flask_limiter import Limiter
 # from flask_limiter.util import get_remote_address
 # from flask_caching import Cache
-from flask_mail import Mail
+# from flask_mail import Mail
 import stripe
 
 # Initialize extensions with no app bound initially
@@ -13,7 +13,7 @@ login_manager = LoginManager()
 # migrate = Migrate()
 # limiter = Limiter(key_func=get_remote_address, default_limits=["200 per day", "50 per hour"])
 # cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
-mail = Mail()
+# mail = Mail()
 
 def init_extensions(app):
     """Initialize all extensions with the Flask application"""
@@ -36,7 +36,7 @@ def init_extensions(app):
     # cache.init_app(app)
     
     # Email
-    mail.init_app(app)
+    # mail.init_app(app)
     
     # Stripe configuration
     stripe.api_key = app.config.get('STRIPE_SECRET_KEY')

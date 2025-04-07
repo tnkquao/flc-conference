@@ -1,24 +1,30 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 # from flask_migrate import Migrate
-from .extensions import init_extensions
-from config import configs
+from .extensions import init_extensions, db
+from .config import configs
+
 
 # db = SQLAlchemy
 # migrate = Migrate()
 
 def create_app(config_name='default'):
     app = Flask(__name__)
-    app.config.from_object(configs[config_name])
+    env = os.getenv('FLASK_ENV', 'development')
+    app.config.from_object(configs[env])
 
     # Initialize all extensions
     init_extensions(app)
 
-    # db.init_app(app)
-    # migrate.init_app(app, db)
 
     from app import models  # Import models to register them with SQLAlchemy
-    
+
+    # Database table creation
+    with app.app_context():
+        db.create_all()
+
+
     # Register blueprints
     from app.routes import main, registration, payment, admin, auth
     app.register_blueprint(main.main_bp)

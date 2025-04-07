@@ -1,13 +1,9 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-# from flask_migrate import Migrate
 from .extensions import init_extensions, db
 from .config import configs
 
-
-# db = SQLAlchemy
-# migrate = Migrate()
 
 def create_app(config_name='default'):
     app = Flask(__name__)
@@ -23,6 +19,7 @@ def create_app(config_name='default'):
     # Database table creation
     with app.app_context():
         db.create_all()
+
 
 
     # Register blueprints

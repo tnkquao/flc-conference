@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 # from flask_limiter import Limiter
 # from flask_limiter.util import get_remote_address
 # from flask_caching import Cache
@@ -10,7 +10,7 @@ import stripe
 # Initialize extensions with no app bound initially
 db = SQLAlchemy()
 login_manager = LoginManager()
-migrate = Migrate()
+# migrate = Migrate()
 # limiter = Limiter(key_func=get_remote_address, default_limits=["200 per day", "50 per hour"])
 # cache = Cache(config={'CACHE_TYPE': 'SimpleCache'})
 mail = Mail()
@@ -27,7 +27,7 @@ def init_extensions(app):
     login_manager.login_message_category = 'warning'
     
     # Migration setup
-    migrate.init_app(app, db)
+    # migrate.init_app(app, db)
     
     # Rate limiting
     # limiter.init_app(app)

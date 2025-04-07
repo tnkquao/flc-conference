@@ -239,3 +239,15 @@ def process_payment():
     else:
         flash('Payment processing failed. Please try again.', 'error')
         return redirect(url_for('payment'))
+
+@payment_bp.route('/qrcode/<registration_id>')
+def get_qrcode(registration_id):
+    """Display QR code for a registration"""
+    registration = Registration.query.filter_by(registration_id=registration_id).first()
+    
+    if not registration or not registration.qr_code:
+        flash('QR code not found', 'error')
+        return redirect(url_for('index'))
+    
+    qr_path = os.path.join(app.static_folder, registration.qr_code)
+    return send_file(qr_path, mimetype='image/png')

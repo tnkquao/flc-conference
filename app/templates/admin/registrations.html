@@ -6,7 +6,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1 class="mb-0"><i class="fas fa-user-check me-2"></i>Registrations</h1>
     <div class="d-flex">
-        <form class="d-flex me-2" action="{{ url_for('admin_search') }}" method="get">
+        <form class="d-flex me-2" action="{{ url_for('admin.admin_search') }}" method="get">
             <input type="text" name="query" class="form-control" placeholder="Search..." aria-label="Search">
             <button class="btn btn-outline-primary" type="submit">
                 <i class="fas fa-search"></i>
@@ -31,19 +31,19 @@
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
                 <a class="nav-link {% if not request.args.get('status') and not request.args.get('is_firstlover') %}active{% endif %}"
-                    href="{{ url_for('admin_registrations') }}">All Registrations</a>
+                    href="{{ url_for('admin.admin_registrations') }}">All Registrations</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.args.get('status') == 'paid' %}active{% endif %}"
-                    href="{{ url_for('admin_registrations') }}?status=paid">Paid</a>
+                    href="{{ url_for('admin.admin_registrations') }}?status=paid">Paid</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.args.get('status') == 'pending' %}active{% endif %}"
-                    href="{{ url_for('admin_registrations') }}?status=pending">Pending</a>
+                    href="{{ url_for('admin.admin_registrations') }}?status=pending">Pending</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {% if request.args.get('is_firstlover') == 'true' %}active{% endif %}"
-                    href="{{ url_for('admin_registrations') }}?is_firstlover=true">First Lovers</a>
+                    href="{{ url_for('admin.admin_registrations') }}?is_firstlover=true">First Lovers</a>
             </li>
         </ul>
     </div>
@@ -78,7 +78,7 @@
                             <span class="badge bg-secondary">No</span>
                             {% endif %}
                         </td>
-                        <td>${{ registration.total_cost }}</td>
+                        <td>${{ registration.payment_amount }}</td>
                         <td>
                             {% if registration.payment_status == 'paid' %}
                             <span class="badge bg-success">Paid</span>
@@ -90,16 +90,19 @@
                         </td>
                         <td>
                             <div class="btn-group">
-                                <a href="{{ url_for('admin_registration_detail', registration_id=registration.registration_id) }}"
-                                    class="btn btn-sm btn-outline-primary">
+                                <a href="{{ url_for('admin.admin_registration_detail', registration_id=registration.registration_id) }}"
+                                    class="btn btn-sm btn-outline-primary icon-container" data-text="View">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ url_for('get_qrcode', registration_id=registration.registration_id) }}"
-                                    class="btn btn-sm btn-outline-info" target="_blank">
+                                <a href="{{ url_for('payments.get_qrcode', registration_id=registration.registration_id) }}"
+                                    class="btn btn-sm btn-outline-info icon-container" target="_blank"
+                                    data-text="QR Code">
                                     <i class="fas fa-qrcode"></i>
                                 </a>
-                                <button type="button" class="btn btn-sm btn-outline-success send-email-btn"
-                                    data-email="{{ registration.email }}" data-id="{{ registration.id }}">
+                                <button type="button"
+                                    class="btn btn-sm btn-outline-success send-email-btn icon-container"
+                                    data-email="{{ registration.email }}" data-id="{{ registration.id }}"
+                                    data-text="Send Email">
                                     <i class="fas fa-envelope"></i>
                                 </button>
                             </div>

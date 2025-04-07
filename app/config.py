@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'your-secret-key')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Email configuration
@@ -22,16 +21,24 @@ class Config:
     # QR_CODE_DIR = 'application/static/qrcodes'
 
 class DevelopmentConfig(Config):
-    # DEBUG = True
-    SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL', 'postgresql://tarek:Bible63@localhost/flc_conference_dev')
+    SECRET_KEY = 'your-secret-key'
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        'DEV_DATABASE_URL', 
+        'postgresql://tarek:Bible63@localhost/flc_conference_dev'
+    )
     # SESSION_COOKIE_SECURE = False  # Disable in development for HTTP
-    # TESTING = True
+    TESTING = True
     # TEMPLATES_AUTO_RELOAD = True
     # EXPLAIN_TEMPLATE_LOADING = False
 
 class ProductionConfig(Config):
+    SECRET_KEY = os.getenv('SECRET_KEY')
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://tarek:Bible63@localhost/flc_conference')
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        'DATABASE_URL',
+        'postgresql://tarek:Bible63@localhost/flc_conference'
+    )
     PROPAGATE_EXCEPTIONS = True  # Better error reporting
     PREFERRED_URL_SCHEME = 'https'
 

@@ -1794,7 +1794,7 @@ div.row.mb-5 {
     display: flex;
     width: calc(300% + 60px);
     /* Extra space for seamless looping */
-    animation: scroll 40s linear 3s infinite;
+    animation: scroll 60s linear infinite;
 }
 
 @keyframes scroll {

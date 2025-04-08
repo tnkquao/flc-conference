@@ -12,7 +12,7 @@ admin_bp = Blueprint('admin',__name__,
 
 # Admin routes
 @admin_bp.route('/')
-# @login_required
+@login_required
 def admin_dashboard():
     # Get statistics for dashboard
     total_registrations = Registration.query.count()
@@ -20,7 +20,16 @@ def admin_dashboard():
     fl_registrations = Registration.query.filter_by(is_firstlover=True).count()
     
     # Calculate revenue
-    total_revenue = db.session.query(db.func.sum(Payment.total_paid)).scalar() or 0
+    usd_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'usd').scalar() or 0
+    gbp_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'gbp').scalar() or 0
+    eur_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'eur').scalar() or 0
+    # Convert all revenue to USD for total revenue
+    # Assuming conversion rates are 1.2 for GBP and 1.1 for EUR
+    total_revenue = usd_revenue + (gbp_revenue * 1.28) + (eur_revenue * 1.09)
+    # Alternatively, if you want to keep the original currency values
+    # total_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'usd').scalar() or 0
+    # total_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'gbp').scalar() or 0
+    # total_revenue = db.session.query(db.func.sum(Payment.total_paid)).scalar() or 0
     
     # Get recent registrations for dashboard
     recent_registrations = Registration.query.order_by(Registration.created_at.desc()).limit(5).all()
@@ -37,7 +46,7 @@ def admin_dashboard():
                           now=now)
 
 @admin_bp.route('/registrations')
-# @login_required
+@login_required
 def admin_registrations():
     page = request.args.get('page', 1, type=int)
     per_page = 20
@@ -55,7 +64,7 @@ def admin_registrations():
         query = query.filter_by(is_firstlover=True)
     
     results = db.session.query( Registration.id, Registration.name, Registration.email, Registration.phone,
-        Registration.is_firstlover, Registration.payment_status, Registration.created_at,
+        Registration.is_firstlover, Registration.payment_status, Registration.created_at, Payment.currency,
         db.func.coalesce(Payment.total_paid, 0).label('payment_amount'),  
     ).outerjoin(
         Payment, 
@@ -68,11 +77,31 @@ def admin_registrations():
     
     return render_template('admin/registrations.html', registrations=registrations)
 
-@admin_bp.route('/registration/<registration_id>')
-# @login_required
+@admin_bp.route('/<int:registration_id>')
+@login_required
 def admin_registration_detail(registration_id):
-    registration = Registration.query.filter_by(registration_id=registration_id).first_or_404()
-    return render_template('admin/registration_detail.html', registration=registration)
+    registration = Registration.query.get_or_404(registration_id)
+    payment = Payment.query.filter_by(registration_id=registration_id).first()
+
+    return render_template(
+        'admin/registration_detail.html', 
+        registration=registration,
+        payment=payment
+    )
+
+@admin_bp.route('/<int:registration_id>/update', methods=['POST'])
+@login_required
+def update_reg_payment_status(registration_id):
+    registration = Registration.query.get_or_404(registration_id)
+    
+    if new_status not in ['paid', 'pending', 'failed', 'refunded']:
+        flash('Invalid status', 'error')
+        return redirect(url_for('admin.admin_registration_detail', registration_id=registration_id))
+    
+    registration.payment_status = new_status
+    db.session.commit()
+
+
 
 @admin_bp.route('/search', methods=['GET'])
 @login_required
@@ -80,7 +109,7 @@ def admin_search():
     query = request.args.get('query', '')
     
     if not query:
-        return redirect(url_for('admin_registrations'))
+        return redirect(url_for('admin.admin_registrations'))
     
     # Search for registrations
     registrations = Registration.query.filter(

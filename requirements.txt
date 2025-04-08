@@ -10,3 +10,4 @@ requests
 stripe
 werkzeug
 python-dotenv
+flask-migrate

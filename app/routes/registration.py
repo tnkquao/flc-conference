@@ -78,6 +78,7 @@ def nonfl_registration():
         country = request.form.get('country')
         special_needs = request.form.get('special_needs')
         referral = request.form.get('referral')
+        currency = request.form.get('currency')
         
         # Validate form data
         if not name or not email or not phone or not country:
@@ -92,7 +93,9 @@ def nonfl_registration():
             'city': city,
             'country': country,
             'special_needs': special_needs,
-            'referral': referral
+            'referral': referral,
+            'currency': currency,
+            'is_firstlover': False
         }
 
         # Generate and store a payment access token

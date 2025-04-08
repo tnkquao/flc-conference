@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_user, logout_user
-from werkzeug.security import generate_password_hash
-from flask_login import login_required
+from flask_login import login_user, logout_user, login_required
+from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from app.models import Admin
 from app.extensions import db, login_manager
@@ -25,7 +24,7 @@ def admin_login():
             login_user(admin)
             admin.last_login = datetime.utcnow()
             db.session.commit()
-            return redirect(url_for('admin_dashboard'))
+            return redirect(url_for('admin.admin_dashboard'))
         else:
             flash('Invalid username or password', 'error')
     
@@ -35,7 +34,7 @@ def admin_login():
 @login_required
 def admin_logout():
     logout_user()
-    return redirect(url_for('admin_login'))
+    return redirect(url_for('auth.admin_login'))
 
 @auth_bp.route('/setup')
 def admin_setup():

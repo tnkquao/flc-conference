@@ -38,6 +38,12 @@
     padding: 0.25rem 0.5rem;
 }
 
+/* FOR REG/PAYMENT STATUS*/
+.btn-group.btn-update {
+    padding-left: 1rem;
+}
+
+
 /* Custom Badges */
 .badge {
     padding: 0.5em 0.75em;

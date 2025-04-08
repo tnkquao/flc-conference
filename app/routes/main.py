@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, session
+from app.models import Registration
 
 main_bp = Blueprint('main',__name__, 
                 template_folder='../templates',

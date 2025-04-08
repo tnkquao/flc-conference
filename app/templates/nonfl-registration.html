@@ -73,6 +73,16 @@
                         <textarea class="form-control" id="special-needs" name="special_needs" rows="3"
                             placeholder="Please specify any special needs or accommodations"></textarea>
                     </div>
+                    <div class="mb-3">
+                        <label for="currency" class="form-label">Preferred Currency :</label>
+                        <select name="currency" id="currency" required>
+                            <option disabled selected>Choose currency</option>
+                            <option value="usd">USD ($)</option>
+                            <option value="eur">EUR (€)</option>
+                            <option value="gbp">GBP (£)</option>
+                        </select>
+                        <span>To be used for payment on the next page (100 per currency)</span>
+                    </div>
 
                     <div class="mb-3">
                         <label class="form-label">How did you hear about the conference?</label>

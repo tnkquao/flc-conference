@@ -165,3 +165,5 @@ replit.nix
 static/countries.json
 uv.lock
 app/static/qrcodes/
+app.py
+app/app.py

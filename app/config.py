@@ -7,11 +7,13 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Email configuration
-    # EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
-    # EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
-    # EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
-    # EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
-    # DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "conference@firstlovechurch.org")
+    EMAIL_HOST = os.environ.get("MAIL_SERVER", "smtp.gmail.com")
+    EMAIL_PORT = int(os.environ.get("MAIL_PORT", 587))
+    EMAIL_USE_TLS = True
+    EMAIL_USE_SSL = False
+    EMAIL_HOST_USER = os.environ.get("MAIL_USERNAME", "tarek.quao@gmail.com")
+    EMAIL_HOST_PASSWORD = os.environ.get("MAIL_APP_PASSWORD", "ebuaxmqkpjamlown")
+    DEFAULT_FROM_EMAIL = os.environ.get("MAIL_DEFAULT_SENDER", "")
     
     # Stripe configuration
     # STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
@@ -26,6 +28,9 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv('DEV_DATABASE_URL')
     # SESSION_COOKIE_SECURE = False  # Disable in development for HTTP
     TESTING = True
+    STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
+    STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')
+    STRIPE_WEBHOOK_SECRET = os.getenv('STRIPE_WEBHOOK_SECRET')  # For webhook verification
     # TEMPLATES_AUTO_RELOAD = True
     # EXPLAIN_TEMPLATE_LOADING = False
 

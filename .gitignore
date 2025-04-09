@@ -167,3 +167,4 @@ uv.lock
 app/static/qrcodes/
 app.py
 app/app.py
+app/utils/currency_helper.py

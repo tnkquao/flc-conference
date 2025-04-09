@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div class="site-header-middle">
+        <!-- <div class="site-header-middle">
           <a href="/" class="w-nav-brand w--current">
             <div class="header-text-container">
               <strong class="logo-main"> 2025 First Love Conference</strong>
@@ -59,10 +59,23 @@
               <span class="flc-logo flc-logo-text">First <br>Love <br>Church </span>
             </div>
           </a>
-        </div>
+        </div> -->
 
         <div class="site-header-right">
-          <a href="https://firstlovecenter.com/" class="site-nav_link">First Love HQ</a>
+          <!-- Hamburger Menu Button (visible only on mobile) -->
+          <button class="burger-menu" onclick="toggleMenu()">☰</button>
+
+          <div>
+            <div class="nav-links" id="mobileMenu">
+              <a href="https://firstlovecenter.com/" class="site-nav_link">First Love HQ</a>
+              <a href="https://firstlovecenter.com/" class="site-nav_link">About</a>
+              <a id="prekindle-register" href="{{ url_for('main.pre_registration') }}"
+                class="site-button is-small is-yellow w-button">
+                <strong>REGISTER FOR&nbsp;2025<br></strong>
+              </a>
+            </div>
+          </div>
+          <!-- <a href="https://firstlovecenter.com/" class="site-nav_link">First Love HQ</a>
           <div class="site-nav_links is-site-header_right">
             <a href="https://firstlovecenter.com/" class="site-nav_link">About</a>
           </div>
@@ -71,7 +84,7 @@
               class="site-button is-small is-yellow isnt-mobile w-button">
               <strong>REGISTER FOR&nbsp;2025<br></strong>
             </a>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -150,6 +163,12 @@
   <!-- Custom JS -->
   <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('show');
+    }
+  </script>
 
   {% block extra_js %}{% endblock %}
 </body>

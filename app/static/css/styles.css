@@ -1581,7 +1581,7 @@ div.row.mb-5 {
     width: calc(300% + 60px);
     /* Extra space for seamless looping */
     /* animation: scroll 60s linear infinite; */
-    animation: scroll 20s linear 3s infinite;
+    animation: scroll 25s linear 3s infinite;
 
 }
 
@@ -1591,7 +1591,7 @@ div.row.mb-5 {
     }
 
     100% {
-        transform: translateX(calc(-66.666% - 20px));
+        transform: translateX(calc(-50% - 20px));
     }
 }
 

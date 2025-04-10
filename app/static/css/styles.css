@@ -314,6 +314,7 @@ html:not(.wf-design-mode):not(.w-editor) [data-reveal-item] {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
+    line-height: 1;
     /* This vertically centers the items */
     gap: 10px;
     /* Adds some space between the elements */
@@ -428,7 +429,7 @@ html:not(.wf-design-mode):not(.w-editor) [data-reveal-item] {
 }
 
 .site-nav_inner {
-    position: relative;
+    /* position: relative; */
 }
 
 .site-nav_links {
@@ -1982,6 +1983,10 @@ video {
 
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
+    .site-nav {
+        display: none;
+    }
+
     .site-header {
         flex-direction: column;
         align-items: center;

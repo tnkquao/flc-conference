@@ -37,9 +37,9 @@ def create_app(config_name='default'):
             
             # Create a default admin user
             admin = Admin(
-                username="admin",
+                username=os.getenv('ADMIN_USERNAME', 'admin'),
                 email="admin@example.com",
-                password_hash=generate_password_hash("admin123")
+                password_hash=generate_password_hash(os.getenv('ADMIN_PASSWORD', 'admin123'))
             )
             
             db.session.add(admin)

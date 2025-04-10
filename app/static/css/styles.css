@@ -1582,7 +1582,7 @@ div.row.mb-5 {
     width: calc(300% + 60px);
     /* Extra space for seamless looping */
     /* animation: scroll 60s linear infinite; */
-    animation: scroll 25s linear 3s infinite;
+    animation: scroll 25s linear 5s infinite;
 
 }
 

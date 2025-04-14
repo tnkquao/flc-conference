@@ -54,25 +54,25 @@ def admin_registrations():
     is_firstlover = request.args.get('is_firstlover')
     
     # Start with base query
-    query = Registration.query
-
-    # Apply filters
-    if status:
-        query = query.filter_by(payment_status=status)
-    
-    if is_firstlover == 'true':
-        query = query.filter_by(is_firstlover=True)
-    
-    results = db.session.query( Registration.id, Registration.name, Registration.email, Registration.phone,
-        Registration.is_firstlover, Registration.payment_status, Registration.created_at, Payment.currency,
-        db.func.coalesce(Payment.total_paid, 0).label('payment_amount'),  
+    query = db.session.query(
+        Registration.id, 
+        Registration.name, Registration.email, 
+        Registration.phone, Registration.is_firstlover, 
+        Registration.payment_status, Registration.created_at, 
+        Payment.currency,
+        db.func.coalesce(Payment.total_paid, 0).label('payment_amount')
     ).outerjoin(
         Payment, 
         Registration.id == Payment.registration_id
     )
 
+    if status:
+        query = query.filter(Registration.payment_status == status)
 
-    registrations = results.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
+    if is_firstlover == 'true':
+        query = query.filter(Registration.is_firstlover == True)
+
+    registrations = query.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
     # Get registrations with pagination
     
     return render_template('admin/registrations.html', registrations=registrations)
@@ -89,17 +89,17 @@ def admin_registration_detail(registration_id):
         payment=payment
     )
 
-@admin_bp.route('/<int:registration_id>/update', methods=['POST'])
-@login_required
-def update_reg_payment_status(registration_id):
-    registration = Registration.query.get_or_404(registration_id)
+# @admin_bp.route('/<int:registration_id>/update', methods=['POST'])
+# @login_required
+# def update_reg_payment_status(registration_id):
+#     registration = Registration.query.get_or_404(registration_id)
     
-    if new_status not in ['paid', 'pending', 'failed', 'refunded']:
-        flash('Invalid status', 'error')
-        return redirect(url_for('admin.admin_registration_detail', registration_id=registration_id))
+#     if new_status not in ['paid', 'pending', 'failed', 'refunded']:
+#         flash('Invalid status', 'error')
+#         return redirect(url_for('admin.admin_registration_detail', registration_id=registration_id))
     
-    registration.payment_status = new_status
-    db.session.commit()
+#     registration.payment_status = new_status
+#     db.session.commit()
 
 
 

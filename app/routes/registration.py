@@ -20,7 +20,8 @@ with open('app/static/countries.json', 'r') as f:
     COUNTRIES = json.load(f)
 
 
-@registration_bp.route('/first-love', methods=['GET', 'POST'])
+# @registration_bp.route('/first-love', methods=['GET', 'POST'])
+@registration_bp.route('/', methods=['GET', 'POST'])
 def fl_registration():
 
     if request.method == 'POST':

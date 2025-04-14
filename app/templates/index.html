@@ -3,22 +3,29 @@
 {% block title %}First Love Conference{% endblock %}
 
 {% block content %}
+<style>
+    #modalSpeakerTitle {
+        font-size: 20px;
+    }
+</style>
 <!-- Hero Section -->
 <div class="hero-section">
-    <!-- <img src="{{ url_for('static', filename='images/Conference 3 copy.png') }}" alt="Conference Flyer"
-        class="hero-image"> -->
+    <video autoplay muted loop playsinline>
+        <source src="https://res.cloudinary.com/dtr7ausk3/video/upload/q_auto/FLC_20_eqlgdp.mp4" type="video/mp4">
+    </video>
     <div class="hero-content">
         <!-- <h1>Road to The First Love Conference</h1>
          <p>Join us at First Love Center for an unforgettable time of worship, fellowship, and inspiration as we gather together to grow in faith and community.</p> -->
-        <a href="{{ url_for('main.pre_registration') }}" class="btn btn-primary btn-lg hero-btn"><strong>REGISTER
-                NOW</strong></a>
+        <!-- <a href="{{ url_for('registrations.fl_registration') }}"
+            class="btn btn-primary btn-lg hero-btn"><strong>REGISTER
+                NOW</strong></a> -->
     </div>
 </div>
 
 <!-- Conference Highlights -->
 <section class="conference-highlights">
     <div class="countdown-container">
-        <a href="{{ url_for('main.pre_registration') }}" class="carousel-item">
+        <a href="{{ url_for('registrations.fl_registration') }}" class="carousel-item">
             <div class="countdown-carousel">
                 <div class="countdown-banner">
                     <span id="countdown-days" class="countdown-number">00</span>
@@ -36,11 +43,11 @@
     <div class="marquee-countdown background-color-pink text-color-white"></div>
     <div class="core-speakers">
         <div class="site-container cc-speakers">
-            <div data-reveal-container class="_2-column">
+            <div data-reveal-container class="_2-column" id="conference-intro">
                 <div data-reveal-item class="core-speakers_intro revealed">
-                    <h2>The <strong>Meet Our Theme &amp; Confirmed 2025 First Love Conference Speakers</strong></h2>
-                    <p class="site-paragraph is-medium text-weight-500"><strong>Experience The First Love
-                            Conference</strong></p>
+                    <h2><strong>Experience The First Love Conference</strong></h2>
+                    <!-- <p class="site-paragraph is-medium text-weight-500"><strong>Experience The First Love
+                            Conference</strong></p> -->
                     <p class="site-paragraph is-medium text-weight-500">The <strong>First Love Conference</strong> is a
                         spirit filled international event that brings together
                         <strong>young people and adults from over 49 nations</strong>, united by a passion for Jesus and
@@ -59,6 +66,9 @@
                     <p class="site-paragraph is-medium text-weight-500">
                         <strong>This is more than a conference—it's an encounter with His presence.</strong> See you
                         there!
+                    </p>
+                    <p class="intro-ending is-medium text-weight-500">
+                        <strong>-Joshua Heward-Mills, Pastor of The First Love Church</strong>
                     </p>
 
                 </div>
@@ -95,12 +105,109 @@
             </div>
 
             <!--  SPEAKERS -->
-            <div data-reveal-container class="featured-speakers">
-                <h1 data-reveal-item class="heading-3 revealed">Featured Speakers</h1>
+            <div data-reveal-container class="featured-speakers" id="speakers">
+                <h1 data-reveal-item class="heading-3 revealed">Speakers</h1>
                 <div role="list" class="featured-speakers__list w-dyn-items">
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Prophet_Dag_Heward-Mills_inszi1.jpg"
+                            loading="lazy" width="405" alt="Prophet Dag Heward-Mills">
+                        <h3>Dag Heward-Mills</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Dag Heward-Mills Ministries,
+                            Ghana</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Dag Heward-Mills is an evangelist, pastor, author, and missionary known
+                            for his global impact
+                            in ministry.<br>
+                            He is the founder of the United Denominations Originating from the Lighthouse Group of
+                            Churches (UD-OLGC), a denomination with thousands of churches in over 90 countries.<br>
+                            He also launched the Healing Jesus Campaign, a series of large-scale gospel crusades that
+                            have reached millions across Africa. In addition to planting churches and organizing
+                            crusades, he has authored over 90 influential books on leadership, ministry, and church
+                            growth.<br>
+                            Bishop Dag continues to train missionaries and raise leaders with a strong focus on the
+                            Great
+                            Commission</p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Ben_Fitzgerald_pmjswg.jpg"
+                            loading="lazy" width="405" alt="Ben Fitzgerald">
+                        <h3>Ben Fitzgerald</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Awakening Europe,
+                            Germany</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Ben Fitzgerald is the senior leader of Awakening Europe, a movement
+                            dedicated to spreading
+                            the gospel across Europe through stadium events, city-wide outreaches, and training schools.
+                            <br>
+                            Currently based in Germany, Ben leads the Awakening Team and travels extensively, preaching
+                            the message of Jesus and equipping believers to live in the fullness of freedom and identity
+                            found in Christ. <br>
+                            With a deep conviction that the future of nations will be transformed by radical believers,
+                            Ben’s passion is to see people set free and boldly proclaiming the Kingdom of God.
+                        </p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Joshua_McCauley_mzgi3j.jpg"
+                            loading="lazy" width="405" alt="Joshua McCauley">
+                        <h3>Joshua McCauley</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Redemption Church
+                            and Rhema, South Africa</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Joshua McCauley is the Senior Pastor of Rhema and Redemption Church
+                            Johannesburg, two
+                            vibrant and rapidly growing congregations in South Africa. Known for his passionate and
+                            engaging teaching, he is a prominent voice in the global grace movement. His messages focus
+                            on the transformative power of God’s love and the finished work of Jesus, helping believers
+                            experience true freedom, healing, and peace in Christ. Pastor Joshua’s approach to scripture
+                            brings fresh insights, often using typology and the original Hebrew text to highlight the
+                            depth of God’s goodness.
+                        </p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Glyn_Barrett_frmoa6.jpg"
+                            loading="lazy" width="405" alt="Glyn Barrett">
+                        <h3>Glyn Barrett</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Audacious, UK and
+                            National leader of Assemblies of God UK</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Glyn Barrett is a pastor, international speaker, and author known for his
+                            dynamic preaching
+                            and
+                            inspiring leadership. He leads !Audacious Church, a thriving multi-site church with campuses
+                            across the UK and Europe.<br>
+                            Glyn currently serves as the National Leader of Assemblies of God Great Britain, Chair of
+                            Empowered21 of Europe, and Global Church Planting Chair for AoG.<br>
+                            Passionate about raising leaders and planting churches, he continues to speak around the
+                            world while pursuing a Doctorate in Leadership and Global Perspectives.
+                        </p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Daniel_Chand_hku4j9.jpg"
+                            loading="lazy" width="405" alt="Daniel Chand">
+                        <h3>Daniel Chand</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Walking Like Jesus
+                            Ministries, UK</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Daniel Chand is an evangelist, pastor, author, and the founder of Walking
+                            Like Jesus
+                            Ministries.<br>
+                            He leads large-scale gospel campaigns, including Tent Revivals and international crusades,
+                            reaching hundreds of thousands of people globally. Through his ministry, Daniel also hosts
+                            weekly television programs on TBN UK, such as Let’s Talk Revival and Walking Like Jesus.
+                            Alongside his evangelistic work, Daniel and his wife Tanya pastor Pragma Church in Milton
+                            Keynes, a thriving congregation focused on revival and equipping believers. With a heart to
+                            reach the lost, Daniel has ministered in over 32 nations, hosting powerful crusades and
+                            spreading the message of salvation and healing. His ministry's mandate is to "reach the lost
+                            at any cost."</p>
+                    </div>
                     <!-- <div data-reveal-item role="listitem"
                         class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Joshua Heward-Mills.jpg') }}"
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Joshua_Heward-Mills_dc5qpx.jpg"
                             loading="lazy" width="405" alt="Joshua Heward-Mills">
                         <h3>Joshua Heward-Mills</h3>
                         <p class="site-paragraph is-medium text-weight-600 is-speakers"><strong>Host and Lead
@@ -108,80 +215,95 @@
                     </div> -->
                     <div data-reveal-item role="listitem"
                         class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Prophet Dag Heward-Mills.jpg') }}"
-                            loading="lazy" width="405" alt="Prophet Dag Heward-Mills">
-                        <h3>Prophet Dag Heward-Mills</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Founder of The United
-                            Denominations Originating from the Lighthouse
-                            Group of Churches (UD-OLGC), Ghana</p>
-                    </div>
-                    <!-- <div data-reveal-item role="listitem"
-                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Glyn Barrett.jpg') }}"
-                            loading="lazy" width="405" alt="Glyn Barrett">
-                        <h3>Glyn Barrett</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior Pastor Audacious, UK and
-                            National leader of Assemblies of God UK</p>
-                    </div> -->
-                    <div data-reveal-item role="listitem"
-                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Kong Hee.jpg') }}"
-                            loading="lazy" width="405" alt="Kong Hee">
-                        <h3>Kong Hee</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior Pastor, City Harvest
-                            Church, Singapore</p>
-                    </div>
-
-                    <!-- <div data-reveal-item role="listitem"
-                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Daniel Chand.jpg') }}"
-                            loading="lazy" width="405" alt="Daniel Chand">
-                        <h3>Daniel Chand</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Leader of Walking Like Jesus
-                            Ministries, UK</p>
-                    </div> -->
-                    <div data-reveal-item role="listitem"
-                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/David Diga Hernandez.jpg') }}"
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/David_Diga_Hernandez___cdbkyw.jpg"
                             loading="lazy" width="405" alt="David Diga Hernandez">
                         <h3>David Diga Hernandez</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Evangelist, healing minister and
-                            TV host, USA</p>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">David Diga Hernandez Ministries,
+                            USA</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">David Diga Hernandez is an evangelist, bestselling author, YouTuber, and
+                            healing minister
+                            with a deep friendship with the Holy Spirit. His ministry hosts powerful encounter services
+                            around the world and reaches millions through online media. <br>
+                            David has a heart for the lost and a strong desire to help this generation connect with the
+                            Holy Spirit in a real and personal way. Through his ministry, many have come to know Jesus,
+                            experienced healing and freedom, and discovered a deeper walk with God. <br>
+                            He carries a special grace to lead people to Christ and to help believers grow closer to the
+                            Holy Spirit.
+                        </p>
                     </div>
                     <div data-reveal-item role="listitem"
                         class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Ben Fitzgerald.jpg') }}"
-                            loading="lazy" width="405" alt="Ben Fitzgerald">
-                        <h3>Ben Fitzgerald</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior leader Awakening Europe,
-                            Germany</p>
-                    </div>
-                    <!-- <div data-reveal-item role="listitem"
-                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Joshua McCauley.jpg') }}"
-                            loading="lazy" width="405" alt="Joshua McCauley">
-                        <h3>Joshua McCauley</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Senior Pastor Redemption Church
-                            and Rhema, South Africa</p> -->
-
-                    <div data-reveal-item role="listitem"
-                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                        <img src="{{ url_for('static', filename='images/conference-speakers/Markus Wenz.jpg') }}"
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Markus_Wenz_dinijt.jpg"
                             loading="lazy" width="405" alt="Markus Wenz">
                         <h3>Markus Wenz</h3>
-                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Leader of Holy Spirit Night
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Holy Spirit Night
                             Movement at the Gospel Forum, Germany</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Markus Wenz is the leader of the Holy Spirit Night Movement and a key
+                            member of the
+                            leadership team at Gospel Forum Church in Stuttgart, Germany.<br>
+                            He is passionate about seeing a generation rise up to live in true freedom and walk in the
+                            supernatural power of the Holy Spirit. After a life-changing encounter with the Holy Spirit,
+                            Markus has made it his mission to create space for God’s presence and power to move. He is
+                            deeply committed to equipping and empowering young people to bring transformation in every
+                            sphere of society—through bold faith, spiritual authority, and a lifestyle led by the
+                            Spirit.
+                        </p>
                     </div>
-                    <!-- <div data-reveal-item role="listitem"
-                    class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Teo Hayashi.jpg') }}"
-                        loading="lazy" width="405" alt="Teo Hayashi">
-                    <h3>Teo Hayashi</h3>
-                    <p class="site-paragraph is-medium text-weight-600 is-speakers">Pastor, Dunamis Movement and
-                        Monte Sião Church, Brazil</p>
-                </div> -->
-                </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Teo_Hayashi_eoj7qn.jpg"
+                            loading="lazy" width="405" alt="Teo Hayashi">
+                        <h3>Teo Hayashi</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">Dunamis Movement and
+                            Monte Sião Church, Brazil</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Teo Hayashi is the founder of the Dunamis Movement and a passionate
+                            leader focused on
+                            equipping a generation to bring the Kingdom of Heaven to Earth.<br>
+                            He serves as a writer, speaker, and senior pastor at Monte Sião Church in São Paulo, Brazil.
+                            His ministry journey began with Youth With A Mission (YWAM) and continued as a youth pastor
+                            in North Carolina.<br>
+                            After returning to Brazil, Teo envisioned a move of God among college students—one that
+                            would spark revival and global impact. That vision became the Dunamis Movement.
+                        </p>
+                    </div>
+                    <div data-reveal-item role="listitem"
+                        class="core-speakers_item-image is-featuredspeakers w-dyn-item revealed">
+                        <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Kong_Hee_fgs2pp.jpg"
+                            loading="lazy" width="405" alt="Kong Hee">
+                        <h3>Kong Hee</h3>
+                        <p class="site-paragraph is-medium text-weight-600 is-speakers">City Harvest
+                            Church, Singapore</p>
+                        <a class="btn about-btn">About</a>
+                        <p class="speaker-bio">Kong Hee is the founder and senior pastor of City Harvest Church, a
+                            vibrant, multi-campus
+                            congregation. He also established the School of Theology, Church Without Walls, and City
+                            Harvest Community Services Association, equipping leaders and serving thousands in need.
+                            <br>
+                            A spiritual son of the late Dr. David Yonggi Cho, who led the world’s largest church, Kong
+                            carries a deep commitment to Pentecostal faith, spiritual formation, and Christlikeness.
+                            <br>
+                            He continues to champion soul-winning, church growth, and intimacy with God as the ultimate
+                            goal of every believer. He is currently pursuing an education in theology.
+                        </p>
+                    </div>
 
+                </div>
+                <div id="speakerModal" class="modal">
+                    <div class="spk-modal-content">
+                        <span class="close-modal">&times;</span>
+                        <div class="modal-image-container">
+                            <img id="modalSpeakerImage" src="" alt="Speaker" loading="lazy" width="405">
+                        </div>
+                        <div class="modal-text">
+                            <h3 id="modalSpeakerName"></h3>
+                            <h5 id="modalSpeakerTitle"></h5>
+                            <p id="modalSpeakerBio"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -190,65 +312,65 @@
             <h1 class="heading-3">All Speakers</h1>
             <div class="carousel-track">
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Joshua Heward-Mills.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Joshua_Heward-Mills_dc5qpx.jpg"
                         alt="Joshua Heward-Mills" class="speaker-image">
                     <h4>Joshua Heward-Mills</h4>
                     <p class="speaker-title">Host and Lead Pastor, First Love Church</p>
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Prophet Dag Heward-Mills.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Prophet_Dag_Heward-Mills_inszi1.jpg"
                         alt="Prophet Dag Heward-Mills" class="speaker-image">
-                    <h4>Prophet Dag Heward-Mills</h4>
-                    <p class="speaker-title">Founder of The UD-OLGC, Ghana
+                    <h4>Dag Heward-Mills</h4>
+                    <p class="speaker-title">Dag Heward-Mills Ministries, Ghana
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Glyn Barrett.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Glyn_Barrett_frmoa6.jpg"
                         alt="Glyn Barrett" class="speaker-image">
                     <h4>Glyn Barrett</h4>
-                    <p class="speaker-title">Senior Pastor Audacious, UK and National leader of Assemblies of God UK
+                    <p class="speaker-title">Audacious, UK and Assemblies of God UK
                     </p>
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Ben Fitzgerald.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Ben_Fitzgerald_pmjswg.jpg"
                         alt="Ben Fitzgerald" class="speaker-image">
                     <h4>Ben Fitzgerald</h4>
-                    <p class="speaker-title">Senior leader Awakening Europe, Germany</p>
+                    <p class="speaker-title">Awakening Europe, Germany</p>
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Daniel Chand.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Daniel_Chand_hku4j9.jpg"
                         alt="Daniel Chand" class="speaker-image">
                     <h4>Daniel Chand</h4>
-                    <p class="speaker-title">Leader of Walking Like Jesus Ministries, UK</p>
+                    <p class="speaker-title">Walking Like Jesus Ministries, UK</p>
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/David Diga Hernandez.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/David_Diga_Hernandez___cdbkyw.jpg"
                         alt="David Diga Hernandez" class="speaker-image">
                     <h4>David Diga Hernandez</h4>
-                    <p class="speaker-title">Evangelist, healing minister and TV host USA</p>
+                    <p class="speaker-title">David Diga Hernandez Ministries, USA</p>
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Joshua McCauley.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Joshua_McCauley_mzgi3j.jpg"
                         alt="Joshua McCauley" class="speaker-image">
                     <h4>Joshua McCauley</h4>
-                    <p class="speaker-title">Senior Pastor Redemption Church and Rhema, South Africa</p>
+                    <p class="speaker-title">Redemption Church and Rhema, South Africa</p>
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Kong Hee.jpg') }}"
-                        alt="Kong Hee" class="speaker-image">
-                    <h4>Kong Hee</h4>
-                    <p class="speaker-title">Senior Pastor, City Harvest Church, Singapore</p>
-                </div>
-                <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Markus Wenz.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/v1744285614/w_1000/q_auto/f_auto/Markus_Wenz_dinijt.jpg"
                         alt="Markus Wenz" class="speaker-image">
                     <h4>Markus Wenz</h4>
-                    <p class="speaker-title">Leader of Holy Spirit Night Movement at the Gospel Forum, Germany</p>
+                    <p class="speaker-title">Holy Spirit Night Movement at the Gospel Forum, Germany</p>
                 </div>
                 <div class="speaker-card">
-                    <img src="{{ url_for('static', filename='images/conference-speakers/Teo Hayashi.jpg') }}"
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Teo_Hayashi_eoj7qn.jpg"
                         alt="Teo Hayashi" class="speaker-image">
                     <h4>Teo Hayashi</h4>
-                    <p class="speaker-title">Pastor, Dunamis Movement and Monte Sião Church, Brazil</p>
+                    <p class="speaker-title">Dunamis Movement and Monte Sião Church, Brazil</p>
+                </div>
+                <div class="speaker-card">
+                    <img src="https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/Kong_Hee_fgs2pp.jpg"
+                        alt="Kong Hee" class="speaker-image">
+                    <h4>Kong Hee</h4>
+                    <p class="speaker-title">City Harvest Church, Singapore</p>
                 </div>
             </div>
 
@@ -258,9 +380,9 @@
 
     <!--  EXCLUSIVES -->
     <div class="event-exclusive">
-        <div data-reveal-container="" class="site-container is-event-exclusive">
+        <div data-reveal-container="" class="site-container is-event-exclusive" id="why-attend">
             <div data-reveal-item class="event-exclusive_left revealed">
-                <h6 class="text-color-purple">Exclusive Growth opportunity</h6>
+                <!-- <h6 class="text-color-purple">Exclusive Growth opportunity</h6> -->
                 <div class="event-exclusive_heading">
                     <h2>Why Attend?</h2>
                     <div class="div-spacer"></div>
@@ -298,7 +420,7 @@
                     </div>
                 </div>
 
-                <a id="" href="{{ url_for('main.pre_registration') }}" target="_blank"
+                <a id="" href="{{ url_for('registrations.fl_registration') }}" target="_blank"
                     class="site-button is-small is-yellow w-button"><strong>REGISTER
                         NOW<br></strong></a>
             </div>
@@ -317,22 +439,56 @@
         </div>
     </div>
 
+    <!-- Conference Location -->
+    <div class="event-exclusive">
+        <div data-reveal-container="" class="site-container is-event-exclusive" id="why-attend">
+            <div data-reveal-item class="event-exclusive_left revealed">
+                <div class="event-exclusive_heading" style="margin-bottom: 10px;">
+                    <h2>The Venue</h2>
+                    <div class="div-spacer"></div>
+                </div>
+                <div class="event-exclusive_images">
+                    <div class="event-exclusive_image-top">
+                        <img src="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend.jpg"
+                            loading="lazy" width="616" sizes="(max-width: 767px) 100vw, 616px" alt=""
+                            srcset="https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-500.jpg 500w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-800.jpg 800w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-1080.jpg 1080w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend-p-1600.jpg 1600w, https://cdn.prod.website-files.com/65cca571f01f08e3e0840f5d/67d897aebd093b381696135d_GSF_WhyAttend.jpg 2000w"
+                            class="image-fullwidth">
+                    </div>
+                    <div class="event-exclusive_image-middle"></div>
 
-    <div id="register-now" class="pricing-cards">
+                </div>
+            </div>
+            <div data-reveal-item class="event-exclusive_right revealed">
+                <!-- <h5 class="text-color-purple">Join us at the First Love Center in Ghana this July-August</h5> -->
+                <div class="event-exclusive_benefits cc-2025">
+                    <div class="event-exclusive_benefits-item">
+                        <div class="event-exclusive_benefits-item_top">
+                            <div>
+                                <h5 style="margin-bottom: 0px;">Address:</h5>
+                                <p class="site-paragraph is-medium text-weight-500">
+                                    <strong>First Love Center</strong>,<br>
+                                    Trinity Avenue<br>
+                                    Accra, Ghana
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a id="" href="{{ url_for('registrations.fl_registration') }}" target="_blank"
+                    class="site-button is-small is-yellow w-button"><strong>Get Directions<br></strong></a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- <div id="register-now" class="pricing-cards">
         <div id="pricing" data-reveal-container="" class="site-container">
             <div data-reveal-item class="ticket-prices_heading revealed">
                 <h6 class="cc-yellow cc-center"><strong>CHOOSE YOUR PACKAGE</strong></h6>
                 <h2 class="site-heading is-ticketpricing">Register Now</h2>
             </div>
-            <!-- <div class="site-faq_marquee splide cc-hide">
-                 <div class="site-faq_marquee-track splide__track">
-                     <div class="site-faq_marquee-list splide__list">
-                         <div class="site-faq_marquee-item splide__slide cc-white">
-                             <h2 class="site-heading is-site-faq-marquee">Admission Options</h2>
-                         </div>
-                     </div>
-                 </div>
-             </div> -->
             <div class="pricing-cards__list">
                 <div data-reveal-item class="pricing-cards__item revealed">
                     <div class="pricing-cards__item-heading is-yellow">USA Admission</div>
@@ -386,21 +542,28 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!--
-    <div class="event-schedule background-color-black text-color-white">
+    <!-- Event Schedule -->
+    <div class="event-schedule background-color-black text-color-white" id="schedule">
         <div class="event-schedule_main">
             <div data-reveal-container="" class="site-container is-event-schedule_main">
                 <div data-reveal-item class="event-schedule_heading revealed">
                     <h2 class="site-heading is-event-schedule">Schedule</h2>
                 </div>
-                <div data-reveal-item class="event-schedule_days revealed">
+                <div data-reveal-item class="event-schedule_day cc-hide revealed">
+                    <div style="padding: 30px 0 0 20px; ">
+                        <h3 style="text-transform: none; font-weight:100;">*Check in later closer to the Conference for
+                            the Schedule.
+                        </h3>
+                    </div>
+                </div>
+                <!-- <div data-reveal-item class="event-schedule_days revealed">
                     <div data-reveal-item class="event-schedule_day cc-hide revealed">
-                        <div class="event-schedule_day-title">
+                        <div class="event-schedule_day-title" onclick="toggleEventSchedule(this)">
                             <h3>Wednesday, &nbsp;JUNE 11</h3>
                         </div>
-                        <div class="event-schedule_day-list-wrapper w-dyn-list" style="display: block;">
+                        <div class="event-schedule_day-list-wrapper w-dyn-list">
                             <div role="list" class="event-schedule_day-list w-dyn-items">
                                 <div role="listitem" class="event-schedule_day-item w-dyn-item">
                                     <div class="event-schedule_day-item_time">5:00 pm</div>
@@ -428,139 +591,10 @@
                             </div>
                         </div>
                     </div>
-                    <div data-reveal-item class="event-schedule_day cc-hide revealed">
-                        <div class="event-schedule_day-title">
-                            <h3>THURSDAY, &nbsp;JUNE 12</h3>
-                        </div>
-                        <div class="event-schedule_day-list-wrapper w-dyn-list">
-                            <div role="list" class="event-schedule_day-list w-dyn-items">
-                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
-                                    <div class="event-schedule_day-item_time">8:30 am</div>
-                                    <div class="event-schedule_day-item_title">
-                                        <h5 class="event-schedule_day-item_title-text">Doors Open for Check-In</h5>
-                                        <div
-                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
-                                        </div>
-                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
-                                    </div>
-                                    <div class="event-schedule_day-item_speaker-wrapper">
-                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
-                                    </div>
-
-                                </div>
-                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
-                                    <div class="event-schedule_day-item_time">11:30 am</div>
-                                    <div class="event-schedule_day-item_title">
-                                        <h5 class="event-schedule_day-item_title-text">Breakout Sessions I</h5>
-                                        <div class="event-schedule_day-item__rtb w-richtext">
-                                            <ul role="list">
-                                                <li>Workshop A - Hammond Hall (Winspear) - <strong>Data-Driven
-                                                        Success</strong>
-                                                </li>
-                                                <li>Workshop B - Hall Arts - <strong>Equitable Outcomes</strong> </li>
-                                                <li>Workshop C - Loggia Area (Winspear) - <strong>Metrics of
-                                                        Accountability</strong> </li>
-                                                <li>Workshop D - Hall Arts - <strong>Scaling for Impact</strong></li>
-                                            </ul>
-                                            <p>‍</p>
-                                        </div>
-                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
-                                    </div>
-                                    <div class="event-schedule_day-item_speaker-wrapper">
-                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
-                                    </div>
-                                </div>
-                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
-                                    <div class="event-schedule_day-item_time">1:00 pm</div>
-                                    <div class="event-schedule_day-item_title">
-                                        <h5 class="event-schedule_day-item_title-text">Opening Inspiration Session -
-                                            (Winspear)
-                                        </h5>
-                                        <div class="event-schedule_day-item__rtb w-richtext">
-                                            <ul role="list">
-                                                <li>Vusi Thembekwayo</li>
-                                            </ul>
-                                        </div>
-                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
-                                    </div>
-                                    <div class="event-schedule_day-item_speaker-wrapper">
-                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
-                                    </div>
-
-                                </div>
-                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
-                                    <div class="event-schedule_day-item_time">2:00 pm</div>
-                                    <div class="event-schedule_day-item_title">
-                                        <h5 class="event-schedule_day-item_title-text">Linda Clemmons (Body
-                                            Language/Sales
-                                            Negotiation Techniques) </h5>
-                                        <div
-                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
-                                        </div>
-                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
-                                    </div>
-                                    <div class="event-schedule_day-item_speaker-wrapper">
-                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
-                                    </div>
-                                </div>
-                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
-                                    <div class="event-schedule_day-item_time">3:00 pm</div>
-                                    <div class="event-schedule_day-item_title">
-                                        <h5 class="event-schedule_day-item_title-text">Breakout Sessions II </h5>
-                                        <div class="event-schedule_day-item__rtb w-richtext">
-                                            <ul role="list">
-                                                <li>Workshop A - Hammond Hall (Winspear) - <strong>Digital
-                                                        Transformation</strong></li>
-                                                <li>Workshop B - Hall Arts - <strong>Tech-Enabled Scaling</strong></li>
-                                                <li>Workshop C - Loggia Area (Winspear) - <strong>Cybersecurity and Data
-                                                        Privacy</strong></li>
-                                                <li>Workshop D - Hall Arts - <strong>Innovation through
-                                                        Technology</strong>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
-                                    </div>
-                                    <div class="event-schedule_day-item_speaker-wrapper">
-                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
-                                    </div>
-
-                                </div>
-                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
-                                    <div class="event-schedule_day-item_time">4:30 pm</div>
-                                    <div class="event-schedule_day-item_title">
-                                        <h5 class="event-schedule_day-item_title-text">GA Networking </h5>
-                                        <div
-                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
-                                        </div>
-                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
-                                    </div>
-                                    <div class="event-schedule_day-item_speaker-wrapper">
-                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
-                                    </div>
-                                </div>
-                                <div role="listitem" class="event-schedule_day-item w-dyn-item">
-                                    <div class="event-schedule_day-item_time">7:00 pm</div>
-                                    <div class="event-schedule_day-item_title">
-                                        <h5 class="event-schedule_day-item_title-text">Evening Fireside Chat (Winspear)
-                                            -
-                                            Chairman Jakes and Special Guest</h5>
-                                        <div
-                                            class="event-schedule_day-item__rtb w-condition-invisible w-dyn-bind-empty w-richtext">
-                                        </div>
-                                        <div class="event-schedule_day-item_taxonomy w-dyn-bind-empty"></div>
-                                    </div>
-                                    <div class="event-schedule_day-item_speaker-wrapper">
-                                        <div class="event-schedule_day-item_speaker w-dyn-bind-empty"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div> -->
             </div>
         </div>
-    </div>-->
+    </div>
 </section>
 
 <!-- Resource Banner -->
@@ -602,5 +636,16 @@
         </div>
     </div>
 </div>
-
+<script>
+    function toggleEventSchedule(element) {
+        const content = element.nextElementSibling;
+        if (content.classList.contains('expanded')) {
+            content.style.maxHeight = '0';
+            content.classList.remove('expanded');
+        } else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.classList.add('expanded');
+        }
+    }
+</script>
 {% endblock %}

@@ -13,6 +13,10 @@ def index():
 def pre_registration():
     """Page to choose type of registration"""
     return render_template('pre-registration.html')
+@main_bp.route('/accommodation')
+def accommodation():
+    """Page to choose type of registration"""
+    return render_template('accommodation.html')
 
 @main_bp.route('/success')
 def success():

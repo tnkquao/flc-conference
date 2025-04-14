@@ -41,6 +41,10 @@
                 <a class="nav-link {% if request.args.get('status') == 'pending' %}active{% endif %}"
                     href="{{ url_for('admin.admin_registrations') }}?status=pending">Pending</a>
             </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link {% if request.args.get('status') == 'pending' %}active{% endif %}"
+                    href="{{ url_for('admin.admin_registrations') }}?status=pending">Pending</a>
+            </li> -->
             <li class="nav-item">
                 <a class="nav-link {% if request.args.get('is_firstlover') == 'true' %}active{% endif %}"
                     href="{{ url_for('admin.admin_registrations') }}?is_firstlover=true">First Lovers</a>

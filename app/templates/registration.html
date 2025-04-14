@@ -7,7 +7,8 @@
     <div class="col-lg-8 mx-auto fl-form">
         <div class="card">
             <div class="card-header">
-                <h3 class="mb-0">First Love Registration</h3>
+                <h3 class="mb-0">Conference Registration</h3>
+                <!-- <h3 class="mb-0">First Love Registration</h3> -->
             </div>
             <div class="card-body">
                 <form id="registrationForm" action="{{ url_for('registrations.fl_registration') }}" method="POST"
@@ -66,7 +67,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="country" class="form-label">Home Church Country</label><br>
+                        <label for="country" class="form-label">Country</label><br>
                         <select id="country" name="country" required>
                             <option disabled selected>Choose your country</option>
                             {% for country in countries %}

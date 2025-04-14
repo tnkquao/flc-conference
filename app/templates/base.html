@@ -32,9 +32,6 @@
   <link href="https://www.prekindle.com/css/pk-widget-purchase-clientsite.css?v=251" type="text/css" rel="stylesheet">
   <link href="https://www.prekindle.com/css/pk-widget-purchase-clientsite.css?v=251" type="text/css" rel="stylesheet">
 
-  <script type="text/javascript" src="https://www.prekindle.com/js/pk-purchase-widget-embed.js"></script>
-  <script type="text/javascript" src="https://www.prekindle.com/js/pk-widget-listframe.js"></script>
-  <script type="text/javascript" src="https://www.prekindle.com/js/ie-classlist-shim.js"></script>
   {% block extra_css %}{% endblock %}
 </head>
 
@@ -46,33 +43,39 @@
         <div class="site-nav">
           <div class="site-nav_inner">
             <div class="site-nav_links">
-              <a href="/" aria-current="page" class="site-nav_link w--current">First Love Conference 2025</a>
+              <a href="/" class="w-nav-brand w--current">
+                <div class="header-text-container">
+                  <img src="{{ url_for('static', filename='images/first_love_logo.png') }}" alt="First Love Church logo"
+                    class="header-logo">
+                  <!-- <strong class="logo-main"> 2025 First Love Conference</strong> -->
+                  <!-- <span class="presented-by">Presented by</span>
+                  <span class="flc-logo flc-logo-text">First <br>Love <br>Church </span> -->
+                </div>
+              </a>
+              <!-- <a href="/" aria-current="page" class="site-nav_link w--current">First Love Conference 2025</a> -->
             </div>
           </div>
         </div>
 
         <div class="site-header-middle">
-          <a href="/" class="w-nav-brand w--current">
-            <div class="header-text-container">
-              <strong class="logo-main"> 2025 First Love Conference</strong>
-              <span class="presented-by">Presented by</span>
-              <span class="flc-logo flc-logo-text">First <br>Love <br>Church </span>
-            </div>
+          <a id="prekindle-register" href="{{ url_for('registrations.fl_registration') }}"
+            class="site-button is-small is-yellow w-button">
+            <strong>REGISTER NOW</strong>
           </a>
+
         </div>
 
         <div class="site-header-right">
           <!-- Hamburger Menu Button (visible only on mobile) -->
-          <button class="burger-menu" onclick="toggleMenu()">☰</button>
+          <button class="burger-menu" onclick="toggleMenu()" id="burgerBtn">☰</button>
 
           <div>
             <div class="nav-links" id="mobileMenu">
-              <a href="https://firstlovecenter.com/" class="site-nav_link">First Love HQ</a>
-              <a href="https://firstlovecenter.com/" class="site-nav_link">About</a>
-              <a id="prekindle-register" href="{{ url_for('main.pre_registration') }}"
-                class="site-button is-small is-yellow w-button">
-                <strong>REGISTER FOR&nbsp;2025<br></strong>
-              </a>
+              <a href="#conference-intro" class="site-nav_link">Conference Highlight</a>
+              <a href="#speakers" class="site-nav_link">Speakers</a>
+              <a href="#why-attend" class="site-nav_link">Why Attend</a>
+              <a href="#schedule" class="site-nav_link">Schedule</a>
+              <a href="{{ url_for('main.accommodation') }}" class="site-nav_link">Accommodation</a>
             </div>
           </div>
           <!-- <a href="https://firstlovecenter.com/" class="site-nav_link">First Love HQ</a>
@@ -106,7 +109,7 @@
   <main class="container my-5">
     <!-- Progress Steps for multi-step forms -->
     {% if request.path not in [url_for('main.index'), url_for('main.success'),
-    url_for('main.error'), url_for('main.pre_registration')] %}
+    url_for('main.error'), url_for('main.pre_registration'), url_for('main.accommodation')] %}
     <div class="progress-steps mb-5">
       <div
         class="step {% if request.path == url_for('registrations.fl_registration') or request.path == url_for('registrations.nonfl_registration') %}active{% elif request.path in [url_for('payments.checkout')] %}completed{% endif %}">
@@ -137,6 +140,7 @@
         <div class="col-md-6 mb-4 mb-md-0">
           <h5>Quick Links</h5>
           <a href="{{ url_for('main.index') }}" class="footer-link">Home</a>
+          <a href="{{ url_for('main.accommodation') }}" class="footer-link">Accommodation</a>
         </div>
         <div class="col-md-2">
           <h5>Connect With Us</h5>
@@ -164,10 +168,21 @@
   <script src="{{ url_for('static', filename='js/validation.js') }}"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   <script>
+    const menu = document.getElementById('mobileMenu');
+    const burger = document.getElementById('burgerBtn');
+
     function toggleMenu() {
-      const menu = document.getElementById('mobileMenu');
       menu.classList.toggle('show');
     }
+
+    document.addEventListener('click', function (event) {
+      const clickedInsideMenu = menu.contains(event.target);
+      const clickedBurger = burger.contains(event.target);
+
+      if (!clickedInsideMenu && !clickedBurger) {
+        menu.classList.remove('show');
+      }
+    });
   </script>
 
   {% block extra_js %}{% endblock %}

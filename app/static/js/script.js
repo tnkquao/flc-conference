@@ -115,4 +115,31 @@ document.addEventListener('DOMContentLoaded', function () {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto'; // Re-enable scrolling
     }
+
+    // Simple JavaScript for the slideshow
+    let currentSlide = 0;
+    const slideshow = document.getElementById('venueSlideshow');
+    const slides = slideshow.getElementsByTagName('img');
+    const slideCount = slides.length;
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideCount;
+        slideshow.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Change slide every 5 seconds
+    setInterval(nextSlide, 2000);
+
+
+    // Event schedule toggle
+    function toggleEventSchedule(element) {
+        const content = element.nextElementSibling;
+        if (content.classList.contains('expanded')) {
+            content.style.maxHeight = '0';
+            content.classList.remove('expanded');
+        } else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            content.classList.add('expanded');
+        }
+    }
 });

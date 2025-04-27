@@ -32,7 +32,7 @@ def fl_registration():
         city = request.form.get('city')
         country = request.form.get('country')
         referral = request.form.get('referral')
-        is_firstlover = True
+        # is_firstlover = True
         
         # Validate form data
         if not name or not email or not phone or not country:
@@ -53,8 +53,8 @@ def fl_registration():
             email=email,
             phone=phone,
             city=city,
-            country=country,
-            is_firstlover=is_firstlover
+            country=country
+            # is_firstlover=is_firstlover
         )
         db.session.add(fl_registration)
         db.session.commit()

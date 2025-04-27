@@ -112,7 +112,7 @@
                 <h4>Update Payment Status</h4>
             </div>
             <form method="POST"
-                action="{{ url_for('admin.update_reg_payment_status', registration_id=registration.id) }}">
+                action="{{ """url_for('admin.update_reg_payment_status', registration_id=registration.id) """}}">
                 <div class="btn-group btn-update" role="group">
                     <button type="submit" name="status" value="paid"
                         class="btn btn-success {% if registration.payment_status == 'paid' %}active{% endif %}">

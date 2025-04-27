@@ -61,9 +61,9 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Registration Date</th>
-                        <th>First Lover</th>
+                        <!-- <th>First Lover</th>
                         <th>Total</th>
-                        <th>Status</th>
+                        <th>Status</th> -->
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -75,7 +75,7 @@
                         <td>{{ registration.email }}</td>
                         <td>{{ registration.phone }}</td>
                         <td>{{ registration.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
-                        <td>
+                        <!-- <td>
                             {% if registration.is_firstlover %}
                             <span class="badge bg-success"> Yes</span>
                             {% else %}
@@ -102,7 +102,7 @@
                             {% else %}
                             <span class="badge bg-danger">{{ registration.payment_status }}</span>
                             {% endif %}
-                        </td>
+                        </td> -->
                         <td>
                             <div class="btn-group">
                                 <a href="{{ url_for('admin.admin_registration_detail', registration_id=registration.id) }}"

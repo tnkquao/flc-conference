@@ -17,7 +17,7 @@ def admin_dashboard():
     # Get statistics for dashboard
     total_registrations = Registration.query.count()
     paid_registrations = Registration.query.filter_by(payment_status='paid').count()
-    fl_registrations = Registration.query.filter_by(is_firstlover=True).count()
+    # fl_registrations = Registration.query.filter_by(is_firstlover=True).count()
     
     # Calculate revenue
     usd_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'usd').scalar() or 0
@@ -26,10 +26,6 @@ def admin_dashboard():
     # Convert all revenue to USD for total revenue
     # Assuming conversion rates are 1.2 for GBP and 1.1 for EUR
     total_revenue = usd_revenue + (gbp_revenue * 1.28) + (eur_revenue * 1.09)
-    # Alternatively, if you want to keep the original currency values
-    # total_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'usd').scalar() or 0
-    # total_revenue = db.session.query(db.func.sum(Payment.total_paid)).filter(Payment.currency == 'gbp').scalar() or 0
-    # total_revenue = db.session.query(db.func.sum(Payment.total_paid)).scalar() or 0
     
     # Get recent registrations for dashboard
     recent_registrations = Registration.query.order_by(Registration.created_at.desc()).limit(5).all()
@@ -40,7 +36,7 @@ def admin_dashboard():
     return render_template('admin/dashboard.html', 
                           total_registrations=total_registrations,
                           paid_registrations=paid_registrations,
-                          fl_registrations=fl_registrations,
+                        #   fl_registrations=fl_registrations,
                           total_revenue=total_revenue,
                           recent_registrations=recent_registrations,
                           now=now)
@@ -57,7 +53,7 @@ def admin_registrations():
     query = db.session.query(
         Registration.id, 
         Registration.name, Registration.email, 
-        Registration.phone, Registration.is_firstlover, 
+        Registration.phone, #"""Registration.is_firstlover,""" 
         Registration.payment_status, Registration.created_at, 
         Payment.currency,
         db.func.coalesce(Payment.total_paid, 0).label('payment_amount')
@@ -69,8 +65,8 @@ def admin_registrations():
     if status:
         query = query.filter(Registration.payment_status == status)
 
-    if is_firstlover == 'true':
-        query = query.filter(Registration.is_firstlover == True)
+    # if is_firstlover == 'true':
+    #     query = query.filter(Registration.is_firstlover == True)
 
     registrations = query.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
     # Get registrations with pagination

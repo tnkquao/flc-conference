@@ -6,15 +6,24 @@ main_bp = Blueprint('main',__name__,
                 static_folder='../static')
 
 
+# venue_images = [
+#     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST-LOVE-SINGBOARD_jrwxcr.jpg',
+#     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST_LOVE_CENTER_3_esquyr.jpg',
+#     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/MAIN-CAR-PARK2_ccttek.jpg',
+#     # 'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST_LOVE_CENTER_9_fzadjw.jpg',
+#     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST_LOVE_CENTER_1_ypbmcx.jpg',
+#     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/THE_CENTER-DAG-HEWARD-MILLSFIRST-LOVE-CENTER_11_xsd8b8.jpg',
+#     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/JSOTW-SING4_loumkh.jpg'
+# ]   
 venue_images = [
     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST-LOVE-SINGBOARD_jrwxcr.jpg',
     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST_LOVE_CENTER_3_esquyr.jpg',
     'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/MAIN-CAR-PARK2_ccttek.jpg',
     # 'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST_LOVE_CENTER_9_fzadjw.jpg',
-    'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/FIRST_LOVE_CENTER_1_ypbmcx.jpg',
-    'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/THE_CENTER-DAG-HEWARD-MILLSFIRST-LOVE-CENTER_11_xsd8b8.jpg',
-    'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/JSOTW-SING4_loumkh.jpg'
-]   
+    'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/worship-cropped_mzwgsu.jpg',
+    'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/dancers-hge-edit_lud1na.jpg',
+    'https://res.cloudinary.com/dtr7ausk3/image/upload/w_1000/q_auto/f_auto/glgc_singing-cropped_ezh189.jpg'
+]
 
 @main_bp.route('/')
 def index():

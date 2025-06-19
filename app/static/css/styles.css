@@ -722,6 +722,12 @@ h1 {
     display: flex;
 }
 
+.event-exclusive_heading {
+    margin: 10px 10px 10px 50px;
+    padding-left: 50px;
+    text-align: center;
+}
+
 .event-exclusive_left {
     grid-column-gap: 20px;
     grid-row-gap: 20px;

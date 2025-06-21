@@ -71,10 +71,12 @@
 
           <div>
             <div class="nav-links" id="mobileMenu">
+              <a href="{{ url_for('main.index') }}" class="site-nav_link">Home</a>
               <a href="#conference-intro" class="site-nav_link">Conference Highlight</a>
               <a href="#speakers" class="site-nav_link">Speakers</a>
               <a href="#why-attend" class="site-nav_link">Why Attend</a>
               <a href="#schedule" class="site-nav_link">Schedule</a>
+              <a href="{{ url_for('main.share_page') }}" class="site-nav_link">Share</a>
               <a href="{{ url_for('main.accommodation') }}" class="site-nav_link">Accommodation</a>
             </div>
           </div>
@@ -109,7 +111,8 @@
   <main class="container my-5">
     <!-- Progress Steps for multi-step forms -->
     {% if request.path not in [url_for('main.index'), url_for('main.success'),
-    url_for('main.error'), url_for('main.pre_registration'), url_for('main.accommodation')] %}
+    url_for('main.error'), url_for('main.pre_registration'), url_for('main.accommodation'), url_for('main.share_page')]
+    %}
     <div class="progress-steps mb-5">
       <div
         class="step {% if request.path == url_for('registrations.fl_registration') or request.path == url_for('registrations.nonfl_registration') %}active{% elif request.path in [url_for('payments.checkout')] %}completed{% endif %}">

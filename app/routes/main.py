@@ -37,6 +37,10 @@ def pre_registration():
 def accommodation():
     """Page to choose type of registration"""
     return render_template('accommodation.html')
+@main_bp.route('/share')
+def share_page():
+    """Page to choose type of registration"""
+    return render_template('share.html')
 
 @main_bp.route('/success')
 def success():

@@ -1,11 +1,36 @@
 .container.my-5 {
-    padding-top: 60px;
+    padding-top: 40px;
     flex-flow: column;
     min-height: 100svh;
     display: flex;
 }
 
-.main-wrapper {}
+.section_faq-hero.background-color-black {
+    background-color: #2e2c2c;
+    color: #fff;
+}
+
+.heading-style-h1 {
+    font-family: "Merriweather", serif;
+    letter-spacing: -0.01em;
+    /* font-size: 6.125rem; */
+    font-weight: 500;
+    line-height: 1;
+    text-transform: none
+}
+
+.heading-style-yr {
+    font-family: "Anton", serif;
+    letter-spacing: -0.01em;
+    /* font-size: 6.125rem; */
+    font-weight: 500;
+    line-height: 1;
+    text-transform: none
+}
+
+/* .section-content.intro {
+    color: #fff;
+} */
 
 .section_welcome {
     z-index: 3;
@@ -236,4 +261,34 @@ img {
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 30px;
     display: block;
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .heading-style-h1 {
+        font-size: 7rem;
+    }
+
+    .section-content.is-share-downloadables-4col {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .download-anchor-links {
+        grid-template-columns: 1fr;
+    }
+
+    .share-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-content {
+        grid-template-columns: 1fr;
+    }
+
+    .padding-global {
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
 }

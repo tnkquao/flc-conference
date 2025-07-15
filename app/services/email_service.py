@@ -47,8 +47,8 @@ def send_confirmation_email(registration):
             Kindly see your country/city pastor for payment details.</p>
             <p> We look forward to having you join us for a special time in God's presence! </p>
             <br>
-            <span>With Love</span><br>
-            <span>The First Love Conference</span>
+            <span>With Love,</span><br>
+            <span>The First Love Conference Team</span>
             <!-- Rest of your email template -->
         </body>
         </html>

@@ -162,7 +162,7 @@
                 {% else %}
                 <li class="page-item">
                     <a class="page-link"
-                        href="{{ url_for('admin_registrations', page=page_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}">{{
+                        href="{{ url_for('admin.admin_registrations', page=page_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}">{{
                         page_num }}</a>
                 </li>
                 {% endif %}

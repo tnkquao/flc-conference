@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, Blueprint
 from datetime import datetime
+import json
 from app.extensions import db
 from flask_login import login_required
 from app.models import Admin, Registration, Payment
@@ -9,6 +10,9 @@ admin_bp = Blueprint('admin',__name__,
                 static_folder='../static',
                 url_prefix='/admin')
 
+with open('app/static/countries.json') as f:
+    countries = json.load(f)
+iso3_to_name = {c["iso3"]: c["name"] for c in countries}
 
 # Admin routes
 @admin_bp.route('/')
@@ -52,7 +56,7 @@ def admin_registrations():
     # Start with base query
     query = db.session.query(
         Registration.id, 
-        Registration.name, Registration.email, 
+        Registration.name, Registration.country, Registration.email, 
         Registration.phone, #"""Registration.is_firstlover,""" 
         Registration.payment_status, Registration.created_at, 
         Payment.currency,
@@ -68,8 +72,27 @@ def admin_registrations():
     # if is_firstlover == 'true':
     #     query = query.filter(Registration.is_firstlover == True)
 
-    registrations = query.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
     # Get registrations with pagination
+    registrations = query.order_by(Registration.created_at.desc()).paginate(page=page, per_page=per_page)
+    
+    # 🔁 Add country_name to each item
+    paginated = registrations
+    paginated.items = [
+        {
+            "id": reg.id,
+            "name": reg.name,
+            "country": iso3_to_name.get(reg.country, reg.country),
+            "email": reg.email,
+            "phone": reg.phone,
+            "payment_status": reg.payment_status,
+            "created_at": reg.created_at,
+            "currency": reg.currency,
+            "payment_amount": reg.payment_amount
+        }
+        for reg in paginated.items
+    ]
+    
+    # fallback to ISO3 if not found
     
     return render_template('admin/registrations.html', registrations=registrations)
 
@@ -112,6 +135,7 @@ def admin_search():
         db.or_(
             Registration.name.ilike(f'%{query}%'),
             Registration.email.ilike(f'%{query}%'),
+            Registration.country.ilike(f'%{query}%'),
             Registration.phone.ilike(f'%{query}%'),
             Registration.registration_id.ilike(f'%{query}%')
         )

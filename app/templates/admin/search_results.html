@@ -124,7 +124,7 @@
         searchButton.addEventListener('click', function () {
             const query = searchBox.value.trim();
             if (query) {
-                window.location.href = "{{ url_for('admin_search') }}?query=" + encodeURIComponent(query);
+                window.location.href = "{{ url_for('admin.admin_search') }}?query=" + encodeURIComponent(query);
             }
         });
 

@@ -58,6 +58,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Country</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Registration Date</th>
@@ -72,6 +73,7 @@
                     <tr>
                         <td>{{ loop.index + ((registrations.page - 1) * registrations.per_page) }}</td>
                         <td>{{ registration.name }}</td>
+                        <td>{{ registration.country }}</td>
                         <td>{{ registration.email }}</td>
                         <td>{{ registration.phone }}</td>
                         <td>{{ registration.created_at.strftime('%Y-%m-%d %H:%M') }}</td>

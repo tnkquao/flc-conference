@@ -133,13 +133,14 @@
         </div>
     </div>
     {% if registrations.pages > 1 %}
+    {% print(registrations.pages) %}
     <div class="card-footer">
         <nav aria-label="Registrations pagination">
             <ul class="pagination justify-content-center mb-0">
                 {% if registrations.has_prev %}
                 <li class="page-item">
                     <a class="page-link"
-                        href="{{ url_for('admin_registrations', page=registrations.prev_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}"
+                        href="{{ url_for('admin.admin_registrations', page=registrations.prev_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}"
                         aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
@@ -176,7 +177,7 @@
                 {% if registrations.has_next %}
                 <li class="page-item">
                     <a class="page-link"
-                        href="{{ url_for('admin_registrations', page=registrations.next_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}"
+                        href="{{ url_for('admin.admin_registrations', page=registrations.next_num) }}{% if request.args.get('status') %}?status={{ request.args.get('status') }}{% endif %}{% if request.args.get('accommodation') %}?accommodation={{ request.args.get('accommodation') }}{% endif %}"
                         aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>

@@ -54,7 +54,6 @@ def send_confirmation_email(registration):
         </html>
         """
         
-        print(body)
 
         msg.attach(MIMEText(body, 'html'))
         

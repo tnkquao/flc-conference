@@ -105,20 +105,11 @@
     </div>
   </div>
 
-  <!-- Flash Messages -->
-  <div class="container mt-4">
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %}
-    <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show"
-      role="alert">
-      {{ message }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {% endfor %} {% endif %} {% endwith %}
-  </div>
+
 
   <!-- Main Content -->
   <main class="container my-5">
+
     <!-- Progress Steps for multi-step forms -->
     {% if request.path not in [url_for('main.index'), url_for('main.success'),
     url_for('main.error'), url_for('main.pre_registration'), url_for('main.accommodation'), url_for('main.share_page')]
@@ -137,6 +128,17 @@
       {% endif %}
     </div>
     {% endif %} {% block content %}{% endblock %}
+    <!-- Flash Messages -->
+    <div class="container mt-4">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category if category != 'error' else 'danger' }} alert-dismissible fade show"
+        role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
+    </div>
   </main>
 
   <!-- Footer -->

@@ -48,6 +48,11 @@ def fl_registration():
             'country': country,
             'referral': referral
         }
+        existing = Registration.query.filter_by(email=email).first()
+        if existing:
+            flash('This email has already been registered.', 'error')
+            return render_template('registration.html', countries=COUNTRIES)
+            
         fl_registration = Registration(
             name=name,
             email=email,
@@ -56,15 +61,26 @@ def fl_registration():
             country=country
             # is_firstlover=is_firstlover
         )
-        db.session.add(fl_registration)
-        db.session.commit()
+        try:
+            db.session.add(fl_registration)
+            db.session.commit()
 
-        # registration_data = session.get('registration', {})
-        send_confirmation_email(fl_registration)
-        
-        # Skip Formspree and redirect to accommodation
-        flash('Registration successful!', 'success')
-        return redirect(url_for('main.success'))
+            # registration_data = session.get('registration', {})
+            send_confirmation_email(fl_registration)
+            
+            # Skip Formspree and redirect to accommodation
+            flash('Registration successful!', 'success')
+            return redirect(url_for('main.success'))
+
+        except IntegrityError:
+            db.session.rollback()
+            flash('This email has already been registered.', 'error')
+            return render_template('registration.html', countries=COUNTRIES)
+
+        except Exception as e:
+            db.session.rollback()
+            flash('An unexpected error occurred. Please try again.', 'error')
+            return render_template('registration.html', countries=COUNTRIES)
     
     return render_template('registration.html', countries=COUNTRIES)
 

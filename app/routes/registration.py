@@ -55,7 +55,7 @@ def fl_registration():
             
         fl_registration = Registration(
             name=name,
-            email=email,
+            email=email.lower(),
             phone=phone,
             city=city,
             country=country

@@ -43,8 +43,7 @@ def send_confirmation_email(registration):
         <body>
             <h1>Registration Confirmation</h1>
             <p>Dear {registration.name},</p>
-            <p>Thank you for registering for the conference! <br>
-            Kindly see your country/city pastor for payment details.</p>
+            <p>Thank you for registering for the conference!</p>
             <p> We look forward to having you join us for a special time in God's presence! </p>
             <br>
             <span>With Love,</span><br>

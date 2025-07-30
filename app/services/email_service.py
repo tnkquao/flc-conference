@@ -41,14 +41,31 @@ def send_confirmation_email(registration):
             </style>
         </head>
         <body>
-            <h1>Registration Confirmation</h1>
-            <p>Dear {registration.name},</p>
-            <p>Thank you for registering for the conference!</p>
-            <p> We look forward to having you join us for a special time in God's presence! </p>
-            <br>
-            <span>With Love,</span><br>
-            <span>The First Love Conference Team</span>
-            <!-- Rest of your email template -->
+            <p>Hello {name},</p>
+
+            <p> Welcome to First Love Conference 2025 — we’re so glad you’re coming!</p>
+
+            <p>📎 Your e-participant tag is attached. Please save it to your phone or print it out. 
+            You may need it at the door for Priority Seating Access if you arrive on time.</p>
+
+            <p>
+                📍Venue: First Love Center, Accra <br>
+                ⏰ Morning Sessions: 7:00AM (this may vary so check our socials for live updates)
+                ⏰ Evening Sessions: 5:30PM (this may vary so check our socials for live updates)
+            </p>
+
+            <p>Follow the ushers on arrival and get ready for a week of powerful preaching, worship, and unforgettable encounters.</p>
+
+            <p>
+            📲 Stay connected on all Socials: @firstlovecenter <br>
+            Use #FirstLoveConference2025 to share your experience!
+            </p>
+
+            <p>
+            See you soon,<br>
+            <strong>The First Love Conference Team</strong><br>
+            <a href="https://www.firstloveconference.com">firstLoveConference.com</a>
+            </p>
         </body>
         </html>
         """

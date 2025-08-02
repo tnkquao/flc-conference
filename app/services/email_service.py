@@ -53,7 +53,7 @@ def send_confirmation_email(registration):
                 Remaining Sessions: <br>
                 ⏰ Saturday: Ps Kong Hee ministering @6:00PM <br>
                 ⏰ Sunday Afternoon: Ps Kong Hee ministering @12:00PM<br>
-                ⏰ Sunday Evening: Ps David Diga Hernandez 6/7PM 
+                ⏰ Sunday Evening: Ps David Diga Hernandez 6:30PM 
             </p>
 
             <p>Follow the ushers on arrival and get ready for a week of powerful preaching, worship, and unforgettable encounters.</p>

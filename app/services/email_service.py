@@ -41,7 +41,7 @@ def send_confirmation_email(registration):
             </style>
         </head>
         <body>
-            <p>Hello {name},</p>
+            <p>Hello {registration.name},</p>
 
             <p> Welcome to First Love Conference 2025 — we’re so glad you’re coming!</p>
 
@@ -50,8 +50,10 @@ def send_confirmation_email(registration):
 
             <p>
                 📍Venue: First Love Center, Accra <br>
-                ⏰ Morning Sessions: 7:00AM (this may vary so check our socials for live updates)
-                ⏰ Evening Sessions: 5:30PM (this may vary so check our socials for live updates)
+                Remaining Sessions: <br>
+                ⏰ Saturday: Ps Kong Hee ministering @6:00PM <br>
+                ⏰ Sunday Afternoon: Ps Kong Hee ministering @12:00PM<br
+                ⏰ Sunday Evening: Ps David Diga Hernandez 6/7PM 
             </p>
 
             <p>Follow the ushers on arrival and get ready for a week of powerful preaching, worship, and unforgettable encounters.</p>

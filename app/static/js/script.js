@@ -130,16 +130,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // Change slide every 5 seconds
     setInterval(nextSlide, 2000);
 
-
-    // Event schedule toggle
-    function toggleEventSchedule(element) {
-        const content = element.nextElementSibling;
-        if (content.classList.contains('expanded')) {
-            content.style.maxHeight = '0';
-            content.classList.remove('expanded');
-        } else {
-            content.style.maxHeight = content.scrollHeight + 'px';
-            content.classList.add('expanded');
-        }
-    }
 });
+
+// Event schedule toggle
+function toggleEventSchedule(element) {
+    const content = element.nextElementSibling;
+    if (content.classList.contains('expanded')) {
+        content.style.maxHeight = '0';
+        content.classList.remove('expanded');
+    } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        content.classList.add('expanded');
+    }
+}

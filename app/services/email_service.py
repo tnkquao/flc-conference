@@ -52,7 +52,7 @@ def send_confirmation_email(registration):
                 📍Venue: First Love Center, Accra <br>
                 Remaining Sessions: <br>
                 ⏰ Saturday: Ps Kong Hee ministering @6:00PM <br>
-                ⏰ Sunday Afternoon: Ps Kong Hee ministering @12:00PM<br
+                ⏰ Sunday Afternoon: Ps Kong Hee ministering @12:00PM<br>
                 ⏰ Sunday Evening: Ps David Diga Hernandez 6/7PM 
             </p>
 
